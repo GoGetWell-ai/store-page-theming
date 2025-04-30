@@ -52,10 +52,11 @@ const themeConfig = {
         borderRadius: '0.25rem',
         example:
             'A standard medical interface with clear navigation and readable text.',
-        bgClass: 'bg-primary',
+        bgClass: 'card-gradient card-gradient-primary text-white',
         textClass: 'text-primary',
         borderClass: 'border-primary',
         hoverClass: 'hover:bg-primary-deep',
+        gradientClass: 'from-blue-700 to-blue-500',
     },
     organTransplant: {
         name: 'Organ Transplant Theme',
@@ -67,10 +68,11 @@ const themeConfig = {
         borderRadius: '0.25rem',
         example:
             'Focus on medical data presentation with clear hierarchy for critical information.',
-        bgClass: 'bg-teal-700',
+        bgClass: 'card-gradient card-gradient-success text-white',
         textClass: 'text-teal-700',
         borderClass: 'border-teal-700',
         hoverClass: 'hover:bg-teal-800',
+        gradientClass: 'from-teal-700 to-teal-500',
     },
     cosmeticSurgery: {
         name: 'Cosmetic Surgery Theme',
@@ -79,41 +81,43 @@ const themeConfig = {
         secondaryColor: '#f48fb1',
         accentColor: '#ec407a',
         fontFamily: 'Playfair Display, Georgia, serif',
-        borderRadius: '0.75rem',
+        borderRadius: '0.5rem',
         example:
-            'Sophisticated design with refined typography and visually engaging elements.',
-        bgClass: 'bg-pink-700',
+            'Sophisticated presentation for aesthetic procedures and outcomes.',
+        bgClass: 'card-gradient card-gradient-primary text-white',
         textClass: 'text-pink-700',
         borderClass: 'border-pink-700',
         hoverClass: 'hover:bg-pink-800',
+        gradientClass: 'from-pink-700 to-pink-500',
     },
 }
 
+// Define the props interface separately
+interface ThemePreviewCardProps {
+    themeKey: string;
+    active: boolean;
+    onSelect: () => void;
+}
+
 /**
- * Theme preview card component
+ * Theme Preview Card component to showcase each theme option
  */
-const ThemePreviewCard = ({
-    themeKey,
-    active,
-    onSelect,
-}: {
-    themeKey: string
-    active: boolean
-    onSelect: () => void
-}) => {
+const ThemePreviewCard = ({ themeKey, active, onSelect }: ThemePreviewCardProps) => {
     // Get theme config based on theme key
     const theme = themeConfig[themeKey as keyof typeof themeConfig]
 
     return (
         <Card
-            className={`theme-card transition-all hover:shadow-lg ${active ? 'ring-2 ring-offset-2 ' + theme.borderClass : ''}`}
-            headerClass={theme.bgClass + ' text-white'}
+            className={`theme-card card-hover transition-all ${
+                active ? 'ring-2 ring-offset-2 ' + theme.borderClass : ''
+            }`}
+            headerClass={theme.bgClass + ' card-gradient-animated'}
             header={
                 <div className="flex justify-between items-center">
                     <h4 className="text-lg font-medium">{theme.name}</h4>
                     {active && (
                         <Badge
-                            className="bg-white text-gray-700"
+                            className="bg-white text-gray-700 pulse"
                             content="Active"
                         />
                     )}
@@ -123,12 +127,11 @@ const ThemePreviewCard = ({
                 <div className="flex justify-between items-center">
                     <Button
                         size="sm"
-                        variant={active ? 'solid' : 'twoTone'}
-                        className={
-                            active
-                                ? 'bg-gray-200 text-gray-600 cursor-default'
-                                : ''
-                        }
+                        className={`btn-ripple transition-all duration-300 ${
+                            active 
+                            ? 'bg-gray-200 text-gray-600 cursor-default' 
+                            : `bg-gradient-to-r ${theme.gradientClass} text-white hover:shadow-lg transform hover:-translate-y-1`
+                        }`}
                         icon={active ? <HiCheck /> : <HiOutlineColorSwatch />}
                         onClick={onSelect}
                         disabled={active}
@@ -138,15 +141,15 @@ const ThemePreviewCard = ({
 
                     <div className="flex gap-2">
                         <div
-                            className="h-5 w-5 rounded-full"
+                            className="h-5 w-5 rounded-full shadow-inner"
                             style={{ backgroundColor: theme.primaryColor }}
                         ></div>
                         <div
-                            className="h-5 w-5 rounded-full"
+                            className="h-5 w-5 rounded-full shadow-inner"
                             style={{ backgroundColor: theme.secondaryColor }}
                         ></div>
                         <div
-                            className="h-5 w-5 rounded-full"
+                            className="h-5 w-5 rounded-full shadow-inner"
                             style={{ backgroundColor: theme.accentColor }}
                         ></div>
                     </div>
@@ -156,7 +159,7 @@ const ThemePreviewCard = ({
             <div className="p-4">
                 <p className="mb-3 text-gray-600">{theme.description}</p>
 
-                <div className="grid grid-cols-2 gap-2 mb-4">
+                <div className="grid grid-cols-2 gap-2 mb-4 fade-in">
                     <div className="text-sm">
                         <span className="font-bold block">Primary Color</span>
                         <span style={{ color: theme.primaryColor }}>
@@ -164,28 +167,22 @@ const ThemePreviewCard = ({
                         </span>
                     </div>
                     <div className="text-sm">
-                        <span className="font-bold block">Font</span>
+                        <span className="font-bold block">Font Family</span>
                         <span>{theme.fontFamily.split(',')[0]}</span>
                     </div>
                 </div>
 
-                <div className="mt-4">
-                    <div
-                        className={`p-3 rounded-md mb-3 text-white ${theme.bgClass}`}
-                    >
-                        Sample Header
-                    </div>
-                    <div className="flex flex-wrap gap-2 mb-3">
+                <div className="bg-gray-50 dark:bg-gray-700 p-2 rounded-md mt-2">
+                    <span className="text-xs text-gray-500 dark:text-gray-400 block mb-1">
+                        Sample Terms:
+                    </span>
+                    <div className="flex flex-wrap gap-1">
                         {sampleMedicalTerms[
                             themeKey as keyof typeof sampleMedicalTerms
                         ].map((term, index) => (
                             <Tag
                                 key={index}
-                                className={
-                                    active
-                                        ? theme.bgClass + ' text-white'
-                                        : 'bg-gray-100'
-                                }
+                                className={`text-xs ${theme.textClass} stagger-fade-in`}
                             >
                                 {term}
                             </Tag>
@@ -197,126 +194,53 @@ const ThemePreviewCard = ({
     )
 }
 
-/**
- * Component preview section - shows how UI components look with the selected theme
- */
-const ComponentPreviews = ({ activeTheme }: { activeTheme: string }) => {
+// Component showcases for different themes
+const ComponentShowcase = ({
+    activeTheme,
+}: {
+    activeTheme: string
+}) => {
+    // Get theme config based on active theme
     const theme = themeConfig[activeTheme as keyof typeof themeConfig]
-    const [activeTab, setActiveTab] = useState('buttons')
-
-    const tabList = [
-        { key: 'buttons', label: 'Buttons', icon: <HiOutlineCube /> },
-        { key: 'alerts', label: 'Alerts', icon: <HiOutlineDocument /> },
-        { key: 'forms', label: 'Forms', icon: <HiOutlinePhotograph /> },
-    ]
 
     return (
         <Card
+            className="mb-6 card-hover"
             header={
-                <h4 className="text-lg">Component Preview with {theme.name}</h4>
+                <div className="flex items-center justify-between">
+                    <h5 className="font-medium">Component Preview</h5>
+                    <Tag className={theme.textClass}>
+                        {activeTheme === 'default'
+                            ? 'Standard Components'
+                            : activeTheme === 'organTransplant'
+                              ? 'Transplant UI'
+                              : 'Aesthetic UI'}
+                    </Tag>
+                </div>
             }
-            headerClass={theme.bgClass + ' text-white'}
         >
             <div className="p-4">
-                <Tabs
-                    value={activeTab}
-                    onChange={(val) => setActiveTab(val as string)}
-                >
-                    {tabList.map((tab) => (
-                        <Tabs.TabNav
-                            key={tab.key}
-                            value={tab.key}
-                            icon={tab.icon}
-                        >
-                            {tab.label}
-                        </Tabs.TabNav>
-                    ))}
-                </Tabs>
-
-                <div className="mt-4 p-4 border rounded-lg">
-                    {activeTab === 'buttons' && (
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h6 className="mb-3 font-medium">Interactive Elements</h6>
                         <div className="space-y-4">
-                            <h5 className="font-medium mb-3">Buttons</h5>
-                            <div className="flex flex-wrap gap-2">
-                                <Button
-                                    className={theme.bgClass + ' text-white'}
-                                >
-                                    Primary Button
-                                </Button>
-                                <Button variant="twoTone">
-                                    Secondary Button
-                                </Button>
-                                <Button
-                                    variant="plain"
-                                    className={theme.textClass}
-                                >
-                                    Text Button
-                                </Button>
-                                <Button
-                                    size="sm"
-                                    className={theme.bgClass + ' text-white'}
-                                >
-                                    Small Button
-                                </Button>
-                                <Button
-                                    icon={<HiOutlineColorSwatch />}
-                                    className={theme.bgClass + ' text-white'}
-                                >
-                                    With Icon
+                            <Button
+                                className={`btn-gradient btn-ripple bg-gradient-to-r ${theme.gradientClass}`}
+                                size="sm"
+                            >
+                                Primary Action
+                            </Button>
+                            <div className="ml-2 inline-block">
+                                <Button size="sm" variant="twoTone">
+                                    Secondary
                                 </Button>
                             </div>
-                        </div>
-                    )}
-
-                    {activeTab === 'alerts' && (
-                        <div className="space-y-4">
-                            <h5 className="font-medium mb-3">
-                                Alerts & Notifications
-                            </h5>
-                            <Alert
-                                type="info"
-                                showIcon
-                                title="Information"
-                                className="mb-4"
-                            >
-                                This is an information message.
-                            </Alert>
-                            <Alert
-                                type="success"
-                                showIcon
-                                title="Success"
-                                className="mb-4"
-                            >
-                                Operation completed successfully.
-                            </Alert>
-                            <Alert
-                                type="warning"
-                                showIcon
-                                title="Warning"
-                                className="mb-4"
-                            >
-                                Please review before proceeding.
-                            </Alert>
-                            <Alert
-                                type="danger"
-                                showIcon
-                                title="Error"
-                                className="mb-4"
-                            >
-                                An error has occurred.
-                            </Alert>
-                        </div>
-                    )}
-
-                    {activeTab === 'forms' && (
-                        <div className="space-y-4">
-                            <h5 className="font-medium mb-3">Form Elements</h5>
-                            <div className="mb-4">
-                                <label className="block mb-2">
-                                    Input Field
-                                </label>
-                                <Input placeholder="Enter text here" />
+                            <div className="ml-2 inline-block">
+                                <Button size="sm" variant="plain">
+                                    Tertiary
+                                </Button>
                             </div>
+
                             <div className="mb-4">
                                 <label className="block mb-2">With Label</label>
                                 <Input
@@ -346,7 +270,48 @@ const ComponentPreviews = ({ activeTheme }: { activeTheme: string }) => {
                                 </div>
                             </div>
                         </div>
-                    )}
+                    </div>
+                    <div>
+                        <h6 className="mb-3 font-medium">Status Components</h6>
+                        <div className="space-y-4">
+                            <Alert 
+                                showIcon
+                                type="success" 
+                                title="Procedure Scheduled" 
+                                className="mb-4 fade-in"
+                            >
+                                Your appointment is confirmed.
+                            </Alert>
+
+                            <Alert 
+                                showIcon
+                                type="info" 
+                                title="Information Available"
+                                className="mb-4 fade-in"
+                            >
+                                New research published.
+                            </Alert>
+
+                            <Tabs defaultValue="tab1">
+                                <Tabs.TabList>
+                                    <Tabs.TabNav value="tab1">Details</Tabs.TabNav>
+                                    <Tabs.TabNav value="tab2">History</Tabs.TabNav>
+                                    <Tabs.TabNav value="tab3">Reports</Tabs.TabNav>
+                                </Tabs.TabList>
+                                <div className="p-4">
+                                    <Tabs.TabContent value="tab1">
+                                        <p>Patient details would appear here.</p>
+                                    </Tabs.TabContent>
+                                    <Tabs.TabContent value="tab2">
+                                        <p>Medical history records.</p>
+                                    </Tabs.TabContent>
+                                    <Tabs.TabContent value="tab3">
+                                        <p>Medical reports and test results.</p>
+                                    </Tabs.TabContent>
+                                </div>
+                            </Tabs>
+                        </div>
+                    </div>
                 </div>
             </div>
         </Card>
@@ -359,64 +324,36 @@ const ComponentPreviews = ({ activeTheme }: { activeTheme: string }) => {
 const TypographyShowcase = ({ activeTheme }: { activeTheme: string }) => {
     const theme = themeConfig[activeTheme as keyof typeof themeConfig]
 
-    const headingStyle = { fontFamily: theme.fontFamily.split(',')[0] }
-    const textStyle = { fontFamily: theme.fontFamily }
-
     return (
-        <Card
-            header={<h4 className="text-lg">Typography & Text Examples</h4>}
-            headerClass={theme.bgClass + ' text-white'}
-        >
+        <Card className="mb-6 card-hover">
             <div className="p-4">
-                <h2 className="text-2xl font-bold mb-2" style={headingStyle}>
-                    Main Heading
-                </h2>
-                <h3 className="text-xl font-semibold mb-4" style={headingStyle}>
-                    Subheading
-                </h3>
+                <h6 className="mb-4 font-medium">Typography Preview</h6>
 
-                <p className="mb-4" style={textStyle}>
-                    This paragraph demonstrates the default text styling for the{' '}
-                    {theme.name}. Notice how the font family, size, and spacing
-                    all contribute to the overall theme experience.
-                </p>
-
-                <div className="mb-4 p-3 border rounded" style={textStyle}>
-                    <strong className={theme.textClass}>Important:</strong> This
-                    callout box highlights
-                    {activeTheme === 'default' &&
-                        ' general medical information that may be relevant to patients.'}
-                    {activeTheme === 'organTransplant' &&
-                        ' critical information about organ donation and transplant procedures.'}
-                    {activeTheme === 'cosmeticSurgery' &&
-                        ' considerations for patients seeking cosmetic procedures.'}
+                <div className="mb-6">
+                    <div className="mb-2 font-bold">Headings</div>
+                    <div>
+                        <h1 className="text-2xl mb-1 font-bold">Heading 1</h1>
+                        <h2 className="text-xl mb-1 font-bold">Heading 2</h2>
+                        <h3 className="text-lg mb-1 font-bold">Heading 3</h3>
+                        <h4 className="text-base mb-1 font-bold">Heading 4</h4>
+                    </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <div className="mb-2 font-bold">Text Styles</div>
                     <div>
-                        <h4 className="font-medium mb-2" style={headingStyle}>
-                            List Example
-                        </h4>
-                        <ul
-                            className="list-disc list-inside space-y-1"
-                            style={textStyle}
-                        >
-                            {sampleMedicalTerms[
-                                activeTheme as keyof typeof sampleMedicalTerms
-                            ].map((item, index) => (
-                                <li key={index}>{item}</li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h4 className="font-medium mb-2" style={headingStyle}>
-                            Text Formatting
-                        </h4>
-                        <p style={textStyle}>
+                        <p className="mb-2">
+                            Regular paragraph text in{' '}
+                            <span style={{ fontFamily: theme.fontFamily }}>
+                                {theme.fontFamily.split(',')[0]}
+                            </span>{' '}
+                            font.
+                        </p>
+                        <p className="mb-2">
+                            Text can appear in different styles like{' '}
                             <span className="font-bold">Bold text</span>,
                             <span className="italic ml-1">italic text</span>,
-                            <span className={`ml-1 ${theme.textClass}`}>
+                            <span className={`ml-1 ${theme.textClass} gradient-text`}>
                                 colored text
                             </span>
                             , and
@@ -451,7 +388,7 @@ const ThemesPage = () => {
 
     return (
         <div className="container mx-auto py-8 px-4">
-            <div className="mb-8">
+            <div className="mb-8 fade-in">
                 <h1 className="text-3xl font-bold mb-2">
                     Medical Specialty Themes
                 </h1>
@@ -464,7 +401,7 @@ const ThemesPage = () => {
             </div>
 
             {/* Theme Selection Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 stagger-fade-in">
                 {themeKeys.map((themeKey) => (
                     <ThemePreviewCard
                         key={themeKey}
@@ -477,9 +414,9 @@ const ThemesPage = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Component Previews */}
-                <ComponentPreviews activeTheme={specialty} />
-
-                {/* Typography Examples */}
+                <ComponentShowcase activeTheme={specialty} />
+                
+                {/* Typography Previews */}
                 <TypographyShowcase activeTheme={specialty} />
             </div>
         </div>

@@ -6,7 +6,7 @@ import { AuthProvider } from '@/auth'
 import Views from '@/views'
 import appConfig from './configs/app.config'
 import './locales'
-
+import MenuBar from './components/shared/MenuBar'
 // Import the theme store to ensure theme state is available globally
 import { useThemeStore } from '@/store/themeStore'
 
@@ -23,6 +23,7 @@ function App() {
             <ThemeProvider>
                 <BrowserRouter>
                     <AuthProvider>
+                        <MenuBar />
                         {/* Layout component already includes MenuBar via PostLoginLayout */}
                         <Layout>
                             {/* Views component handles routing to Home and Themes pages */}

@@ -1,9 +1,86 @@
 .card {
-  @apply bg-white dark:bg-gray-800 rounded-2xl ;
+  @apply bg-white dark:bg-gray-800 rounded-lg;
+
+  .card-body {
+    @apply p-6;
+  }
+
+  .card-header {
+    @apply flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700;
+  }
+
+  .card-footer {
+    @apply px-6 py-4 border-t border-gray-200 dark:border-gray-700;
+  }
 }
 
+/* Gradient Cards */
+.card-gradient {
+  @apply relative overflow-hidden;
+  background-size: 200% 200%;
+}
+
+.card-gradient-header {
+  @apply rounded-t-lg bg-opacity-90 dark:bg-opacity-90 border-0 text-white;
+}
+
+.card-gradient-primary {
+  background-image: var(--gradient-primary);
+}
+
+.card-gradient-secondary {
+  background-image: var(--gradient-secondary);
+}
+
+.card-gradient-success {
+  background-image: var(--gradient-success);
+}
+
+.card-gradient-warning {
+  background-image: var(--gradient-warning);
+}
+
+.card-gradient-danger {
+  background-image: var(--gradient-error);
+}
+
+.card-gradient-animated {
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Card with hover animation */
+.card-hover {
+  transform: translateY(0);
+  transition: transform var(--transition-normal) ease-in-out, 
+              box-shadow var(--transition-normal) ease-in-out;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Card with fancy highlight border */
+.card-highlight {
+  position: relative;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+  background-color: white;
+}
+
+.card-highlight::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  margin: -1px;
+  border-radius: inherit;
+  background: var(--gradient-primary);
+}
+
+/* Bordered Card */
 .card-border {
-  @apply border border-gray-200 dark:border-gray-800;
+  @apply border border-gray-200 dark:border-gray-700;
 }
 
 .card-shadow {
@@ -24,15 +101,6 @@
 
 .card-footer-border {
   @apply border-t border-gray-200 dark:border-gray-600;
-}
-
-.card-header,
-.card-footer {
-  @apply py-3 px-5;
-}
-
-.card-body {
-  @apply p-5;
 }
 
 .card-gutterless {

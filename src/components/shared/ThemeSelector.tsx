@@ -36,15 +36,15 @@ const ThemeSelector = () => {
         setIsOpen(false)
     }
 
-    // Get theme-specific colors for the button
-    const getThemeColors = () => {
+    // Get theme-specific gradient styles for the button
+    const getThemeGradientStyles = () => {
         switch (specialty) {
             case 'organTransplant':
-                return 'bg-teal-700 hover:bg-teal-800'
+                return 'bg-gradient-to-r from-teal-700 to-teal-500 hover:shadow-lg hover:from-teal-600 hover:to-teal-400'
             case 'cosmeticSurgery':
-                return 'bg-pink-700 hover:bg-pink-800'
+                return 'bg-gradient-to-r from-pink-700 to-pink-500 hover:shadow-lg hover:from-pink-600 hover:to-pink-400'
             default:
-                return 'bg-primary hover:bg-primary-deep'
+                return 'bg-gradient-to-r from-blue-700 to-blue-500 hover:shadow-lg hover:from-blue-600 hover:to-blue-400'
         }
     }
 
@@ -57,13 +57,13 @@ const ThemeSelector = () => {
                 className="mr-1"
                 renderTitle={
                     <div
-                        className={`flex items-center justify-center h-9 w-9 rounded-full ${getThemeColors()} text-white cursor-pointer`}
+                        className={`flex items-center justify-center h-9 w-9 rounded-full transition-all duration-300 ease-in-out transform hover:scale-110 ${getThemeGradientStyles()} text-white cursor-pointer btn-ripple`}
                     >
-                        <HiOutlineColorSwatch size={18} />
+                        <HiOutlineColorSwatch size={18} className="animate-spin-slow" />
                     </div>
                 }
             >
-                <div className="px-2 py-2 w-[180px]">
+                <div className="px-2 py-2 w-[180px] fade-in">
                     <div className="text-gray-500 px-2 mb-2 text-sm">
                         Theme Specialty
                     </div>
@@ -71,19 +71,30 @@ const ThemeSelector = () => {
                         <Dropdown.Item
                             key={option.value}
                             eventKey={option.value}
-                            className={`mb-1 ${specialty === option.value ? 'bg-gray-100 dark:bg-gray-700' : ''}`}
+                            className={`mb-1 hover-scale ${
+                                specialty === option.value 
+                                ? 'bg-gray-100 dark:bg-gray-700' 
+                                : ''
+                            }`}
                             onClick={() => handleSelectTheme(option.value)}
                         >
                             <div className="flex items-center justify-between">
-                                <span>{option.label}</span>
+                                <span className={specialty === option.value ? 'gradient-text font-bold' : ''}>
+                                    {option.label}
+                                </span>
                                 {specialty === option.value && (
                                     <svg
                                         width="16"
                                         height="16"
                                         viewBox="0 0 16 16"
-                                        className="fill-current text-primary"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        className="text-primary"
                                     >
-                                        <path d="M13.3047 3.30469C13.6875 3.6875 13.6875 4.28125 13.3047 4.69531L6.69531 11.3047C6.28125 11.6875 5.6875 11.6875 5.30469 11.3047L2.30469 8.30469C1.92188 7.89062 1.92188 7.32812 2.30469 6.90625C2.71875 6.51562 3.28125 6.51562 3.69531 6.90625L6 9.21094L11.9141 3.30469C12.3281 2.92188 12.8906 2.92188 13.3047 3.30469Z" />
+                                        <path
+                                            d="M13.4 4L5.7 11.7L2.6 8.6L1.4 9.8L5.7 14.1L14.6 5.2L13.4 4Z"
+                                            fill="currentColor"
+                                        />
                                     </svg>
                                 )}
                             </div>
