@@ -59,7 +59,10 @@ const ThemeSelector = () => {
                     <div
                         className={`flex items-center justify-center h-9 w-9 rounded-full transition-all duration-300 ease-in-out transform hover:scale-110 ${getThemeGradientStyles()} text-white cursor-pointer btn-ripple`}
                     >
-                        <HiOutlineColorSwatch size={18} className="animate-spin-slow" />
+                        <HiOutlineColorSwatch
+                            size={18}
+                            className="animate-spin-slow"
+                        />
                     </div>
                 }
             >
@@ -72,14 +75,20 @@ const ThemeSelector = () => {
                             key={option.value}
                             eventKey={option.value}
                             className={`mb-1 hover-scale ${
-                                specialty === option.value 
-                                ? 'bg-gray-100 dark:bg-gray-700' 
-                                : ''
+                                specialty === option.value
+                                    ? 'bg-gray-100 dark:bg-gray-700'
+                                    : ''
                             }`}
                             onClick={() => handleSelectTheme(option.value)}
                         >
                             <div className="flex items-center justify-between">
-                                <span className={specialty === option.value ? 'gradient-text font-bold' : ''}>
+                                <span
+                                    className={
+                                        specialty === option.value
+                                            ? 'gradient-text font-bold'
+                                            : ''
+                                    }
+                                >
                                     {option.label}
                                 </span>
                                 {specialty === option.value && (
