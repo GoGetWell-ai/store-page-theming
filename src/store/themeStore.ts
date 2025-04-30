@@ -1,8 +1,18 @@
 import { themeConfig } from '@/configs/theme.config'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Theme, LayoutType, Direction, ThemeSpecialty, ThemeConfig } from '@/@types/theme'
-import { defaultTheme, organTransplantTheme, cosmeticSurgeryTheme } from '@/configs/specialty-themes.config'
+import type {
+    Theme,
+    LayoutType,
+    Direction,
+    ThemeSpecialty,
+    ThemeConfig,
+} from '@/@types/theme'
+import {
+    defaultTheme,
+    organTransplantTheme,
+    cosmeticSurgeryTheme,
+} from '@/configs/specialty-themes.config'
 
 type ThemeState = Theme
 
@@ -21,14 +31,14 @@ type ThemeAction = {
 const initialThemeState: ThemeState = {
     ...themeConfig,
     specialty: 'default',
-    config: defaultTheme
+    config: defaultTheme,
 }
 
 // Create a map of specialty themes for easier access
 const specialtyThemes: Record<ThemeSpecialty, ThemeConfig> = {
-    'default': defaultTheme,
-    'organTransplant': organTransplantTheme,
-    'cosmeticSurgery': cosmeticSurgeryTheme
+    default: defaultTheme,
+    organTransplant: organTransplantTheme,
+    cosmeticSurgery: cosmeticSurgeryTheme,
 }
 
 export const useThemeStore = create<ThemeState & ThemeAction>()(
@@ -52,10 +62,10 @@ export const useThemeStore = create<ThemeState & ThemeAction>()(
                     layout: { ...state.layout, previousType: payload },
                 })),
             // New action to change theme specialty
-            setSpecialty: (payload) => 
-                set(() => ({ 
+            setSpecialty: (payload) =>
+                set(() => ({
                     specialty: payload,
-                    config: specialtyThemes[payload]
+                    config: specialtyThemes[payload],
                 })),
         }),
         {
@@ -67,7 +77,7 @@ export const useThemeStore = create<ThemeState & ThemeAction>()(
                 mode: state.mode,
                 panelExpand: state.panelExpand,
                 layout: state.layout,
-                specialty: state.specialty
+                specialty: state.specialty,
             }),
         },
     ),

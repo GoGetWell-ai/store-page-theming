@@ -34,12 +34,10 @@ const layouts: Layouts = {
 }
 
 const PostLoginLayout = ({ layoutType, children }: PostLoginLayoutProps) => {
-
-    const AppLayout =
-        layouts[layoutType] ?? layouts[Object.keys(layouts)[0]];
+    const AppLayout = layouts[layoutType] ?? layouts[Object.keys(layouts)[0]]
 
     return (
-        <Suspense fallback={<Loading type='cover' loading={true} />}>
+        <Suspense fallback={<Loading type="cover" loading={true} />}>
             <div className="flex flex-col h-screen">
                 <MenuBar />
                 <div className="flex-1 overflow-auto">

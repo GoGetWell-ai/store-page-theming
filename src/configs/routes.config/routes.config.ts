@@ -24,9 +24,10 @@ export const protectedRoutes: Routes = [
             pageContainerType: 'contained',
             header: {
                 title: 'Theme Specialties',
-                description: 'Customize the application with different medical specialty themes'
+                description:
+                    'Customize the application with different medical specialty themes',
             },
             footer: true,
         },
-    }
+    },
 ]
