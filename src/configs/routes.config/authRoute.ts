@@ -33,7 +33,7 @@ const authRoute: Routes = [
         authority: [],
         meta: {
             layout: 'blank',
-        }
+        },
     },
     {
         key: `chatBotId`,
@@ -42,6 +42,15 @@ const authRoute: Routes = [
         authority: [],
         meta: {
             layout: 'topBarClassic',
+        },
+    },
+    {
+        key: 'themes',  // 👈 New route added
+        path: '/themes',
+        component: lazy(() => import('@/views/Home/themes')),  // Lazy-loaded ThemePage component
+        authority: [],
+        meta: {
+            layout: 'blank',  // Can use your preferred layout
         },
     },
 ]

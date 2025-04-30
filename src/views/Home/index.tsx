@@ -11,6 +11,7 @@ import Notification from '@/components/template/Notification'
 import HeaderLogo from '@/components/template/HeaderLogo'
 import { useAuth } from '@/auth'
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore'
+import MenuBar from '@/components/shared/MenuBar'
 
 const Home = () => {
     const { hcfData } = useAuthStore((state) => state)
@@ -22,6 +23,7 @@ const Home = () => {
         <>
 
             <div className="patient w-full" >
+                <MenuBar></MenuBar>
                 {smaller.lg && (
                     <div className="w-full py-[10px] bg-white px-[5%] flex items-center justify-between">
                         <div className="max-w-[150px]">

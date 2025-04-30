@@ -3,3 +3,6 @@
 @import "./template/index.css";
 @import "./vendors/index.css";
 @import "./tailwind/index.css";
+@import './themes.css';
+
+

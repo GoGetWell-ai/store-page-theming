@@ -1,0 +1,21 @@
+/* Default */
+.theme-default {
+    --primary: #0ea5e9;
+    --primary-deep: #0369a1;
+    --primary-mild: #bae6fd;
+  }
+  
+  /* Organ Transplant */
+  .theme-theme1 {
+    --primary: black;
+    --primary-deep: black;
+    --primary-mild: #d1fae5;
+  }
+  
+  /* Cosmetic Surgery */
+  .theme-theme2 {
+    --primary: #db2777;
+    --primary-deep: #9d174d;
+    --primary-mild: #fbcfe8;
+  }
+  
