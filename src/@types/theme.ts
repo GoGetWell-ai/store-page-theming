@@ -20,3 +20,29 @@ export type Theme = {
         previousType?: LayoutType | ''
     }
 }
+
+export type SpecialtyTheme = {
+  primary: string
+  'primary-deep': string
+  'primary-mild': string
+  font: string
+}
+
+export type TypographyTheme = {
+  fontFamily: string
+  headings: {
+    fontSize: string
+    fontWeight: number
+    lineHeight: string
+  }
+  body: {
+    fontSize: string
+    fontWeight: number
+    lineHeight: string
+  }
+}
+
+export type FullSpecialtyTheme = {
+  color: SpecialtyTheme
+  typography: TypographyTheme
+}

@@ -1,5 +1,9 @@
 import { THEME_ENUM } from '@/constants/theme.constant'
-import { Direction, Mode, ControlSize, LayoutType } from '@/@types/theme'
+import { Direction, Mode, ControlSize, LayoutType, FullSpecialtyTheme } from '@/@types/theme'
+import { organTransplantColors } from '@/views/Home/themes/organ-transplant/colors'
+import { cosmeticSurgeryColors } from '@/views/Home/themes/cosmetic-surgery/colors'
+import { organTransplantTypography } from '@/views/Home/themes/organ-transplant/typography'
+import { cosmeticSurgeryTypography } from '@/views/Home/themes/cosmetic-surgery/typography'
 
 export type ThemeConfig = {
     themeSchema: string
@@ -27,4 +31,15 @@ export const themeConfig: ThemeConfig = {
         type: THEME_ENUM.LAYOUT_COLLAPSIBLE_SIDE,
         sideNavCollapse: false,
     },
+}
+
+export const specialtyThemes: Record<'organ-transplant' | 'cosmetic-surgery', FullSpecialtyTheme> = {
+  'organ-transplant': {
+    color: organTransplantColors,
+    typography: organTransplantTypography,
+  },
+  'cosmetic-surgery': {
+    color: cosmeticSurgeryColors,
+    typography: cosmeticSurgeryTypography,
+  },
 }
