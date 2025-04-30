@@ -9,6 +9,8 @@ export type LayoutType =
     | 'framelessSide'
     | 'contentOverlay'
 
+export type MedicalSpecialty = 'default' | 'organTransplant' | 'cosmeticSurgery'
+
 export type Theme = {
     themeSchema: string
     direction: Direction
@@ -19,4 +21,5 @@ export type Theme = {
         sideNavCollapse: boolean
         previousType?: LayoutType | ''
     }
+    specialty: MedicalSpecialty
 }

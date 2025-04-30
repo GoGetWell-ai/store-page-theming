@@ -1,5 +1,5 @@
 import { THEME_ENUM } from '@/constants/theme.constant'
-import { Direction, Mode, ControlSize, LayoutType } from '@/@types/theme'
+import { Direction, Mode, ControlSize, LayoutType, MedicalSpecialty } from '@/@types/theme'
 
 export type ThemeConfig = {
     themeSchema: string
@@ -11,6 +11,7 @@ export type ThemeConfig = {
         type: LayoutType
         sideNavCollapse: boolean
     }
+    specialty: MedicalSpecialty
 }
 
 /**
@@ -27,4 +28,5 @@ export const themeConfig: ThemeConfig = {
         type: THEME_ENUM.LAYOUT_COLLAPSIBLE_SIDE,
         sideNavCollapse: false,
     },
+    specialty: 'default'
 }

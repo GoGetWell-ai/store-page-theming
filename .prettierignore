@@ -3,8 +3,8 @@
 /node_modules
 
 # Ignore files: 
-/public
+<!-- /public
 /src/assets/styles
 /src/index.css
 package.json
-package.lock.json
+package.lock.json -->
