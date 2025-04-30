@@ -177,3 +177,67 @@
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
+
+/* Card Gradient Animations for Theme Cards */
+.card-gradient {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-gradient-primary {
+  background-image: linear-gradient(135deg, var(--color-primary-deep) 0%, var(--color-primary) 100%);
+}
+
+.card-gradient-success {
+  background-image: linear-gradient(135deg, var(--color-success-deep) 0%, var(--color-success) 100%);
+}
+
+.card-gradient-warning {
+  background-image: linear-gradient(135deg, var(--color-warning-deep) 0%, var(--color-warning) 100%);
+}
+
+.card-gradient-animated {
+  background-size: 200% 200%;
+  animation: gradientShift 5s ease infinite;
+}
+
+/* Slide-in animation */
+@keyframes slideInRight {
+  from {
+    transform: translateX(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight var(--transition-normal) ease-out forwards;
+}
+
+/* Bounce animation for emphasis */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+.bounce {
+  animation: bounce 2s ease infinite;
+}
+
+/* Theme transition effect */
+.theme-transition {
+  transition: background-color 0.5s ease, 
+              color 0.5s ease, 
+              border-color 0.5s ease,
+              box-shadow 0.5s ease;
+}
