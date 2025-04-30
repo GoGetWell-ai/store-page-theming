@@ -8,6 +8,7 @@ import {
     LAYOUT_BLANK,
 } from '@/constants/theme.constant'
 import Loading from '@/components/shared/Loading'
+import MenuBar from '@/components/shared/MenuBar'
 import type { CommonProps } from '@/@types/common'
 import type { LazyExoticComponent } from 'react'
 import type { LayoutType } from '@/@types/theme'
@@ -39,7 +40,12 @@ const PostLoginLayout = ({ layoutType, children }: PostLoginLayoutProps) => {
 
     return (
         <Suspense fallback={<Loading type='cover' loading={true} />}>
-            <AppLayout>{children}</AppLayout>
+            <div className="flex flex-col h-screen">
+                <MenuBar />
+                <div className="flex-1 overflow-auto">
+                    <AppLayout>{children}</AppLayout>
+                </div>
+            </div>
         </Suspense>
     )
 }
