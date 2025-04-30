@@ -9,25 +9,74 @@ import { treatmentTypesData } from '../data/treatmentTypesData';
 import { useNavigate } from 'react-router-dom';
 import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore';
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore';
+import { useThemeStore } from '@/store/themeStore';
 
 const StartYourJourney = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [uploadReportPopupStatus, setUploadReportPopupStatus] = useState(false);
-  const { hcfData } = useAuthStore()
-  const [steps, setSteps] = useState<{ icon: JSX.Element; text: string; description: string; }[]>([])
+  const { hcfData } = useAuthStore();
+  const { specialty } = useThemeStore();
+  const [steps, setSteps] = useState<{ icon: JSX.Element; text: string; description: string; }[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
-  const { setPushedMessages } = usGenerativeChatStore()
+  const { setPushedMessages } = usGenerativeChatStore();
+
+  // Apply animation on mount
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
+  // Get theme specific classes
+  const getThemeClasses = () => {
+    switch (specialty) {
+      case 'organTransplant':
+        return {
+          primary: 'text-teal-600',
+          gradient: 'from-teal-500 to-cyan-600',
+          activeStepBg: 'bg-teal-600',
+          inactiveStepBg: 'bg-teal-100',
+          hoverStepBg: 'bg-teal-200',
+          borderFocus: 'focus:border-teal-500 hover:border-teal-500',
+          progressBar: 'bg-teal-500',
+          buttonGradient: 'bg-gradient-to-r from-teal-600 to-teal-400',
+        };
+      case 'cosmeticSurgery':
+        return {
+          primary: 'text-pink-600',
+          gradient: 'from-pink-500 to-purple-600',
+          activeStepBg: 'bg-pink-600',
+          inactiveStepBg: 'bg-pink-100',
+          hoverStepBg: 'bg-pink-200',
+          borderFocus: 'focus:border-pink-500 hover:border-pink-500',
+          progressBar: 'bg-pink-500',
+          buttonGradient: 'bg-gradient-to-r from-pink-600 to-pink-400',
+        };
+      default:
+        return {
+          primary: 'text-primary',
+          gradient: 'from-blue-500 to-indigo-600',
+          activeStepBg: 'bg-primary',
+          inactiveStepBg: 'bg-[#e5e2f1]',
+          hoverStepBg: 'bg-primary/20',
+          borderFocus: 'focus:border-primary hover:border-primary',
+          progressBar: 'bg-primary',
+          buttonGradient: 'bg-gradient-to-r from-blue-600 to-blue-400',
+        };
+    }
+  };
+
+  const themeClasses = getThemeClasses();
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
     }, 2000);
     return () => clearInterval(timer);
-  }, []);
+  }, [steps.length]);
 
   useEffect(() => {
     if (hcfData?.type !== 'hospital') {
@@ -37,7 +86,7 @@ const StartYourJourney = () => {
         { icon: <BsHospital className="w-6 h-6" />, text: "Select Hospital", description: "Find the best hospitals" },
         { icon: <BiUser className="w-6 h-6" />, text: "Select Doctor", description: "Choose top specialists" },
         { icon: <CiSettings className="w-6 h-6" />, text: "Finalize Treatment", description: "Confirm your options" }
-      ])
+      ]);
     } else {
       setSteps(
         [
@@ -46,9 +95,9 @@ const StartYourJourney = () => {
           { icon: <BiUser className="w-6 h-6" />, text: "Select Doctor", description: "Choose top specialists" },
           { icon: <CiSettings className="w-6 h-6" />, text: "Finalize Treatment", description: "Confirm your options" }
         ]
-      )
+      );
     }
-  }, [hcfData])
+  }, [hcfData]);
 
   const handleInputChange = (e) => {
     const value = e.target.value;
@@ -106,15 +155,13 @@ const StartYourJourney = () => {
   const handleSelectTreatment = (treatment) => {
     setSearchTerm(treatment.subtype);
     setIsInputFocused(false);
-    setPushedMessages(treatment.subtype)
-    navigate(`/chat-bot`)
-    // You can add additional logic here, like navigating to a treatment page
+    setPushedMessages(treatment.subtype);
+    navigate(`/chat-bot`);
   };
 
-
   return (
-    <div className="py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20">
-      <div className="flex justify-center items-center gap-x-2 sm:flex-row flex-col my-5">
+    <div className={`py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+      <div className="flex justify-center items-center gap-x-4 sm:flex-row flex-col my-5">
         <div className="relative w-full md:w-96" ref={wrapperRef}>
           <form onSubmit={handleSearch} className="relative w-full md:w-96 group">
             <Input
@@ -126,30 +173,30 @@ const StartYourJourney = () => {
                 searchTreatments(searchTerm);
               }}
               placeholder="Search Your Treatment"
-              className="w-full px-6 py-3 pr-12 rounded-full border-2 border-[#c0bada] focus:outline-none 
-            text-gray-700 placeholder-gray-400 transition-all duration-300
-            group-hover:border-primary focus:border-primary"
+              className={`w-full px-6 py-3 pr-12 rounded-full border-2 border-gray-200 ${themeClasses.borderFocus} focus:outline-none 
+              text-gray-700 placeholder-gray-400 transition-all duration-300 shadow-sm`}
             />
             <button
               type="submit"
-              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-[#00000015]
-            transition-all duration-300 hover:bg-primary hover:text-white"
+              className={`absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full 
+              transition-all duration-300 hover:text-white ${themeClasses.buttonGradient} hover:shadow-lg btn-ripple`}
             >
-              <BiSearch className="w-5 h-5" />
+              <BiSearch className="w-5 h-5 text-white" />
             </button>
           </form>
 
           {isInputFocused && (
-            <div className="absolute z-10 mt-2 w-full bg-white shadow-lg rounded-md border border-gray-200 max-h-60 overflow-y-auto">
+            <div className="absolute z-10 mt-2 w-full bg-white shadow-lg rounded-md border border-gray-200 max-h-60 overflow-y-auto fade-in">
               {searchResults.length > 0 ? (
                 <ul className="py-1">
                   {searchResults.map((result, index) => (
                     <li
                       key={index}
-                      className="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                      className={`px-4 py-2 hover:bg-gray-100 cursor-pointer transition-all duration-300 ${index === 0 ? 'stagger-fade-in' : ''}`}
                       onClick={() => handleSelectTreatment(result)}
+                      style={{animationDelay: `${index * 50}ms`}}
                     >
-                      <div className="text-sm font-medium text-gray-800">
+                      <div className={`text-sm font-medium ${themeClasses.primary}`}>
                         {result.subtype}
                       </div>
                       <div className="text-xs text-gray-500">
@@ -159,7 +206,7 @@ const StartYourJourney = () => {
                   ))}
                 </ul>
               ) : (
-                <div className="px-4 py-3 text-sm text-gray-500">
+                <div className="px-4 py-3 text-sm text-gray-500 fade-in">
                   No treatments found
                 </div>
               )}
@@ -170,35 +217,33 @@ const StartYourJourney = () => {
         <p className="mx-3 sm:block hidden text-gray-500">Or</p>
 
         <div className="sm:mt-0 mt-3 w-full sm:w-auto">
-
-          {
-            uploadReportPopupStatus && <UploadMedicalReports setPopupStatus={setUploadReportPopupStatus} />
-          }
+          {uploadReportPopupStatus && <UploadMedicalReports setPopupStatus={setUploadReportPopupStatus} />}
           <Button 
-          className="rounded-full block w-full md:w-auto transition-all duration-300
-            hover:shadow-lg hover:scale-105 active:scale-95"
-            variant="solid"
+            className={`rounded-full block w-full md:w-auto ${themeClasses.buttonGradient} 
+              text-white shadow-md btn-ripple transition-all duration-300
+              hover:shadow-lg hover:scale-105 active:scale-95`}
+            onClick={() => setUploadReportPopupStatus(true)}
           >
             Upload Your Medical Report
           </Button>
         </div>
       </div>
 
-      <div className="text-center mb-6 mt-10">
-        <h2 className="text-2xl sm:text-4xl font-bold text-gray-900 mb-2 animate-fade-in">
+      <div className="text-center mb-10 mt-12 stagger-fade-in">
+        <h2 className={`text-3xl sm:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.gradient}`}>
           Start Your Journey
         </h2>
-        <p className="text-sm text-gray-600 max-w-3xl mx-auto animate-slide-up">
+        <p className="text-gray-600 max-w-3xl mx-auto">
           Upload your medical report to receive AI-powered insights on the best treatment plans.
         </p>
       </div>
 
-      <div className="relative">
+      <div className="relative py-4 mt-5">
         {/* Progress Line */}
         <div className="absolute top-[calc(55%)] left-[7.5%] w-[85%] hidden md:block z-[2]">
-          <div className="h-0.5 bg-gray-300 relative">
+          <div className="h-1 bg-gray-200 rounded-full relative">
             <div
-              className="absolute top-0 left-0 h-full bg-primary transition-all duration-1000 ease-in-out"
+              className={`absolute top-0 left-0 h-full ${themeClasses.progressBar} rounded-full transition-all duration-1000 ease-in-out`}
               style={{ width: `${(activeStep / (steps.length - 1)) * 100}%` }}
             />
           </div>
@@ -208,28 +253,28 @@ const StartYourJourney = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className={`flex flex-col items-center w-full md:w-40 transition-all duration-300
+              className={`flex flex-col items-center w-full md:w-40 transition-all duration-500
                 ${index === activeStep ? 'scale-110' : 'scale-100'}
               `}
             >
               <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center mb-2 relative z-[2]
-                  transition-all duration-300 transform
+                className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 relative z-[2]
+                  transition-all duration-300 transform shadow-md
                   ${index === activeStep
-                    ? 'bg-primary text-white shadow-lg scale-110'
-                    : 'bg-[#e5e2f1] text-primary hover:bg-primary/20'
+                    ? `${themeClasses.activeStepBg} text-white shadow-lg scale-110`
+                    : `${themeClasses.inactiveStepBg} ${themeClasses.primary} hover:${themeClasses.hoverStepBg}`
                   }
                 `}
               >
                 {step.icon}
               </div>
-              <p className={`text-sm text-center font-medium transition-colors duration-300
-                ${index === activeStep ? 'text-primary' : 'text-gray-600'}
+              <p className={`text-sm font-medium text-center transition-colors duration-300
+                ${index === activeStep ? themeClasses.primary : 'text-gray-600'}
               `}>
                 {step.text}
               </p>
-              <p className={`text-xs text-center transition-opacity duration-300
-                ${index === activeStep ? 'opacity-100' : 'opacity-0'}
+              <p className={`text-xs text-center mt-1 transition-all duration-300
+                ${index === activeStep ? 'opacity-100 scale-100' : 'opacity-0 scale-0 h-0'}
               `}>
                 {step.description}
               </p>
@@ -237,24 +282,6 @@ const StartYourJourney = () => {
           ))}
         </div>
       </div>
-
-
-      <style jsx>{`
-        @keyframes fade-in {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes slide-up {
-          from { transform: translateY(20px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
-        .animate-fade-in {
-          animation: fade-in 0.5s ease-out;
-        }
-        .animate-slide-up {
-          animation: slide-up 0.5s ease-out;
-        }
-      `}</style>
     </div>
   );
 };
