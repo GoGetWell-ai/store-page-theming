@@ -27,7 +27,7 @@ const ThemeConfigurator = ({ callBackClose }: ThemeConfiguratorProps) => {
                     <DirectionSwitcher callBackClose={callBackClose} />
                 </div>
                 <div>
-                    <h6 className="mb-3">Theme</h6>
+                    <h6 className="mb-3">Themes</h6>
                     <ThemeSwitcher />
                 </div>
                 <div>

@@ -11,7 +11,7 @@ const Testimonials: React.FC = () => {
         {
             imageSrc:
                 'https://a.storyblok.com/f/191576/1200x800/faa88c639f/round_profil_picture_before_.webp', // Profile image source will be inserted here
-            reviewContent: `I would like to express my heartfelt gratitude to ${hcfData.fullname} for making my medical journey to India smooth and stress-free. From the moment I reached out for assistance, ${hcfData.name} took care of every detail – from finding the best doctor to arranging my travel and accommodation. Their professionalism, kindness, and quick responses reassured me throughout the process. Thanks to their expertise and dedication, I was able to focus entirely on my recovery, knowing I was in capable hands.`,
+            reviewContent: `I would like to express my heartfelt gratitude to ${hcfData.name} for making my medical journey to India smooth and stress-free. From the moment I reached out for assistance, ${hcfData.name} took care of every detail – from finding the best doctor to arranging my travel and accommodation. Their professionalism, kindness, and quick responses reassured me throughout the process. Thanks to their expertise and dedication, I was able to focus entirely on my recovery, knowing I was in capable hands.`,
             reviewer: {
                 name: 'Ava Robert',
                 designation: 'Golio',

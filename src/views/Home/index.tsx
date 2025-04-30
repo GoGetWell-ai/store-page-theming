@@ -9,6 +9,7 @@ import UserDropdown from '@/components/template/UserProfileDropdown'
 import useResponsive from '@/utils/hooks/useResponsive'
 import Notification from '@/components/template/Notification'
 import HeaderLogo from '@/components/template/HeaderLogo'
+import MenuBar from '../../components/shared/Menubar'
 import { useAuth } from '@/auth'
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore'
 
@@ -20,34 +21,32 @@ const Home = () => {
 
     return (
         <>
-
-            <div className="patient w-full" >
+            <div className="patient w-full">
                 {smaller.lg && (
                     <div className="w-full py-[10px] bg-white px-[5%] flex items-center justify-between">
                         <div className="max-w-[150px]">
                             <HeaderLogo />
                         </div>
 
-                        {
-                            authenticated && (
-                                <div className='flex items-center gap-x-[10px]'>
-                                    <UserDropdown />
-                                    <Notification />
-                                </div>
-                            )
-                        }
+                        {authenticated && (
+                            <div className='flex items-center gap-x-[10px]'>
+                                <UserDropdown />
+                                <Notification />
+                            </div>
+                        )}
                     </div>
                 )}
+                <MenuBar />
                 <Hero />
                 <StartYourJourney />
                 <Treatment />
-                <TopHospitals hcfData={hcfData} />
-                <TopDoctors hcfData={hcfData} />
+                <TopHospitals hcfData={{ hospitals: [], ...hcfData }} />
+                <TopDoctors hcfData={{ doctors: [], ...hcfData }} />
                 {/* <WhyMakeWell /> */}
                 {/* <MbbsVisual /> */}
                 {/* <Testimonials /> */}
                 <GetInTouch hcfData={hcfData} />
-                <Footer />
+                <Footer pageContainerType="contained" />
             </div>
         </>
     )

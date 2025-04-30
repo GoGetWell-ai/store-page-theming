@@ -43,8 +43,12 @@ type TreatmentRowProps = {
     rowIndex: number
 }
 
-const getSpecialtyIcon = (title) => {
-    const iconProps = { className: 'w-6 h-6' }
+interface IconProps {
+    className: string
+}
+
+const getSpecialtyIcon = (title: string): JSX.Element => {
+    const iconProps: IconProps = { className: 'w-6 h-6' }
 
     switch (title) {
         case 'Organ Transplant':

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Switching Demo</title>
+  <link rel="stylesheet" href="./dist/index.css">
+  <style>
+    .theme-card {
+      padding: 2rem;
+      margin: 1rem;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .theme-controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      z-index: 50;
+    }
+  </style>
+</head>
+<body class="bg-background min-h-screen transition-colors duration-300">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-4xl font-bold text-text mb-8">Theme Switching Demo</h1>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Primary Card -->
+      <div class="theme-card bg-card-bg border border-border shadow-md">
+        <h2 class="text-2xl font-bold text-primary mb-4">Primary Theme Colors</h2>
+        <div class="space-y-4">
+          <div class="p-4 bg-primary text-white rounded">Primary</div>
+          <div class="p-4 bg-primary-deep text-white rounded">Primary Deep</div>
+          <div class="p-4 bg-primary-mild text-white rounded">Primary Mild</div>
+          <div class="p-4 bg-primary-subtle text-primary rounded">Primary Subtle</div>
+        </div>
+      </div>
+      
+      <!-- Text Card -->
+      <div class="theme-card bg-card-bg border border-border shadow-md">
+        <h2 class="text-2xl font-bold text-primary mb-4">Text Colors</h2>
+        <div class="space-y-4">
+          <p class="text-text">Main Text Color</p>
+          <p class="text-text-light">Light Text Color</p>
+          <p class="text-primary">Primary Text</p>
+          <p class="text-secondary">Secondary Text</p>
+        </div>
+      </div>
+      
+      <!-- Status Colors Card -->
+      <div class="theme-card bg-card-bg border border-border shadow-md">
+        <h2 class="text-2xl font-bold text-primary mb-4">Status Colors</h2>
+        <div class="space-y-4">
+          <div class="p-4 bg-success text-white rounded">Success</div>
+          <div class="p-4 bg-error text-white rounded">Error</div>
+          <div class="p-4 bg-warning text-white rounded">Warning</div>
+          <div class="p-4 bg-info text-white rounded">Info</div>
+        </div>
+      </div>
+      
+      <!-- Buttons Card -->
+      <div class="theme-card bg-card-bg border border-border shadow-md">
+        <h2 class="text-2xl font-bold text-primary mb-4">Buttons</h2>
+        <div class="space-y-4">
+          <button class="px-4 py-2 bg-primary text-white rounded hover:bg-primary-deep transition-colors">
+            Primary Button
+          </button>
+          <button class="px-4 py-2 bg-white text-primary border border-primary rounded hover:bg-primary-subtle transition-colors">
+            Outlined Button
+          </button>
+          <button class="px-4 py-2 bg-error text-white rounded hover:opacity-90 transition-opacity">
+            Error Button
+          </button>
+          <button class="px-4 py-2 bg-success text-white rounded hover:opacity-90 transition-opacity">
+            Success Button
+          </button>
+        </div>
+      </div>
+      
+      <!-- Form Elements Card -->
+      <div class="theme-card bg-card-bg border border-border shadow-md">
+        <h2 class="text-2xl font-bold text-primary mb-4">Form Elements</h2>
+        <div class="space-y-4">
+          <div>
+            <label class="block text-text mb-2">Input Field</label>
+            <input type="text" class="w-full p-2 border border-border rounded focus:border-primary focus:outline-none" placeholder="Enter text...">
+          </div>
+          <div>
+            <label class="block text-text mb-2">Select Field</label>
+            <select class="w-full p-2 border border-border rounded focus:border-primary focus:outline-none">
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Background Card -->
+      <div class="theme-card bg-card-bg border border-border shadow-md">
+        <h2 class="text-2xl font-bold text-primary mb-4">Background & Borders</h2>
+        <div class="space-y-4">
+          <div class="p-4 bg-background border border-border rounded">Background Color</div>
+          <div class="p-4 bg-card-bg border border-border rounded">Card Background</div>
+          <div class="p-4 bg-primary-subtle border border-primary rounded">Primary Border</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Theme Controls -->
+  <div id="theme-switcher" class="theme-controls bg-card-bg border border-border shadow-lg"></div>
+  
+  <script type="module">
+    import { initTheme, initDarkMode } from './src/utils/themeManager.js';
+    import ThemeSwitcher from './src/components/ThemeSwitcher.js';
+    
+    // Initialize theme and dark mode from saved preferences
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initDarkMode();
+      
+      // Initialize the theme switcher
+      new ThemeSwitcher('theme-switcher');
+    });
+  </script>
+</body>
+</html>

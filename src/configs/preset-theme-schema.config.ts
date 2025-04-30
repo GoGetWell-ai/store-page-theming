@@ -92,12 +92,50 @@ const orangeTheme: ThemeVariables = {
     },
 }
 
+// Organ Transplant Theme
+const organTransplantTheme: ThemeVariables = {
+    light: {
+        primary: '#16a34a', // Green primary color
+        primaryDeep: '#15803d',
+        primaryMild: '#22c55e',
+        primarySubtle: '#16a34a1a',
+        neutral: '#ffffff',
+    },
+    dark: {
+        primary: '#22c55e',
+        primaryDeep: '#16a34a',
+        primaryMild: '#4ade80',
+        primarySubtle: '#22c55e1a',
+        neutral: '#ffffff',
+    },
+}
+
+// Cosmetic Surgery Theme
+const cosmeticSurgeryTheme: ThemeVariables = {
+    light: {
+        primary: '#db2777', // Pink primary color
+        primaryDeep: '#be185d',
+        primaryMild: '#ec4899',
+        primarySubtle: '#db27771a',
+        neutral: '#ffffff',
+    },
+    dark: {
+        primary: '#ec4899',
+        primaryDeep: '#db2777',
+        primaryMild: '#f472b6',
+        primarySubtle: '#ec48991a',
+        neutral: '#ffffff',
+    },
+}
+
 const presetThemeSchemaConfig: Record<string, ThemeVariables> = {
     default: defaultTheme,
     dark: darkTheme,
     green: greenTheme,
     purple: purpleTheme,
     orange: orangeTheme,
+    'organ-transplant': organTransplantTheme,
+    'cosmetic-surgery': cosmeticSurgeryTheme,
 }
 
 export default presetThemeSchemaConfig

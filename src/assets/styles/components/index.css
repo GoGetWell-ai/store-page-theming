@@ -18,7 +18,7 @@
 @import "./_pagination.css";
 @import "./_progress.css";
 @import "./_radio.css";
-@import "./_scrollbar";
+@import "./_scrollbar.css";
 @import "./_segment.css";
 @import "./_select.css";
 @import "./_skeleton.css";
@@ -32,3 +32,13 @@
 @import "./_toast.css";
 @import "./_tooltip.css";
 @import "./_upload.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-primary-subtle {
+    background-color: var(--primary-subtle);
+  }
+}
