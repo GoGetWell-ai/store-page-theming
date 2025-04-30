@@ -42,3 +42,128 @@ Files modified:
 - `src/configs/specialty-themes.config.ts`: Created to define theme configurations for each specialty
 
 Next steps will involve implementing a theme selection interface to allow users to switch between different medical specialty themes.
+
+## Step 3: Create Base Theme Configuration Files
+
+In this step, we created detailed base theme configuration files that serve as the foundation for our medical specialty themes. These files establish a comprehensive design system that can be extended or overridden by specialty-specific themes.
+
+### Colors Configuration
+
+We created a detailed color system in `src/views/Home/themes/base/colors.ts` with the following features:
+
+1. **Hierarchical Color Organization**:
+   - Primary colors (default, deep, mild variants)
+   - Secondary colors (default, deep, mild variants)
+   - Accent color for call-to-action elements
+   - Background and surface colors for layering
+   - Text colors with multiple emphasis levels
+   - Status colors for feedback and notifications
+   - Border colors for UI boundaries
+   - Overlay colors for modal backgrounds
+   - Medical-specific colors for specialty contexts
+
+2. **Semantic Naming**:
+   - Colors are named by their purpose rather than their visual appearance
+   - Each color has a clear intent in the UI
+   - Comments explain the purpose and usage of each color
+
+3. **Accessibility Considerations**:
+   - Color contrasts designed to meet WCAG accessibility guidelines
+   - Text colors optimized for readability in medical contexts
+
+### Typography Configuration
+
+We created a comprehensive typography system in `src/views/Home/themes/base/typography.ts` with the following features:
+
+1. **Font Families**:
+   - Primary font for general UI text
+   - Secondary font for headings
+   - Monospace font for medical data and codes
+   - System font fallbacks for optimal performance
+
+2. **Modular Type Scale**:
+   - Consistent size relationships from XS (0.75rem) to 6XL (4rem)
+   - Clear comments explaining the intended use for each size
+
+3. **Vertical Rhythm Control**:
+   - Six line-height options from tight (1) to loose (2)
+   - Optimized for different content types and readability requirements
+
+4. **Font Weight Spectrum**:
+   - Full range from thin (100) to black (900)
+   - Semantic descriptions for appropriate usage
+
+5. **Advanced Typography Controls**:
+   - Letter spacing options for different text styles
+   - Text transformation utilities
+   - Component-specific typography presets for consistent application
+
+These base configuration files provide a robust foundation that ensures consistency across the application while allowing for specialty-specific customizations.
+
+### Implementation Details
+Files created:
+- `src/views/Home/themes/base/colors.ts`: Base color system
+- `src/views/Home/themes/base/typography.ts`: Base typography system
+
+Next steps will involve creating specialty-specific theme configurations that extend these base themes for Organ Transplant and Cosmetic Surgery specialties.
+
+## Step 4: Create Organ Transplant Theme
+
+In this step, we created a specialized theme for the Organ Transplant specialty. This theme was designed to convey trust, precision, and hope - critical aspects in organ transplantation communication.
+
+### Colors Configuration
+
+We created a specialized color system in `src/views/Home/themes/organTransplant/colors.ts` with the following features:
+
+1. **Primary Color Palette**:
+   - Used teal/green tones (#00796B, #004D40) representing life, renewal, and medical expertise
+   - Deep and mild variations for creating visual hierarchy
+
+2. **Secondary Color Palette**:
+   - Used amber/gold tones (#FFC107, #FFA000) representing hope, value, and positive outcomes
+   - Provides warm contrast to the cool primary palette
+
+3. **Specialty-Specific Colors**:
+   - Added transplant-specific semantic colors for donors, recipients, matching, waitlist, etc.
+   - Created a timeline color system for representing the transplant journey
+   - Customized status colors to harmonize with the teal theme
+
+4. **Professional Atmosphere**:
+   - Carefully selected text colors for optimal readability against the teal/green theme
+   - Semi-transparent teal overlay for modal backgrounds
+   - Subtle background with very slight green tint for a calming effect
+
+### Typography Configuration
+
+We created specialized typography settings in `src/views/Home/themes/organTransplant/typography.ts` with these key features:
+
+1. **Professional Font Combination**:
+   - Serif fonts (Merriweather) for headings to convey authority and trust
+   - Sans-serif fonts (Roboto) for body text to maintain readability of medical information
+   - Monospace fonts for medical codes and data
+
+2. **Formal Sizing System**:
+   - Slightly more conservative font size scale for the formal medical context
+   - Refined heading sizes to convey appropriate hierarchy while maintaining professionalism
+
+3. **Specialty-Specific Typography**:
+   - Added transplant-specific component typography for:
+     - Patient status indicators
+     - Organ compatibility information
+     - Medical timeline events
+     - Medical statistics
+
+4. **Improved Readability**:
+   - Adjusted line heights for optimal readability of complex medical information
+   - Customized letter spacing for different text categories
+   - Careful font weight selection for clear information hierarchy
+
+The Organ Transplant theme maintains the same structure as the base theme while customizing the values to create a distinct visual identity appropriate for the specialty.
+
+### Implementation Details
+Files created:
+- `src/views/Home/themes/organTransplant/colors.ts`: Organ Transplant color system
+- `src/views/Home/themes/organTransplant/typography.ts`: Organ Transplant typography system
+- `src/views/Home/themes/organTransplant/index.ts`: Convenient theme exports
+
+Next steps will involve creating the Cosmetic Surgery specialty theme, which will have a distinctly different aesthetic appropriate for that medical specialty.
