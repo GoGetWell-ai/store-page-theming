@@ -30,6 +30,21 @@ const ThemeProvider = ({ children }: ThemeProviderProps) => {
     if (specialty !== 'default') {
       document.documentElement.classList.add(`theme-${specialty}`)
     }
+    
+    // Optional: Update meta theme-color for browser UI (mobile devices)
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+    if (metaThemeColor) {
+      if (specialty === 'organTransplant') {
+        metaThemeColor.setAttribute('content', '#006064') // Teal color
+      } else if (specialty === 'cosmeticSurgery') {
+        metaThemeColor.setAttribute('content', '#ad1457') // Pink color
+      } else {
+        metaThemeColor.setAttribute('content', '#1976d2') // Default blue
+      }
+    }
+    
+    // Log theme change for debugging purposes
+    console.log(`Theme changed to: ${specialty}`)
   }, [specialty]) // Re-run effect when specialty changes
 
   return <>{children}</>

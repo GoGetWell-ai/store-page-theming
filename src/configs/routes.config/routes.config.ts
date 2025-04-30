@@ -18,7 +18,7 @@ export const protectedRoutes: Routes = [
     {
         key: 'themes',
         path: '/themes',
-        component: lazy(() => import('@/views/Home/components/Themes')),
+        component: lazy(() => import('@/views/Home/themes')),
         authority: [],
         meta: {
             pageContainerType: 'contained',
