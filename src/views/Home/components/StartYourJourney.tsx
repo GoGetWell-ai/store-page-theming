@@ -160,7 +160,7 @@ const StartYourJourney = () => {
   };
 
   return (
-    <div className={`py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+    <div className={`mt-32 md:mt-36 lg:mt-24 py-7 sm:py-10 px-4 max-w-6xl mx-auto transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
       <div className="flex justify-center items-center gap-x-4 sm:flex-row flex-col my-5">
         <div className="relative w-full md:w-96" ref={wrapperRef}>
           <form onSubmit={handleSearch} className="relative w-full md:w-96 group">

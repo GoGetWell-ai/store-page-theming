@@ -2,12 +2,16 @@ import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore
 import HCFHeader from '@/components/shared/HCFHeader';
 import { useThemeStore } from '@/store/themeStore';
 import { useState, useEffect } from 'react';
+import UploadMedicalReports from '@/components/shared/UploadMedicalReports';
+import { useNavigate } from 'react-router-dom';
 
 // Define the structure of the expected props
 
 const Hero: React.FC = () => {
     const { specialty } = useThemeStore();
     const [isVisible, setIsVisible] = useState(false);
+    const [uploadReportPopupStatus, setUploadReportPopupStatus] = useState(false);
+    const navigate = useNavigate();
     
     useEffect(() => {
         setIsVisible(true);
@@ -37,6 +41,10 @@ const Hero: React.FC = () => {
         }
     };
 
+    const handleGetStarted = () => {
+        navigate('/chat-bot');
+    };
+
     return (
         <div className='relative'>
             <HCFHeader leftSide={
@@ -51,21 +59,31 @@ const Hero: React.FC = () => {
                         Upload Your Medical Reports to Explore the Best and Most Cost-Effective Treatments in Your Language
                     </p>
                     <div className="flex justify-center mt-8 gap-4 stagger-fade-in">
-                        <button className={`px-6 py-3 rounded-lg bg-gradient-to-r ${getThemeGradientClasses()} text-white font-medium hover-lift btn-ripple shadow-lg`}>
+                        <button 
+                            onClick={() => setUploadReportPopupStatus(true)}
+                            className={`px-6 py-3 rounded-lg bg-gradient-to-r ${getThemeGradientClasses()} text-white font-medium hover-lift btn-ripple shadow-lg`}
+                        >
                             Upload Now
                         </button>
-                        <button className="px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm text-white font-medium border border-white/20 hover-scale">
+                        <button 
+                            onClick={handleGetStarted}
+                            className="px-6 py-3 rounded-lg bg-white/10 backdrop-blur-sm text-white font-medium border border-white/20 hover-scale"
+                        >
                             Get Started
                         </button>
                     </div>
                 </div>
             } />
 
-            <div className={`md:block hidden z-5 absolute bottom-[-25%] w-[70%] left-[15%] lg:w-[50%] lg:left-[25%] transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{transitionDelay: '300ms'}}>
-                <ProfileCard />
-            </div>
-            <div className={`w-full md:hidden block transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{transitionDelay: '300ms'}}>
-                <ProfileCard />
+            {uploadReportPopupStatus && 
+                <UploadMedicalReports setPopupStatus={setUploadReportPopupStatus} />
+            }
+
+            {/* Improved positioning of the profile card with proper spacing */}
+            <div className="w-full mx-auto mt-16 px-4 relative">
+                <div className={`max-w-xl mx-auto md:max-w-2xl lg:max-w-3xl transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`} style={{transitionDelay: '300ms'}}>
+                    <ProfileCard />
+                </div>
             </div>
         </div>
     );
@@ -73,9 +91,9 @@ const Hero: React.FC = () => {
 
 export default Hero;
 
-
-
 const calculateAge = (dateOfBirth: string) => {
+    if (!dateOfBirth) return 'N/A';
+    
     const birthDate = new Date(dateOfBirth);
     const today = new Date();
 
@@ -129,13 +147,19 @@ const ProfileCard = () => {
     };
 
     const themeClasses = getThemeClasses();
+    
+    const getDisplayValue = (value) => {
+        return value || 'N/A';
+    };
 
     return (
         <div className={`w-full mx-auto bg-white rounded-xl shadow-lg p-6 border ${themeClasses.cardBorder} hover-lift transition-all`}>
             <div className="flex flex-col gap-4">
                 {/* Header with title and button */}
                 <div className="flex justify-between items-center">
-                    <h1 className={`text-2xl font-bold ${themeClasses.primary}`}>{hcfData.name}</h1>
+                    <h1 className={`text-2xl font-bold ${themeClasses.primary}`}>
+                        {getDisplayValue(hcfData?.name)}
+                    </h1>
                     <a 
                         href={`https://api.whatsapp.com/send?phone=${hcfData?.phone || hcfData?.auth?.phoneNumber}&text=Hi!%20Dear,%20I%20have%20a%20inquiry`} 
                         target='_blank' 
@@ -149,59 +173,70 @@ const ProfileCard = () => {
                     </a>
                 </div>
 
-                {/* Info grid */}
+                {/* Info grid with consistent heights and styling */}
                 <div className="grid grid-cols-1 xs:grid-cols-2 gap-4">
-                    <div className="flex items-center gap-3">
-                        <div className={`${themeClasses.iconBg} p-2 rounded-full`}>
+                    <InfoItem 
+                        icon={(
                             <svg className={`w-5 h-5 ${themeClasses.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                        </div>
-                        <div>
-                            <span className="text-gray-600 text-sm block">Location</span>
-                            <span className={`${themeClasses.highlight} font-medium`}>
-                                {`${hcfData?.address?.city ? `${hcfData?.address?.city}, ` : ''}${hcfData?.address?.country || 'N/A'}`}
-                            </span>
-                        </div>
-                    </div>
+                        )}
+                        label="Location"
+                        value={`${hcfData?.address?.city ? `${hcfData?.address?.city}, ` : ''}${getDisplayValue(hcfData?.address?.country)}`}
+                        themeClasses={themeClasses}
+                    />
 
-                    <div className="flex items-center gap-3">
-                        <div className={`${themeClasses.iconBg} p-2 rounded-full`}>
+                    <InfoItem 
+                        icon={(
                             <svg className={`w-5 h-5 ${themeClasses.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                        </div>
-                        <div>
-                            <span className="text-gray-600 text-sm block">Age</span>
-                            <span className="font-medium">{age || 'N/A'} years</span>
-                        </div>
-                    </div>
+                        )}
+                        label="Age"
+                        value={typeof age === 'number' ? `${age} years` : age}
+                        themeClasses={themeClasses}
+                    />
 
-                    <div className="flex items-center gap-3">
-                        <div className={`${themeClasses.iconBg} p-2 rounded-full`}>
+                    <InfoItem 
+                        icon={(
                             <svg className={`w-5 h-5 ${themeClasses.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                             </svg>
-                        </div>
-                        <div>
-                            <span className="text-gray-600 text-sm block">Language</span>
-                            <span className="font-medium">{hcfData?.languages?.length ? hcfData?.languages.join(', ') : 'N/A'}</span>
-                        </div>
-                    </div>
+                        )}
+                        label="Language"
+                        value={hcfData?.languages?.length ? hcfData?.languages.join(', ') : 'N/A'}
+                        themeClasses={themeClasses}
+                    />
 
-                    <div className="flex items-center gap-3">
-                        <div className={`${themeClasses.iconBg} p-2 rounded-full`}>
+                    <InfoItem 
+                        icon={(
                             <svg className={`w-5 h-5 ${themeClasses.iconColor}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                             </svg>
-                        </div>
-                        <div>
-                            <span className="text-gray-600 text-sm block">Gender</span>
-                            <span className={`${themeClasses.highlight} font-medium capitalize`}>{hcfData?.gender || 'N/A'}</span>
-                        </div>
-                    </div>
+                        )}
+                        label="Gender"
+                        value={hcfData?.gender ? hcfData?.gender.charAt(0).toUpperCase() + hcfData?.gender.slice(1) : 'N/A'}
+                        themeClasses={themeClasses}
+                    />
                 </div>
+            </div>
+        </div>
+    );
+};
+
+// Extracted InfoItem component for consistency
+const InfoItem = ({ icon, label, value, themeClasses }) => {
+    return (
+        <div className="flex items-center gap-3">
+            <div className={`${themeClasses.iconBg} p-2 rounded-full flex items-center justify-center`} style={{ minWidth: '36px', height: '36px' }}>
+                {icon}
+            </div>
+            <div>
+                <span className="text-gray-600 text-sm block">{label}</span>
+                <span className={`${label === 'Gender' || label === 'Location' ? themeClasses.highlight : ''} font-medium truncate block`}>
+                    {value}
+                </span>
             </div>
         </div>
     );
