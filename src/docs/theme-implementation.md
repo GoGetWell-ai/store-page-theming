@@ -288,3 +288,35 @@ File created:
 - `src/assets/styles/themes.css`: CSS variables for all themes
 
 Next steps will involve integrating the CSS variables with our React components and creating a ThemeProvider component to handle theme switching.
+
+## Step 7: Create ThemeProvider Component
+
+In this step, we created a ThemeProvider component that dynamically applies the appropriate theme class to the document root element based on the selected theme.
+
+### Implementation Approach
+
+The ThemeProvider component:
+1. Imports the theme store to access the current specialty theme selection
+2. Uses React's useEffect hook to apply theme classes when the component mounts or when the theme changes
+3. Removes any existing theme classes before applying the new one
+4. Applies no special class for the default theme (which uses `:root` CSS variables)
+5. Applies the appropriate class (`theme-organTransplant` or `theme-cosmeticSurgery`) for specialty themes
+
+### Integration with Application
+
+We integrated the ThemeProvider into the application by:
+1. Wrapping the main application content with the ThemeProvider component in App.tsx
+2. Ensuring the themes.css file is imported in the main stylesheet (app.css)
+3. Maintaining compatibility with the existing Theme component that handles other theme aspects
+
+This implementation allows for seamless theme switching without page reload. When the user selects a different specialty theme, the ThemeProvider component updates the document's class, causing the CSS variables to change across the entire application.
+
+### Implementation Details
+Files created:
+- `src/components/template/ThemeProvider.tsx`: Component that applies theme classes
+
+Files modified:
+- `src/App.tsx`: Updated to integrate ThemeProvider
+- `src/assets/styles/app.css`: Added import for themes.css
+
+Next steps will involve creating a theme selection interface component that allows users to switch between different medical specialty themes.

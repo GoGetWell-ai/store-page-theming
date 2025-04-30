@@ -58,6 +58,7 @@ module.exports = {
 			},
 			extend: {
 				colors: {
+					// Base theme colors using CSS variables
 					'primary': 'var(--primary)',
 					'primary-deep': 'var(--primary-deep)',
 					'primary-mild': 'var(--primary-mild)',
@@ -82,12 +83,20 @@ module.exports = {
 					'gray-800': 'var(--gray-800)',
 					'gray-900': 'var(--gray-900)',
 					'gray-950': 'var(--gray-950)',
+					
+					// Specialty theme colors
+					'secondary': 'var(--secondary)',
+					'accent': 'var(--accent)',
+					'background': 'var(--background)',
+					'text': 'var(--text)',
+					'muted': 'var(--muted)'
 				},
 				typography: (theme) => ({
 					DEFAULT: {
 						css: {
 							color: theme('colors.gray.500'),
 							maxWidth: '65ch',
+							fontFamily: 'var(--font-family)',
 						},
 					},
 					invert: {
@@ -96,6 +105,41 @@ module.exports = {
 						},
 					},
 				}),
+				fontFamily: {
+					// Theme-specific font families
+					'primary': 'var(--font-family)',
+					'secondary': 'var(--heading-font-family)',
+					'mono': 'var(--mono-font-family)'
+				},
+				fontSize: {
+					// Custom font sizes using CSS variables
+					'xs': 'var(--font-size-xs)',
+					'sm': 'var(--font-size-sm)',
+					'base': 'var(--font-size-base)',
+					'lg': 'var(--font-size-lg)',
+					'xl': 'var(--font-size-xl)',
+					'2xl': 'var(--font-size-2xl)',
+					'3xl': 'var(--font-size-3xl)',
+					'4xl': 'var(--font-size-4xl)',
+					'5xl': 'var(--font-size-5xl)',
+					'6xl': 'var(--font-size-6xl)'
+				},
+				lineHeight: {
+					// Theme-specific line heights
+					'tight': 'var(--line-height-tight)',
+					'snug': 'var(--line-height-snug)',
+					'normal': 'var(--line-height-normal)',
+					'relaxed': 'var(--line-height-relaxed)',
+					'loose': 'var(--line-height-loose)'
+				},
+				borderRadius: {
+					// Theme-specific border radius
+					'none': 'var(--border-radius-none)',
+					'sm': 'var(--border-radius-sm)',
+					'md': 'var(--border-radius-md)',
+					'lg': 'var(--border-radius-lg)',
+					'full': 'var(--border-radius-full)'
+				}
 			},
 		},
 	plugins: [

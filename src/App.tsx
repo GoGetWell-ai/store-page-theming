@@ -1,5 +1,6 @@
 import { BrowserRouter } from 'react-router-dom'
 import Theme from '@/components/template/Theme'
+import ThemeProvider from '@/components/template/ThemeProvider'
 import Layout from '@/components/layouts'
 import { AuthProvider } from '@/auth'
 import Views from '@/views'
@@ -13,13 +14,15 @@ if (appConfig.enableMock) {
 function App() {
     return (
         <Theme>
-            <BrowserRouter>
-                <AuthProvider>
-                    <Layout>
-                        <Views />
-                    </Layout>
-                </AuthProvider>
-            </BrowserRouter>
+            <ThemeProvider>
+                <BrowserRouter>
+                    <AuthProvider>
+                        <Layout>
+                            <Views />
+                        </Layout>
+                    </AuthProvider>
+                </BrowserRouter>
+            </ThemeProvider>
         </Theme>
     )
 }
