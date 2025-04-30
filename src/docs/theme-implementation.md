@@ -167,3 +167,67 @@ Files created:
 - `src/views/Home/themes/organTransplant/index.ts`: Convenient theme exports
 
 Next steps will involve creating the Cosmetic Surgery specialty theme, which will have a distinctly different aesthetic appropriate for that medical specialty.
+
+## Step 5: Create Cosmetic Surgery Theme
+
+In this step, we created a specialized theme for the Cosmetic Surgery specialty. This theme was designed to convey elegance, modernity, and aesthetic refinement - essential aspects in cosmetic and aesthetic medicine communication.
+
+### Colors Configuration
+
+We created a sophisticated color system in `src/views/Home/themes/cosmeticSurgery/colors.ts` with the following features:
+
+1. **Primary Color Palette**:
+   - Used pink/rose tones (#E91E63, #C2185B) representing beauty and transformation
+   - Deep and mild variations for creating visual hierarchy and subtle accents
+
+2. **Secondary Color Palette**:
+   - Used light blue tones (#03A9F4, #0288D1) representing clarity and precision
+   - Provides cool contrast to the warm primary palette
+   - Creates a modern, sophisticated color combination
+
+3. **Specialty-Specific Colors**:
+   - Added cosmetic-specific semantic colors for different phases (preOperative, procedure, recovery, etc.)
+   - Created treatment-specific color coding (surgical, nonSurgical, skinCare, antiAging)
+   - Implemented before/after comparison colors for transformation representation
+
+4. **Elegant Atmosphere**:
+   - Light, clean background colors creating a minimalist feel
+   - Very light pink overlay for modal backgrounds
+   - Sophisticated purple accent color to complement the primary pink
+
+### Typography Configuration
+
+We created specialized typography settings in `src/views/Home/themes/cosmeticSurgery/typography.ts` with these key features:
+
+1. **Modern Font Combination**:
+   - Light, refined sans-serif fonts (Montserrat) for body text providing a modern aesthetic
+   - Elegant serif font (Playfair Display) for headings adding sophistication
+   - Careful balance of modern and classic elements
+
+2. **Golden Ratio Typography**:
+   - Heading sizes follow the golden ratio (1:1.618) for natural, pleasing proportions
+   - More dramatic scale for visual interest appropriate for aesthetic medicine
+
+3. **Luxury Typographic Details**:
+   - Favoring lighter font weights for elegance
+   - More generous line heights for an open, airy feel
+   - Extended letter spacing for refinement
+   - Added smallCaps text transform option for stylistic flourishes
+
+4. **Specialty-Specific Typography**:
+   - Added cosmetic-specific component typography for:
+     - Procedure names with elegant serif styling
+     - Testimonials with lighter weight and italic style
+     - Before/After captions with uppercase transformation
+     - Statistical highlights with extra-light weights for elegant display
+     - Promotional text optimized for marketing messaging
+
+The Cosmetic Surgery theme maintains the same structure as the base theme while completely transforming the aesthetic to create a distinct visual identity appropriate for cosmetic and aesthetic medicine.
+
+### Implementation Details
+Files created:
+- `src/views/Home/themes/cosmeticSurgery/colors.ts`: Cosmetic Surgery color system
+- `src/views/Home/themes/cosmeticSurgery/typography.ts`: Cosmetic Surgery typography system
+- `src/views/Home/themes/cosmeticSurgery/index.ts`: Convenient theme exports
+
+Next steps will involve creating a theme selection interface component that allows users to switch between the different medical specialty themes.
