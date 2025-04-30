@@ -5,7 +5,8 @@ A comprehensive theming system for medical specialty interfaces, supporting Defa
 ## Overview
 
 This theme system provides a robust, fully-featured solution for medical applications requiring different visual experiences based on medical specialties. The system implements a seamless theme switching mechanism with persistent theme preferences.
-![localhost_5173_ (1)](https://github.com/user-attachments/assets/8cd9b436-3873-4053-b40c-3ff1ead82423)
+<img src="![localhost_5173_ (1)](https://github.com/user-attachments/assets/8cd9b436-3873-4053-b40c-3ff1ead82423)" width={100} height={200}/> 
+
 ![localhost_5173_](https://github.com/user-attachments/assets/78653582-07aa-4e0e-8af1-9f361e776ee4)
 ![localhost_5173_ (4)](https://github.com/user-attachments/assets/7a6d7229-5e96-44ad-8cf9-ebb7badfe8e0)
 
