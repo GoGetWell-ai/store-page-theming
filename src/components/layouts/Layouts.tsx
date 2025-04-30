@@ -1,53 +1,14 @@
-import { Suspense, useEffect } from 'react'
-import Loading from '@/components/shared/Loading'
-import type { CommonProps } from '@/@types/common'
-import { useAuth } from '@/auth'
-import { useThemeStore } from '@/store/themeStore'
-import PostLoginLayout from './PostLoginLayout'
-import PreLoginLayout from './PreLoginLayout'
-import useHCFApi from '@/utils/hooks/useHcfApi'
-import { useParams } from 'react-router-dom'
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore'
-import { useAuthStore } from './AuthLayout/store/useAuthStore'
+// src/components/layouts/Layout.tsx
+import React from 'react';
+import MenuBar from '../shared/MenuBar'; // Make sure the path is correct
 
-const Layout = ({ children }: CommonProps) => {
-    const layoutType = useThemeStore((state) => state.layout.type)
-    const { hcfData: hcfDataFromApi, loadingStatus } = useHCFApi()
-    const { id } = useParams()
-    const { setHcfData } = useAuthStore((state) => state)
-    const { setSelectedConversation } = usGenerativeChatStore()
-
-    const { authenticated } = useAuth()
-
-    useEffect(() => {
-        if (hcfDataFromApi?._id) {
-            setHcfData(hcfDataFromApi)
-        }
-
-        if (!id) {
-            setSelectedConversation('')
-        }
-    }, [hcfDataFromApi])
-
+const Layout: React.FC = ({ children }) => {
     return (
-        <Suspense
-            fallback={
-                <div className="flex flex-auto flex-col h-[100vh]">
-                    <Loading loading={true} />
-                </div>
-            }
-        >
-            <Loading loading={loadingStatus}>
-                {authenticated ? (
-                    <PostLoginLayout layoutType={layoutType}>
-                        {children}
-                    </PostLoginLayout>
-                ) : (
-                    <PreLoginLayout>{children}</PreLoginLayout>
-                )}
-            </Loading>
-        </Suspense>
-    )
-}
+        <div>
+            <MenuBar /> {/* Make sure this is here */}
+            <div>{children}</div> {/* This will render the Views content */}
+        </div>
+    );
+};
 
-export default Layout
+export default Layout;
