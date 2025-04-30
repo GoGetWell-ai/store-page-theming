@@ -1,0 +1,12 @@
+# For any subdomain of localhost
+*.localhost {
+  header {
+    +X-Subdomain {labels.1}
+  }
+  reverse_proxy 172.25.64.1:5173
+}
+
+# For the root domain localhost
+localhost {
+  reverse_proxy 172.25.64.1:5173
+}
