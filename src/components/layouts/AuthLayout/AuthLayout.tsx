@@ -1,9 +1,9 @@
-import { useMemo, lazy } from 'react'
 import type { CommonProps } from '@/@types/common'
-import type { LazyExoticComponent } from 'react'
 import { Route } from '@/@types/routes'
+import type { LazyExoticComponent } from 'react'
+import { lazy, useMemo } from 'react'
 
-type LayoutType = 'simple' | 'split' | 'side' | 'blank'	
+type LayoutType = 'simple' | 'split' | 'side' | 'blank'
 
 type Layouts = Record<
     LayoutType,
@@ -25,11 +25,31 @@ interface AuthLayoutProps extends CommonProps {
 
 const AuthLayout = ({ children, path }: AuthLayoutProps) => {
     console.log('here is the path of auth', path)
-    const Layout = useMemo(() => {
-        return layouts[path?.meta?.layout === 'blank' ? 'blank' : currentLayoutType]
-    }, [])
 
-    return <Layout>{children}</Layout>
+    const Layout = useMemo(() => {
+        // Default to currentLayoutType if path or meta is undefined
+        const layoutType =
+            path?.meta?.layout === 'blank' ? 'blank' : currentLayoutType
+
+        // Make sure we have a valid layout type
+        if (!layouts[layoutType]) {
+            console.error(
+                `Invalid layout type: ${layoutType}, falling back to ${currentLayoutType}`,
+            )
+            return layouts[currentLayoutType]
+        }
+
+        return layouts[layoutType]
+    }, [path?.meta?.layout])
+
+    // Add error boundary
+    try {
+        return <Layout>{children}</Layout>
+    } catch (error) {
+        console.error('Error rendering AuthLayout:', error)
+        // Fallback to a simple div if Layout fails
+        return <div className="auth-layout-error">{children}</div>
+    }
 }
 
 export default AuthLayout
