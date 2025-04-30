@@ -27,7 +27,7 @@ const Layout = ({ children }: CommonProps) => {
         if (!id) {
             setSelectedConversation('')
         }
-    }, [hcfDataFromApi])
+    }, [hcfDataFromApi, id, setHcfData, setSelectedConversation])
 
     return (
         <Suspense
@@ -43,7 +43,9 @@ const Layout = ({ children }: CommonProps) => {
                         {children}
                     </PostLoginLayout>
                 ) : (
-                    <PreLoginLayout>{children}</PreLoginLayout>
+                    <PreLoginLayout>
+                        {children}
+                    </PreLoginLayout>
                 )}
             </Loading>
         </Suspense>

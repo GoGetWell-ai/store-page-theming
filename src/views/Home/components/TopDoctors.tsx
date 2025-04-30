@@ -9,36 +9,55 @@ interface TopDoctorsProps {
         doctors: any
     }
 }
+interface Doctor {
+    _id: string;
+    name: string;
+    designation?: string;
+    experience?: {
+        surgeries?: string;
+    };
+    hospitals?: string[];
+    profileImage?: string;
+}
+
 const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
     const navigate = useNavigate();
     const [doctors, setDoctors] = useState<any>([]);
 
     useEffect(() => {
         if (hcfData?.doctors?.length) {
-            setDoctors(hcfData?.doctors?.slice(0, 3) || [])
+            setDoctors(hcfData.doctors.slice(0, 3));
         }
     }, [hcfData])
 
     console.log('doctors', doctors)
 
-
+    // Use a separate effect to fetch additional doctors if needed
+    // This prevents the infinite loop caused by the doctors dependency
     useEffect(() => {
         const callApi = async () => {
             if (doctors.length < 3) {
                 const limit = 3 - doctors.length;
                 try {
-                    const data = await apiGetDoctors({ page: 1, limit, search: '' })
+                    const data = await apiGetDoctors({ page: 1, limit, search: '' });
                     if (data?.data) {
-                        setDoctors((prv) => [...prv, ...data.data])
+                        // Use a functional update to avoid dependency on doctors
+                        setDoctors((prevDoctors: Doctor[]) => {
+                            // Check if we already have these doctors to prevent duplicates
+                            const newDoctors = data.data.filter(
+                                (newDoc: Doctor) => !prevDoctors.some((doc: Doctor) => doc._id === newDoc._id)
+                            );
+                            return [...prevDoctors, ...newDoctors];
+                        });
                     }
                 } catch (err) {
                     console.log('error', err);
                 }
             }
-        }
+        };
 
         callApi();
-    }, [doctors])
+    }, [hcfData]); // Only depend on hcfData, not doctors
 
     return (
         <div className="w-full bg-gradient-to-b py-8">
@@ -48,7 +67,7 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {doctors.slice(0, 3).map((doctor) => (
+                    {doctors.slice(0, 3).map((doctor: Doctor) => (
                         <div
                             key={doctor._id}
                             className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
@@ -106,7 +125,14 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
     );
 };
 
-const InfoRow = ({ icon, label, value, className = '' }) => (
+interface InfoRowProps {
+    icon: React.ReactNode;
+    label: string;
+    value: string | number;
+    className?: string;
+}
+
+const InfoRow: React.FC<InfoRowProps> = ({ icon, label, value, className = '' }) => (
     <div className="flex items-center text-sm">
         <div className="text-primary/60">{icon}</div>
         <span className="ml-2 text-gray-500">{label}:</span>

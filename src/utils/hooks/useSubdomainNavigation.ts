@@ -2,11 +2,14 @@ import authRoute from '@/configs/routes.config/authRoute'
 import { Routes } from '@/@types/routes'
 import { publicRoutes, protectedRoutes } from '@/configs/routes.config'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
 
 const useSubdomainNavigation = () => {
     // Get hostname and determine if it's a subdomain
     const hostname = window.location.hostname
     const { pathname } = useLocation()
+    const navigate = useNavigate()
+    const hasNavigated = useRef(false)
 
     const hostParts = hostname.split('.')
     const subdomain = hostname.includes('localhost')
@@ -31,13 +34,20 @@ const useSubdomainNavigation = () => {
           subdomain !== 'dev' &&
           subdomain !== 'in'
 
-    const navigate = useNavigate()
-
-    const subdomainRoute = authRoute.find((route) => route.path === pathname)
-
-    if (subdomainRoute) {
-        navigate('/')
-    }
+    // Move navigation logic to useEffect to prevent infinite loops
+    useEffect(() => {
+        const subdomainRoute = authRoute.find((route) => route.path === pathname)
+        
+        if (subdomainRoute && !hasNavigated.current) {
+            hasNavigated.current = true
+            navigate('/')
+        }
+        
+        // Reset the flag when pathname changes
+        return () => {
+            hasNavigated.current = false
+        }
+    }, [pathname, navigate])
 
     // Initialize routes
     let newPublicRoutes: Routes = publicRoutes

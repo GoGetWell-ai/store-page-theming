@@ -62,7 +62,7 @@ export async function apiGetHCFDetails({ id }: { id: string }) {
 }
 
 export async function apiGetHCFDetailsForPatient({ name }: { name: string }) {
-    return ApiService.fetchDataWithAxiosV2<unknown>({
+    return ApiService.fetchDataWithAxiosV2<{ success: boolean; data?: StoreDataTypes }>({
         url: `/stores/store-name/${name}?subStore=false`,
         method: 'get',
     })

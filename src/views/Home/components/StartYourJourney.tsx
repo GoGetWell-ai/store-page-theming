@@ -17,7 +17,7 @@ const StartYourJourney = () => {
   const [steps, setSteps] = useState<{ icon: JSX.Element; text: string; description: string; }[]>([])
   const [searchTerm, setSearchTerm] = useState("");
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState<TreatmentSubtype[]>([]);
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
   const { setPushedMessages } = usGenerativeChatStore()
@@ -50,21 +50,25 @@ const StartYourJourney = () => {
     }
   }, [hcfData])
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
+  interface InputChangeEvent extends React.ChangeEvent<HTMLInputElement> {}
+
+  const handleInputChange = (e: InputChangeEvent): void => {
+    const value: string = e.target.value;
     setSearchTerm(value);
     searchTreatments(value);
   };
 
-  const handleSearch = (e) => {
+  interface SearchEvent extends React.FormEvent<HTMLFormElement> {}
+
+  const handleSearch = (e: SearchEvent): void => {
     e.preventDefault();
     searchTreatments(searchTerm);
   };
 
   useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setIsInputFocused(false);
+    function handleClickOutside(event: MouseEvent): void {
+      if (wrapperRef.current && !(wrapperRef.current as HTMLElement).contains(event.target as Node)) {
+      setIsInputFocused(false);
       }
     }
 
@@ -74,10 +78,15 @@ const StartYourJourney = () => {
     };
   }, [wrapperRef]);
 
-  const searchTreatments = (term) => {
+  interface TreatmentSubtype {
+    subtype: string;
+    majorTitle: string;
+  }
+
+  const searchTreatments = (term: string): void => {
     if (!term.trim()) {
       // If search term is empty, show all treatments
-      const allTreatments = treatmentTypesData.flatMap(category =>
+      const allTreatments: TreatmentSubtype[] = treatmentTypesData.flatMap(category =>
         category.subtypes.map(subtype => ({
           subtype,
           majorTitle: category.majorTitle
@@ -88,7 +97,7 @@ const StartYourJourney = () => {
     }
 
     // Filter treatments based on search term
-    const filteredResults = treatmentTypesData.flatMap(category => {
+    const filteredResults: TreatmentSubtype[] = treatmentTypesData.flatMap(category => {
       const matchingSubtypes = category.subtypes.filter(subtype =>
         subtype.toLowerCase().includes(term.toLowerCase())
       );
@@ -103,7 +112,7 @@ const StartYourJourney = () => {
   };
 
   // Handle selection of a treatment
-  const handleSelectTreatment = (treatment) => {
+  const handleSelectTreatment = (treatment: TreatmentSubtype) => {
     setSearchTerm(treatment.subtype);
     setIsInputFocused(false);
     setPushedMessages(treatment.subtype)
@@ -239,7 +248,7 @@ const StartYourJourney = () => {
       </div>
 
 
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in {
           from { opacity: 0; }
           to { opacity: 1; }

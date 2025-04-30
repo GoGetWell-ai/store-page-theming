@@ -3,6 +3,20 @@ import { Button } from '@/components/ui';
 import { useNavigate } from 'react-router-dom';
 import { defaultHospitals } from '../data/treatmentTypesData'
 
+// Define the Hospital type
+interface Hospital {
+    _id: string;
+    name: string;
+    images?: string[];
+    galleryImages?: string[];
+    establishedYear?: string;
+    infrastructure?: {
+        bedCount?: string;
+    };
+    city?: string;
+    country?: string;
+}
+
 
 // Define the props type
 interface TopHospitalsProps {
@@ -25,17 +39,28 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
 
     useEffect(() => {
         const callApi = async () => {
-            const data = hcfData.hospitals.slice(0, 3)
-            const limit = 3 - data?.length || 0;
             try {
-                const againData = [];
-                for (let i = data?.length; i < limit + 1; i++) {
-                    againData.push(defaultHospitals[i])
+                // Check if hcfData and hospitals exist
+                if (hcfData && hcfData.hospitals) {
+                    const data = hcfData.hospitals.slice(0, 3);
+                    const limit = 3 - data.length;
+                    
+                    const againData = [];
+                    for (let i = 0; i < limit; i++) {
+                        if (defaultHospitals[i]) {
+                            againData.push(defaultHospitals[i]);
+                        }
+                    }
+                    
+                    setHospital([...data, ...againData]);
+                } else {
+                    // If no hospitals data, use default hospitals
+                    setHospital(defaultHospitals.slice(0, 3));
                 }
-
-                setHospital([...data, ...againData.splice(0, limit)])
             } catch (err) {
                 console.log('error', err);
+                // Fallback to default hospitals on error
+                setHospital(defaultHospitals.slice(0, 3));
             }
         }
 
@@ -50,7 +75,7 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {hospitals.slice(0, 3).map((hospital) => (
+                    {hospitals.slice(0, 3).map((hospital: Hospital) => (
                         <div
                             key={hospital._id}
                             onClick={() => navigate(`/hospitals-details/${hospital._id}`)}
@@ -62,8 +87,8 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                                         src={hospital.images?.[0] || hospital.galleryImages?.[0] || 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'}
                                         alt={hospital.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                                        onError={(e) => {
-                                            e.target.src = 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'; // Fallback URL
+                                        onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+                                            e.currentTarget.src = 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'; // Fallback URL
                                         }}
                                     />
                                 </div>
@@ -95,7 +120,7 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                                     block
                                     className=""
                                     variant='solid'
-                                    onClick={(e) => {
+                                    onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                                         e.stopPropagation();
                                         navigate(`/hospitals-details/${hospital._id}`);
                                     }}

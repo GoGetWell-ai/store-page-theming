@@ -45,7 +45,12 @@ const GetInTouch: React.FC<GetInTouchProps> = ({ hcfData }) => {
 
                                 <div className="flex items-center gap-3 text-gray-600">
                                     <PiMapPinPlus className="w-5 h-5" />
-                                    <span>{`${hcfData?.address?.postalCode}, ${hcfData?.address?.street}, ${hcfData?.address?.city}, ${hcfData?.address?.country}`}</span>
+                                    <span>
+                                        {hcfData?.address ? 
+                                            `${hcfData.address.postalCode || ''}, ${hcfData.address.street || ''}, ${hcfData.address.city || ''}, ${hcfData.address.country || ''}` 
+                                            : 'Address not available'
+                                        }
+                                    </span>
                                 </div>
                             </div>
 
@@ -63,7 +68,9 @@ const GetInTouch: React.FC<GetInTouchProps> = ({ hcfData }) => {
                         </div>
 
                         <a
-                            href={`https://api.whatsapp.com/send?phone=${hcfData?.phone || hcfData?.auth?.phoneNumber}&text=Hi!%20Dear,%20I%20have%20a%20inquiry`} target='_blank' rel='noreferrer'
+                            href={`https://api.whatsapp.com/send?phone=${hcfData?.phone || hcfData?.auth?.phoneNumber || ''}&text=Hi!%20Dear,%20I%20have%20a%20inquiry`} 
+                            target='_blank' 
+                            rel='noreferrer'
                             className="px-6 py-3 bg-gradient-to-r from-primary-deep to-primary !text-white rounded-xl shadow-lg hover:shadow-xl transition-shadow inline-flex items-center gap-2"
                         >
                             <BsMailbox className="w-5 h-5" />
@@ -90,7 +97,14 @@ const GetInTouch: React.FC<GetInTouchProps> = ({ hcfData }) => {
                                     <BiGlobe className="w-5 h-5 text-primary" />
                                     <span className="text-gray-600">Language</span>
                                 </div>
-                                <span className="text-gray-900">{hcfData?.languages?.length ? hcfData?.languages.map((data) => ` ${data},`) : ''}</span>
+                                <span className="text-gray-900">
+                                    {hcfData?.languages?.length ? 
+                                        hcfData.languages.map((data: string, index: number) => 
+                                            `${index > 0 ? ', ' : ''}${data}`
+                                        ) 
+                                        : 'N/A'
+                                    }
+                                </span>
                             </div>
 
                             <div className="flex items-center justify-between p-4 bg-gray-50 rounded-xl">
