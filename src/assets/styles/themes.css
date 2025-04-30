@@ -1,0 +1,318 @@
+/**
+ * Medical Website Theme CSS Variables
+ *
+ * This file defines CSS variables for all themes in the medical website.
+ * Each theme (Default, Organ Transplant, Cosmetic Surgery) has its own set of variables.
+ * 
+ * Structure:
+ * - :root contains variables for the default theme
+ * - .theme-organTransplant contains variables for the Organ Transplant theme
+ * - .theme-cosmeticSurgery contains variables for the Cosmetic Surgery theme
+ */
+
+/* -------------------------------- */
+/* Default Theme                    */
+/* -------------------------------- */
+:root {
+  /* Primary Colors */
+  --color-primary: #1976d2;
+  --color-primary-deep: #0d47a1;
+  --color-primary-mild: #bbdefb;
+  
+  /* Secondary Colors */
+  --color-secondary: #26a69a;
+  --color-secondary-deep: #00796b;
+  --color-secondary-mild: #b2dfdb;
+  
+  /* Accent Color */
+  --color-accent: #ff4081;
+  
+  /* Background Colors */
+  --color-background: #f5f7fa;
+  --color-surface: #ffffff;
+  
+  /* Text Colors */
+  --color-text: #37474f;
+  --color-text-light: #78909c;
+  --color-text-dark: #102a43;
+  --color-text-disabled: #b0bec5;
+  
+  /* Status Colors */
+  --color-success: #4caf50;
+  --color-error: #f44336;
+  --color-warning: #ff9800;
+  --color-info: #2196f3;
+  
+  /* Border Colors */
+  --color-border: #e0e0e0;
+  --color-border-focus: #2196f3;
+  
+  /* Overlay Color */
+  --color-overlay: rgba(0, 0, 0, 0.5);
+  
+  /* Medical-specific Colors */
+  --color-medical-emergency: #d50000;
+  --color-medical-prescription: #7e57c2;
+  --color-medical-diagnosis: #00838f;
+  --color-medical-vitals: #2e7d32;
+  
+  /* Typography - Font Families */
+  --font-family-primary: "Roboto", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-secondary: "Inter", "Roboto", "Segoe UI", sans-serif;
+  --font-family-mono: "Roboto Mono", "Courier New", monospace;
+  --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* Typography - Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 4rem;
+  
+  /* Typography - Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Typography - Font Weights */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* Typography - Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+}
+
+/* -------------------------------- */
+/* Organ Transplant Theme           */
+/* -------------------------------- */
+.theme-organTransplant {
+  /* Primary Colors */
+  --color-primary: #00796B;
+  --color-primary-deep: #004D40;
+  --color-primary-mild: #B2DFDB;
+  
+  /* Secondary Colors */
+  --color-secondary: #FFC107;
+  --color-secondary-deep: #FFA000;
+  --color-secondary-mild: #FFECB3;
+  
+  /* Accent Color */
+  --color-accent: #26A69A;
+  
+  /* Background Colors */
+  --color-background: #F5F7F6;
+  --color-surface: #FFFFFF;
+  
+  /* Text Colors */
+  --color-text: #263238;
+  --color-text-light: #546E7A;
+  --color-text-dark: #0D2C28;
+  --color-text-disabled: #90A4AE;
+  
+  /* Status Colors */
+  --color-success: #2E7D32;
+  --color-error: #D32F2F;
+  --color-warning: #F57C00;
+  --color-info: #0277BD;
+  
+  /* Border Colors */
+  --color-border: #E0E0E0;
+  --color-border-focus: #26A69A;
+  
+  /* Overlay Color */
+  --color-overlay: rgba(0, 77, 64, 0.4);
+  
+  /* Medical-specific Colors */
+  --color-medical-emergency: #D50000;
+  --color-medical-prescription: #7E57C2;
+  --color-medical-donor: #2E7D32;
+  --color-medical-recipient: #1565C0;
+  --color-medical-match: #00897B;
+  --color-medical-waitlist: #FF8F00;
+  --color-medical-postoperative: #9E9D24;
+  
+  /* Specialty-specific UI colors */
+  --color-transplant-chart-success: #2E7D32;
+  --color-transplant-chart-pending: #FFA000;
+  --color-transplant-chart-rejected: #D32F2F;
+  --color-transplant-timeline-evaluation: #26A69A;
+  --color-transplant-timeline-waitlist: #FFC107;
+  --color-transplant-timeline-match: #66BB6A;
+  --color-transplant-timeline-surgery: #EF6C00;
+  --color-transplant-timeline-recovery: #42A5F5;
+  --color-transplant-timeline-followup: #7E57C2;
+  
+  /* Typography - Font Families */
+  --font-family-primary: "Roboto", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-family-secondary: "Merriweather", "Georgia", "Times New Roman", serif;
+  --font-family-mono: "Roboto Mono", "Courier New", monospace;
+  --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* Typography - Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-4xl: 2.125rem;
+  --font-size-5xl: 2.75rem;
+  --font-size-6xl: 3.5rem;
+  
+  /* Typography - Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+  --line-height-loose: 2;
+  
+  /* Typography - Font Weights */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* Typography - Letter Spacing */
+  --letter-spacing-tighter: -0.05em;
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+}
+
+/* -------------------------------- */
+/* Cosmetic Surgery Theme           */
+/* -------------------------------- */
+.theme-cosmeticSurgery {
+  /* Primary Colors */
+  --color-primary: #E91E63;
+  --color-primary-deep: #C2185B;
+  --color-primary-mild: #F8BBD0;
+  
+  /* Secondary Colors */
+  --color-secondary: #03A9F4;
+  --color-secondary-deep: #0288D1;
+  --color-secondary-mild: #B3E5FC;
+  
+  /* Accent Color */
+  --color-accent: #9C27B0;
+  
+  /* Background Colors */
+  --color-background: #FAFAFA;
+  --color-surface: #FFFFFF;
+  
+  /* Text Colors */
+  --color-text: #212121;
+  --color-text-light: #757575;
+  --color-text-dark: #000000;
+  --color-text-disabled: #BDBDBD;
+  
+  /* Status Colors */
+  --color-success: #4CAF50;
+  --color-error: #F44336;
+  --color-warning: #FF9800;
+  --color-info: #2196F3;
+  
+  /* Border Colors */
+  --color-border: #E0E0E0;
+  --color-border-focus: #E91E63;
+  
+  /* Overlay Color */
+  --color-overlay: rgba(233, 30, 99, 0.15);
+  
+  /* Medical-specific Colors */
+  --color-medical-emergency: #D50000;
+  --color-medical-prescription: #7E57C2;
+  --color-medical-preoperative: #00ACC1;
+  --color-medical-procedure: #E91E63;
+  --color-medical-recovery: #AB47BC;
+  --color-medical-results: #EC407A;
+  --color-medical-consultation: #29B6F6;
+  
+  /* Specialty-specific UI colors */
+  --color-cosmetic-treatment-surgical: #E91E63;
+  --color-cosmetic-treatment-nonsurgical: #03A9F4;
+  --color-cosmetic-treatment-skincare: #9C27B0;
+  --color-cosmetic-treatment-antiaging: #00BCD4;
+  --color-cosmetic-beforeafter-before: #90A4AE;
+  --color-cosmetic-beforeafter-after: #EC407A;
+  --color-cosmetic-beforeafter-arrow: #03A9F4;
+  --color-cosmetic-gallery-background: #FAFAFA;
+  --color-cosmetic-gallery-border: #F5F5F5;
+  --color-cosmetic-gallery-caption: #757575;
+  
+  /* Typography - Font Families */
+  --font-family-primary: "Montserrat", "Helvetica Neue", -apple-system, sans-serif;
+  --font-family-secondary: "Playfair Display", "Georgia", "Times New Roman", serif;
+  --font-family-mono: "Roboto Mono", "Courier New", monospace;
+  --font-family-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* Typography - Font Sizes - Following golden ratio */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.563rem;
+  --font-size-3xl: 1.953rem;
+  --font-size-4xl: 2.441rem;
+  --font-size-5xl: 3.052rem;
+  --font-size-6xl: 3.815rem;
+  
+  /* Typography - Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.25;
+  --line-height-snug: 1.375;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+  
+  /* Typography - Font Weights - Favoring lighter weights */
+  --font-weight-thin: 100;
+  --font-weight-extralight: 200;
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+  --font-weight-black: 900;
+  
+  /* Typography - Letter Spacing - Enhanced for elegance */
+  --letter-spacing-tightest: -0.05em;
+  --letter-spacing-tighter: -0.025em;
+  --letter-spacing-tight: -0.01em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  --letter-spacing-aesthetic: 0.15em;
+}

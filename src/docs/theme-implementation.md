@@ -231,3 +231,60 @@ Files created:
 - `src/views/Home/themes/cosmeticSurgery/index.ts`: Convenient theme exports
 
 Next steps will involve creating a theme selection interface component that allows users to switch between the different medical specialty themes.
+
+## Step 6: Create Theme CSS Variables
+
+In this step, we created a CSS file that defines variables for all our themes, making it easy to apply these themes throughout the application using class selectors.
+
+### CSS Variables Structure
+
+We created `themes.css` in the `src/assets/styles/` directory with the following structure:
+
+1. **Root Variables (Default Theme)**:
+   - The `:root` selector contains CSS variables for the default medical theme
+   - These variables serve as the base theme and are applied by default
+
+2. **Theme-specific Class Selectors**:
+   - `.theme-organTransplant` class contains variables for the Organ Transplant theme
+   - `.theme-cosmeticSurgery` class contains variables for the Cosmetic Surgery theme
+   - Each theme maintains the same variable names but with different values
+
+### Variables Categories
+
+For each theme, we defined CSS variables for:
+
+1. **Colors**:
+   - Primary colors (default, deep, mild variants)
+   - Secondary colors (default, deep, mild variants)
+   - Accent color
+   - Background and surface colors
+   - Text colors with various emphasis levels
+   - Status colors (success, error, warning, info)
+   - Border and overlay colors
+   - Medical and specialty-specific colors
+
+2. **Typography**:
+   - Font families (primary, secondary, mono, system)
+   - Font sizes using a consistent scale
+   - Line heights for different text contexts
+   - Font weights covering the full spectrum
+   - Letter spacing options
+
+### Theme Application Approach
+
+With this CSS structure, applying a theme throughout the application is as simple as adding the corresponding class name to the root HTML element:
+
+- Default theme: No additional class needed (uses `:root`)
+- Organ Transplant theme: Add `.theme-organTransplant` to the root element
+- Cosmetic Surgery theme: Add `.theme-cosmeticSurgery` to the root element
+
+This approach allows for:
+- Easy theme switching without page reload
+- Consistent application of theme styles
+- Simplified component development using CSS variables
+
+### Implementation Details
+File created:
+- `src/assets/styles/themes.css`: CSS variables for all themes
+
+Next steps will involve integrating the CSS variables with our React components and creating a ThemeProvider component to handle theme switching.
