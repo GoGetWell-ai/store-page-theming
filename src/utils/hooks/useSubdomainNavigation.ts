@@ -35,6 +35,12 @@ const useSubdomainNavigation = () => {
 
     // Use useEffect to handle navigation after render
     useEffect(() => {
+        // Skip redirection for specific routes
+        const excludedPaths = ['/themes']
+        if (excludedPaths.includes(pathname)) {
+            return
+        }
+
         const subdomainRoute = authRoute.find(
             (route) => route.path === pathname,
         )

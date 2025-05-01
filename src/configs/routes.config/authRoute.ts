@@ -1,5 +1,5 @@
-import { lazy } from 'react'
 import type { Routes } from '@/@types/routes'
+import { lazy } from 'react'
 
 const authRoute: Routes = [
     {
@@ -33,7 +33,16 @@ const authRoute: Routes = [
         authority: [],
         meta: {
             layout: 'blank',
-        }
+        },
+    },
+    {
+        key: 'Themes',
+        path: `/themes`,
+        component: lazy(() => import('@/views/Home/themes')),
+        authority: [],
+        meta: {
+            layout: 'blank',
+        },
     },
     {
         key: `chatBotId`,

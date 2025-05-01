@@ -1,0 +1,137 @@
+/* Default Theme */
+.theme-default {
+    /* Colors */
+    --primary: var(--primary, #2a85ff);
+    --primary-deep: var(--primary-deep, #0069f6);
+    --primary-mild: var(--primary-mild, #4996ff);
+    --primary-subtle: var(--primary-subtle, #2a85ff1a);
+    --secondary: var(--secondary, #5d5fef);
+    --secondary-deep: var(--secondary-deep, #4a4cbe);
+    --secondary-mild: var(--secondary-mild, #7e80f1);
+    --secondary-subtle: var(--secondary-subtle, #5d5fef1a);
+    --accent: var(--accent, #00c8ff);
+    --neutral: var(--neutral, #ffffff);
+    --background: var(--background, #f5f5f7);
+    --text-primary: var(--text-primary, #1a1d1f);
+    --text-secondary: var(--text-secondary, #6f767e);
+    --text-accent: var(--text-accent, #2a85ff);
+    --border-color: var(--border-color, #e6e8ec);
+    --card-bg: var(--card-bg, #ffffff);
+    --button-bg: var(--button-bg, #2a85ff);
+    --button-text: var(--button-text, #ffffff);
+    --input-bg: var(--input-bg, #ffffff);
+    --input-text: var(--input-text, #1a1d1f);
+    --hero-bg: var(--hero-bg, #2a85ff);
+    --hero-text: var(--hero-text, #ffffff);
+
+    /* Typography */
+    --font-family: var(--font-family, 'Inter, sans-serif');
+    --font-heading-family: var(--font-heading-family, 'Inter, sans-serif');
+    --font-base-size: var(--font-base-size, '16px');
+    --font-heading-size: var(--font-heading-size, '24px');
+    --font-heading-weight: var(--font-heading-weight, '700');
+    --font-body-weight: var(--font-body-weight, '400');
+    --font-line-height: var(--font-line-height, '1.5');
+
+    /* Spacing */
+    --spacing-base: var(--spacing-base, '16px');
+    --spacing-small: var(--spacing-small, '8px');
+    --spacing-medium: var(--spacing-medium, '24px');
+    --spacing-large: var(--spacing-large, '32px');
+    --spacing-section-padding: var(--spacing-section-padding, '64px');
+    --spacing-card-padding: var(--spacing-card-padding, '24px');
+    --spacing-button-padding: var(--spacing-button-padding, '12px 24px');
+    --spacing-input-padding: var(--spacing-input-padding, '12px 16px');
+}
+
+/* Organ Transplant Theme */
+.theme-organ-transplant {
+    /* Colors */
+    --primary: var(--primary, #0CAF60);
+    --primary-deep: var(--primary-deep, #088d50);
+    --primary-mild: var(--primary-mild, #34c779);
+    --primary-subtle: var(--primary-subtle, #0CAF601a);
+    --secondary: var(--secondary, #3b82f6);
+    --secondary-deep: var(--secondary-deep, #2563eb);
+    --secondary-mild: var(--secondary-mild, #60a5fa);
+    --secondary-subtle: var(--secondary-subtle, #3b82f61a);
+    --accent: var(--accent, #f59e0b);
+    --neutral: var(--neutral, #ffffff);
+    --background: var(--background, #f0fdf4);
+    --text-primary: var(--text-primary, #1a1d1f);
+    --text-secondary: var(--text-secondary, #6f767e);
+    --text-accent: var(--text-accent, #0CAF60);
+    --border-color: var(--border-color, #e6e8ec);
+    --card-bg: var(--card-bg, #ffffff);
+    --button-bg: var(--button-bg, #0CAF60);
+    --button-text: var(--button-text, #ffffff);
+    --input-bg: var(--input-bg, #ffffff);
+    --input-text: var(--input-text, #1a1d1f);
+    --hero-bg: var(--hero-bg, #0CAF60);
+    --hero-text: var(--hero-text, #ffffff);
+
+    /* Typography */
+    --font-family: var(--font-family, 'Roboto, sans-serif');
+    --font-heading-family: var(--font-heading-family, 'Montserrat, sans-serif');
+    --font-base-size: var(--font-base-size, '16px');
+    --font-heading-size: var(--font-heading-size, '28px');
+    --font-heading-weight: var(--font-heading-weight, '700');
+    --font-body-weight: var(--font-body-weight, '400');
+    --font-line-height: var(--font-line-height, '1.6');
+
+    /* Spacing */
+    --spacing-base: var(--spacing-base, '16px');
+    --spacing-small: var(--spacing-small, '8px');
+    --spacing-medium: var(--spacing-medium, '24px');
+    --spacing-large: var(--spacing-large, '32px');
+    --spacing-section-padding: var(--spacing-section-padding, '72px');
+    --spacing-card-padding: var(--spacing-card-padding, '24px');
+    --spacing-button-padding: var(--spacing-button-padding, '14px 28px');
+    --spacing-input-padding: var(--spacing-input-padding, '12px 16px');
+}
+
+/* Cosmetic Surgery Theme */
+.theme-cosmetic-surgery {
+    /* Colors */
+    --primary: var(--primary, #f472b6);
+    --primary-deep: var(--primary-deep, #db2777);
+    --primary-mild: var(--primary-mild, #f9a8d4);
+    --primary-subtle: var(--primary-subtle, #f472b61a);
+    --secondary: var(--secondary, #8b5cf6);
+    --secondary-deep: var(--secondary-deep, #7c3aed);
+    --secondary-mild: var(--secondary-mild, #a78bfa);
+    --secondary-subtle: var(--secondary-subtle, #8b5cf61a);
+    --accent: var(--accent, #06b6d4);
+    --neutral: var(--neutral, #ffffff);
+    --background: var(--background, #fdf2f8);
+    --text-primary: var(--text-primary, #1a1d1f);
+    --text-secondary: var(--text-secondary, #6f767e);
+    --text-accent: var(--text-accent, #f472b6);
+    --border-color: var(--border-color, #e6e8ec);
+    --card-bg: var(--card-bg, #ffffff);
+    --button-bg: var(--button-bg, #f472b6);
+    --button-text: var(--button-text, #ffffff);
+    --input-bg: var(--input-bg, #ffffff);
+    --input-text: var(--input-text, #1a1d1f);
+    --hero-bg: var(--hero-bg, #f472b6);
+    --hero-text: var(--hero-text, #ffffff);
+
+    /* Typography */
+    --font-family: var(--font-family, 'Poppins, sans-serif');
+    --font-heading-family: var(--font-heading-family, 'Playfair Display, serif');
+    --font-base-size: var(--font-base-size, '16px');
+    --font-heading-size: var(--font-heading-size, '32px');
+    --font-heading-weight: var(--font-heading-weight, '700');
+    --font-body-weight: var(--font-body-weight, '400');
+    --font-line-height: var(--font-line-height, '1.7');
+
+    /* Spacing */
+    --spacing-base: var(--spacing-base, '16px');
+    --spacing-small: var(--spacing-small, '8px');
+    --spacing-medium: var(--spacing-medium, '24px');
+    --spacing-large: var(--spacing-large, '32px');
+    --spacing-section-padding: var(--spacing-section-padding, '80px');
+    --spacing-card-padding: var(--spacing-card-padding, '28px');
+    --spacing-button-padding: var(--spacing-button-padding, '14px 32px');
+    --spacing-input-padding: var(--spacing-input-padding, '14px 18px');
+}
