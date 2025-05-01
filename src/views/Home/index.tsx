@@ -1,56 +1,32 @@
-import Hero from './components/Home'
-import StartYourJourney from './components/StartYourJourney'
-import Treatment from './components/Treatment'
-import TopHospitals from './components/TopHospitals'
-import TopDoctors from './components/TopDoctors'
-import GetInTouch from './components/GetInTouch'
-import Footer from '@/components/template/Footer'
-import UserDropdown from '@/components/template/UserProfileDropdown'
-import useResponsive from '@/utils/hooks/useResponsive'
-import Notification from '@/components/template/Notification'
-import HeaderLogo from '@/components/template/HeaderLogo'
-import { useAuth } from '@/auth'
-import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore'
+/* Home page component */
+import React from 'react';
+import Hero from './components/Hero';
+import GetInTouch from './components/GetInTouch';
 
-const Home = () => {
-    const { hcfData } = useAuthStore((state) => state)
-    const { smaller } = useResponsive()
+const Home: React.FC = () => {
+  return (
+    <div className="min-h-screen flex flex-col" style={{ padding: `var(--layout-padding)`, background: `linear-gradient(135deg, var(--background), #f0f4f8)` }}>
+      <Hero />
+      <section className="py-16 px-4 text-center">
+        <h2 className="text-h2 font-bold mb-8 text-gray-800">Our Specialized Treatments</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="card bg-white shadow-lg rounded-lg p-6 transform hover:scale-105 transition duration-300" style={{ borderRadius: `var(--card-border-radius)` }}>
+            <h3 className="text-lg font-semibold text-primary mb-4">Lung Transplant</h3>
+            <p className="text-body text-gray-600">Expert care for life-saving lung transplant procedures.</p>
+          </div>
+          <div className="card bg-white shadow-lg rounded-lg p-6 transform hover:scale-105 transition duration-300" style={{ borderRadius: `var(--card-border-radius)` }}>
+            <h3 className="text-lg font-semibold text-primary mb-4">Cosmetic Surgery</h3>
+            <p className="text-body text-gray-600">Transformative solutions with precision and care.</p>
+          </div>
+          <div className="card bg-white shadow-lg rounded-lg p-6 transform hover:scale-105 transition duration-300" style={{ borderRadius: `var(--card-border-radius)` }}>
+            <h3 className="text-lg font-semibold text-primary mb-4">Organ Care</h3>
+            <p className="text-body text-gray-600">Comprehensive support for organ health and recovery.</p>
+          </div>
+        </div>
+      </section>
+      <GetInTouch />
+    </div>
+  );
+};
 
-    const { authenticated } = useAuth()
-
-    return (
-        <>
-
-            <div className="patient w-full" >
-                {smaller.lg && (
-                    <div className="w-full py-[10px] bg-white px-[5%] flex items-center justify-between">
-                        <div className="max-w-[150px]">
-                            <HeaderLogo />
-                        </div>
-
-                        {
-                            authenticated && (
-                                <div className='flex items-center gap-x-[10px]'>
-                                    <UserDropdown />
-                                    <Notification />
-                                </div>
-                            )
-                        }
-                    </div>
-                )}
-                <Hero />
-                <StartYourJourney />
-                <Treatment />
-                <TopHospitals hcfData={hcfData} />
-                <TopDoctors hcfData={hcfData} />
-                {/* <WhyMakeWell /> */}
-                {/* <MbbsVisual /> */}
-                {/* <Testimonials /> */}
-                <GetInTouch hcfData={hcfData} />
-                <Footer />
-            </div>
-        </>
-    )
-}
-
-export default Home
+export default Home;
