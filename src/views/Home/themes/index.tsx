@@ -94,15 +94,19 @@ const themeConfig = {
 
 // Define the props interface separately
 interface ThemePreviewCardProps {
-    themeKey: string;
-    active: boolean;
-    onSelect: () => void;
+    themeKey: string
+    active: boolean
+    onSelect: () => void
 }
 
 /**
  * Theme Preview Card component to showcase each theme option
  */
-const ThemePreviewCard = ({ themeKey, active, onSelect }: ThemePreviewCardProps) => {
+const ThemePreviewCard = ({
+    themeKey,
+    active,
+    onSelect,
+}: ThemePreviewCardProps) => {
     // Get theme config based on theme key
     const theme = themeConfig[themeKey as keyof typeof themeConfig]
 
@@ -128,12 +132,15 @@ const ThemePreviewCard = ({ themeKey, active, onSelect }: ThemePreviewCardProps)
                     <Button
                         size="sm"
                         className={`btn-ripple transition-all duration-300 ${
-                            active 
-                            ? 'bg-gray-200 text-gray-600 cursor-default' 
-                            : `bg-gradient-to-r ${theme.gradientClass} text-white hover:shadow-lg transform hover:-translate-y-1`
+                            active
+                                ? 'bg-gray-200 text-gray-600 cursor-default'
+                                : `bg-gradient-to-r ${theme.gradientClass} text-white hover:shadow-lg transform hover:-translate-y-1`
                         }`}
                         icon={active ? <HiCheck /> : <HiOutlineColorSwatch />}
-                        onClick={onSelect}
+                        onClick={(e) => {
+                            e.stopPropagation() // Prevent card click event from triggering
+                            onSelect()
+                        }}
                         disabled={active}
                     >
                         {active ? 'Current Theme' : 'Apply Theme'}
@@ -155,6 +162,12 @@ const ThemePreviewCard = ({ themeKey, active, onSelect }: ThemePreviewCardProps)
                     </div>
                 </div>
             }
+            clickable={!active} // Make card clickable if it's not the active theme
+            onClick={() => {
+                if (!active) {
+                    onSelect()
+                }
+            }}
         >
             <div className="p-4">
                 <p className="mb-3 text-gray-600">{theme.description}</p>
@@ -195,11 +208,7 @@ const ThemePreviewCard = ({ themeKey, active, onSelect }: ThemePreviewCardProps)
 }
 
 // Component showcases for different themes
-const ComponentShowcase = ({
-    activeTheme,
-}: {
-    activeTheme: string
-}) => {
+const ComponentShowcase = ({ activeTheme }: { activeTheme: string }) => {
     // Get theme config based on active theme
     const theme = themeConfig[activeTheme as keyof typeof themeConfig]
 
@@ -222,7 +231,9 @@ const ComponentShowcase = ({
             <div className="p-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <h6 className="mb-3 font-medium">Interactive Elements</h6>
+                        <h6 className="mb-3 font-medium">
+                            Interactive Elements
+                        </h6>
                         <div className="space-y-4">
                             <Button
                                 className={`btn-gradient btn-ripple bg-gradient-to-r ${theme.gradientClass}`}
@@ -274,18 +285,18 @@ const ComponentShowcase = ({
                     <div>
                         <h6 className="mb-3 font-medium">Status Components</h6>
                         <div className="space-y-4">
-                            <Alert 
+                            <Alert
                                 showIcon
-                                type="success" 
-                                title="Procedure Scheduled" 
+                                type="success"
+                                title="Procedure Scheduled"
                                 className="mb-4 fade-in"
                             >
                                 Your appointment is confirmed.
                             </Alert>
 
-                            <Alert 
+                            <Alert
                                 showIcon
-                                type="info" 
+                                type="info"
                                 title="Information Available"
                                 className="mb-4 fade-in"
                             >
@@ -294,13 +305,21 @@ const ComponentShowcase = ({
 
                             <Tabs defaultValue="tab1">
                                 <Tabs.TabList>
-                                    <Tabs.TabNav value="tab1">Details</Tabs.TabNav>
-                                    <Tabs.TabNav value="tab2">History</Tabs.TabNav>
-                                    <Tabs.TabNav value="tab3">Reports</Tabs.TabNav>
+                                    <Tabs.TabNav value="tab1">
+                                        Details
+                                    </Tabs.TabNav>
+                                    <Tabs.TabNav value="tab2">
+                                        History
+                                    </Tabs.TabNav>
+                                    <Tabs.TabNav value="tab3">
+                                        Reports
+                                    </Tabs.TabNav>
                                 </Tabs.TabList>
                                 <div className="p-4">
                                     <Tabs.TabContent value="tab1">
-                                        <p>Patient details would appear here.</p>
+                                        <p>
+                                            Patient details would appear here.
+                                        </p>
                                     </Tabs.TabContent>
                                     <Tabs.TabContent value="tab2">
                                         <p>Medical history records.</p>
@@ -353,7 +372,9 @@ const TypographyShowcase = ({ activeTheme }: { activeTheme: string }) => {
                             Text can appear in different styles like{' '}
                             <span className="font-bold">Bold text</span>,
                             <span className="italic ml-1">italic text</span>,
-                            <span className={`ml-1 ${theme.textClass} gradient-text`}>
+                            <span
+                                className={`ml-1 ${theme.textClass} gradient-text`}
+                            >
                                 colored text
                             </span>
                             , and
@@ -415,7 +436,7 @@ const ThemesPage = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Component Previews */}
                 <ComponentShowcase activeTheme={specialty} />
-                
+
                 {/* Typography Previews */}
                 <TypographyShowcase activeTheme={specialty} />
             </div>
