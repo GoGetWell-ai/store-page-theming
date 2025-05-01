@@ -77,20 +77,20 @@ const Hero: React.FC = () => {
                             <BeforeAfterCard 
                                 procedure="Rhinoplasty"
                                 description="Refined nose profile with natural-looking results"
-                                beforeImage="https://placehold.co/300x400/db2777/FFFFFF?text=Before"
-                                afterImage="https://placehold.co/300x400/db2777/FFFFFF?text=After"
+                                beforeImage="https://www1.plasticsurgery.org/include/images/photogallery/cases/9728/44247-122963b_scaled.jpg?text=Before"
+                                afterImage="https://www1.plasticsurgery.org/include/images/photogallery/cases/9728/44247-122963a_scaled.jpg?text=After"
                             />
                             <BeforeAfterCard 
                                 procedure="Facelift"
                                 description="Restored youthful contours with minimal scarring"
-                                beforeImage="https://placehold.co/300x400/db2777/FFFFFF?text=Before"
-                                afterImage="https://placehold.co/300x400/db2777/FFFFFF?text=After"
+                                beforeImage="https://www1.plasticsurgery.org/include/images/photogallery/cases/6959/25339-81257b_scaled.jpg?text=Before"
+                                afterImage="https://www1.plasticsurgery.org/include/images/photogallery/cases/6959/25339-81257a_scaled.jpg?text=After"
                             />
                             <BeforeAfterCard 
-                                procedure="Body Contouring"
-                                description="Sculpted silhouette with improved proportion"
-                                beforeImage="https://placehold.co/300x400/db2777/FFFFFF?text=Before"
-                                afterImage="https://placehold.co/300x400/db2777/FFFFFF?text=After"
+                                procedure="Blepharoplasty"
+                                description="Rejuvenated eye area with reduced puffiness and a more alert appearance"
+                                beforeImage="https://www1.plasticsurgery.org/include/images/photogallery/cases/5855/41005-114594b_scaled.jpg?text=Before"
+                                afterImage="https://www1.plasticsurgery.org/include/images/photogallery/cases/5855/41005-114594a_scaled.jpg?text=After"
                             />
                         </div>
                     </div>
@@ -220,7 +220,7 @@ const ProfileCard = () => {
                         </div>
                         <div>
                             <p className="text-text-light text-sm">Medical Professional</p>
-                            <p className="text-primary font-medium">{hcfData?.specialty || 'General Medicine'}</p>
+                            <p className="text-primary font-medium">{'specialty' in hcfData ? hcfData.specialty : 'General Medicine'}</p>
                         </div>
                     </div>
                     

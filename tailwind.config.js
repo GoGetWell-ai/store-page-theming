@@ -156,19 +156,51 @@ module.exports = {
       },
       animation: {
         'float': 'float 4s ease-in-out infinite',
-        'float-slow': 'float 6s ease-in-out infinite',
-        'float-delay': 'float 5s ease-in-out 1s infinite',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
+        'float-delay': 'floatDelay 5s ease-in-out infinite',
+        'float-left': 'floatLeft 7s ease-in-out infinite',
+        'float-right': 'floatRight 8s ease-in-out infinite',
+        'float-circle': 'floatCircle 12s linear infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'fade-in': 'fadeIn 1s ease-in-out',
         'gradient': 'gradient 8s ease infinite',
         'sparkle': 'sparkle 2s ease-in-out infinite',
         'sparkle-delay': 'sparkle 2s ease-in-out 0.5s infinite',
         'sparkle-slow': 'sparkle 3s ease-in-out 1s infinite',
+        'blob': 'blob 7s infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-10px)' },
+        },
+        floatSlow: {
+          '0%, 100%': { transform: 'translate(0px, 0px) rotate(0deg)' },
+          '25%': { transform: 'translate(5px, -10px) rotate(2deg)' },
+          '50%': { transform: 'translate(0px, -15px) rotate(0deg)' },
+          '75%': { transform: 'translate(-5px, -10px) rotate(-2deg)' },
+        },
+        floatDelay: {
+          '0%, 100%': { transform: 'translate(0px, 0px) rotate(0deg)' },
+          '25%': { transform: 'translate(-7px, -5px) rotate(-3deg)' },
+          '50%': { transform: 'translate(0px, -12px) rotate(0deg)' },
+          '75%': { transform: 'translate(7px, -5px) rotate(3deg)' },
+        },
+        floatLeft: {
+          '0%, 100%': { transform: 'translate(0px, 0px) rotate(0deg)' },
+          '25%': { transform: 'translate(-15px, -5px) rotate(-2deg)' },
+          '50%': { transform: 'translate(-20px, -10px) rotate(-1deg)' },
+          '75%': { transform: 'translate(-15px, -15px) rotate(0deg)' },
+        },
+        floatRight: {
+          '0%, 100%': { transform: 'translate(0px, 0px) rotate(0deg)' },
+          '25%': { transform: 'translate(15px, -5px) rotate(2deg)' },
+          '50%': { transform: 'translate(20px, -10px) rotate(1deg)' },
+          '75%': { transform: 'translate(15px, -15px) rotate(0deg)' },
+        },
+        floatCircle: {
+          '0%': { transform: 'rotate(0deg) translateX(10px) rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg) translateX(10px) rotate(-360deg)' },
         },
         fadeIn: {
           '0%': { opacity: '0' },
@@ -182,6 +214,12 @@ module.exports = {
         sparkle: {
           '0%, 100%': { opacity: '0.7', transform: 'scale(1)' },
           '50%': { opacity: '1', transform: 'scale(1.2)' },
+        },
+        blob: {
+          '0%': { transform: 'translate(0px, 0px) scale(1)' },
+          '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+          '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+          '100%': { transform: 'translate(0px, 0px) scale(1)' },
         },
       },
     },

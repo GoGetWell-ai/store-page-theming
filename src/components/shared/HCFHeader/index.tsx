@@ -46,11 +46,22 @@ const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
                     </svg>
                 </div>
                 
-                {/* Animated particles */}
+                {/* Enhanced animated particles with more variety */}
                 <div className="absolute inset-0 overflow-hidden">
+                    {/* Main floating elements */}
                     <div className="absolute top-10 left-10 w-16 h-16 bg-green-300 rounded-full opacity-20 animate-float-slow"></div>
-                    <div className="absolute top-1/4 right-1/4 w-24 h-24 bg-green-400 rounded-full opacity-10 animate-float"></div>
-                    <div className="absolute bottom-1/3 left-1/3 w-20 h-20 bg-green-200 rounded-full opacity-15 animate-float-delay"></div>
+                    <div className="absolute top-1/4 right-1/4 w-24 h-24 bg-green-400 rounded-full opacity-10 animate-float-right"></div>
+                    <div className="absolute bottom-1/3 left-1/3 w-20 h-20 bg-green-200 rounded-full opacity-15 animate-float-left"></div>
+                    
+                    {/* Additional floating elements */}
+                    <div className="absolute top-1/2 right-20 w-12 h-12 bg-green-500 rounded-full opacity-10 animate-float-circle"></div>
+                    <div className="absolute bottom-20 right-1/3 w-14 h-14 bg-green-600 rounded-full opacity-15 animate-float-delay"></div>
+                    <div className="absolute top-1/3 left-20 w-10 h-10 bg-green-100 rounded-full opacity-20 animate-blob"></div>
+                    
+                    {/* Small decorative elements */}
+                    <div className="absolute top-40 right-40 w-6 h-6 bg-white rounded-full opacity-30 animate-pulse-slow"></div>
+                    <div className="absolute bottom-40 left-40 w-8 h-8 bg-white rounded-full opacity-20 animate-pulse"></div>
+                    <div className="absolute top-2/3 right-1/3 w-4 h-4 bg-white rounded-full opacity-40 animate-sparkle"></div>
                 </div>
                 
                 <div className="relative z-10 max-w-7xl mx-auto px-4 py-16 md:py-24 lg:py-32">
@@ -88,9 +99,10 @@ const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
                             </div>
                         </div>
                         <div className="relative flex justify-center">
-                            {/* Enhanced glow effect */}
-                            <div className="absolute w-[120%] h-[120%] bg-green-500 rounded-full opacity-10 animate-pulse-slow"></div>
-                            <div className="absolute w-[90%] h-[90%] bg-green-300 rounded-full opacity-20 animate-pulse"></div>
+                            {/* Enhanced glow effect with animation */}
+                            <div className="absolute w-[120%] h-[120%] bg-green-500 rounded-full opacity-10 animate-blob"></div>
+                            <div className="absolute w-[90%] h-[90%] bg-green-300 rounded-full opacity-20 animate-pulse-slow"></div>
+                            <div className="absolute w-[105%] h-[105%] bg-green-400 rounded-full opacity-15 animate-float-circle"></div>
                             
                             {/* Main image with multiple organ icons */}
                             <div className="relative z-10 w-full max-w-md">
@@ -100,15 +112,15 @@ const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
                                     className="relative z-10 w-full rounded-lg shadow-lg"
                                 />
                                 
-                                {/* Floating organ icons */}
-                                <div className="absolute -top-6 -right-6 w-20 h-20 bg-white rounded-full p-1 shadow-lg animate-float-slow">
+                                {/* Floating organ icons with enhanced animations */}
+                                <div className="absolute -top-6 -right-6 w-20 h-20 bg-white rounded-full p-1 shadow-lg animate-float-right">
                                     <div className="w-full h-full rounded-full bg-green-100 flex items-center justify-center">
                                         <svg className="w-10 h-10 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
                                         </svg>
                                     </div>
                                 </div>
-                                <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white rounded-full p-1 shadow-lg animate-float">
+                                <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white rounded-full p-1 shadow-lg animate-float-left">
                                     <div className="w-full h-full rounded-full bg-green-100 flex items-center justify-center">
                                         <svg className="w-12 h-12 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -119,6 +131,22 @@ const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
                                     <div className="w-full h-full rounded-full bg-green-100 flex items-center justify-center">
                                         <svg className="w-8 h-8 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                
+                                {/* Additional organ icons for more visual interest */}
+                                <div className="absolute -top-4 left-1/4 w-14 h-14 bg-white rounded-full p-1 shadow-lg animate-float-slow">
+                                    <div className="w-full h-full rounded-full bg-green-100 flex items-center justify-center">
+                                        <svg className="w-7 h-7 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h2a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1h3"></path>
+                                        </svg>
+                                    </div>
+                                </div>
+                                <div className="absolute -bottom-6 right-1/4 w-12 h-12 bg-white rounded-full p-1 shadow-lg animate-float">
+                                    <div className="w-full h-full rounded-full bg-green-100 flex items-center justify-center">
+                                        <svg className="w-6 h-6 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path>
                                         </svg>
                                     </div>
                                 </div>
