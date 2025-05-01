@@ -1,5 +1,8 @@
 import { THEME_ENUM } from '@/constants/theme.constant'
 import { Direction, Mode, ControlSize, LayoutType } from '@/@types/theme'
+import { defaultTheme } from '@/views/Home/themes/base/color'
+import { cardiologyTheme } from '@/views/Home/themes/theme1/color'
+import { cosmetologyTheme } from '@/views/Home/themes/theme2/color'
 
 export type ThemeConfig = {
     themeSchema: string
@@ -28,3 +31,24 @@ export const themeConfig: ThemeConfig = {
         sideNavCollapse: false,
     },
 }
+
+           
+export type Variables = 
+  | "primary"
+  | "primaryDeep"
+  | "primaryMild"
+  | "primarySubtle"
+  | "neutral";
+
+export type ThemeVariables = Record<
+  "light" | "dark", 
+  Record<Variables, string>
+>
+  
+const presetThemeSchemaConfig: Record<string, ThemeVariables> = {
+    default: defaultTheme,
+    theme1: cardiologyTheme,
+    theme2: cosmetologyTheme,
+}
+
+export default presetThemeSchemaConfig

@@ -44,6 +44,15 @@ const authRoute: Routes = [
             layout: 'topBarClassic',
         },
     },
+    {
+        key: 'themes',
+        path: '/themes',
+        component: lazy(() => import('@/views/Home/themes')),
+        authority: [],
+        meta: {
+            layout: 'blank',
+        },
+    },
 ]
 
 export default authRoute
