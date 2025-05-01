@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import { treatmentTypesData } from '../data/treatmentTypesData'
-import { useAuth } from '@/auth'
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore'
-import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore'
 import { useNavigate } from 'react-router-dom'
 import {
     FaHeartPulse,
@@ -43,7 +40,7 @@ type TreatmentRowProps = {
     rowIndex: number
 }
 
-const getSpecialtyIcon = (title) => {
+const getSpecialtyIcon = (title: string) => {
     const iconProps = { className: 'w-6 h-6' }
 
     switch (title) {
@@ -101,8 +98,6 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
     rowIndex,
 }) => {
     const [className, setClassNames] = useState<string>('')
-    const { setPushedMessages } = usGenerativeChatStore()
-    const { hcfData } = useAuthStore()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -127,8 +122,6 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
     }, [])
 
     const handleClick = (line: string) => {
-        setPushedMessages(line)
-        navigate(`/chat-bot`)
     }
 
     return (
@@ -138,6 +131,7 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
             {treatments.map((treatment, index) => (
                 <div key={index}>
                     <button
+                        className="w-full p-4 text-left rounded-xl border border-purple-100 hover:border-purple-300 bg-white dark:bg-black transition-all duration-200 relative"
                         onClick={() =>
                             setExpandedId(
                                 expandedId === `${rowIndex}-${index}`
@@ -145,13 +139,12 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
                                     : `${rowIndex}-${index}`,
                             )
                         }
-                        className="w-full p-4 text-left rounded-xl border border-purple-100 hover:border-purple-300 bg-white transition-all duration-200 relative"
                     >
                         <div className="flex items-center justify-between group">
-                            <div className='flex items-center gap-2'>
+                            <div className="flex items-center gap-2">
                                 <div
-                                    className={`p-2 rounded-lg transition-colors duration-300 
-              ${expandedId  === `${rowIndex}-${index}`? 'bg-[#63559a2b] text-primary' : 'bg-gray-50 text-primary group-hover:bg-[#63559a2b] group-hover:text-primary'}`}
+                                    className={`p-2 rounded-lg transition-colors duration-300 dark:bg-gray-700
+              ${expandedId === `${rowIndex}-${index}` ? 'bg-[#63559a2b] text-primary' : 'bg-gray-50 text-primary group-hover:bg-[#63559a2b] group-hover:text-primary '}`}
                                 >
                                     {getSpecialtyIcon(treatment.majorTitle)}
                                 </div>
@@ -168,14 +161,14 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
 
                         {expandedId === `${rowIndex}-${index}` && (
                             <div
-                                className={`mt-4 pt-4 border-t border-purple-100 ${className}`}
+                                className={`mt-4 pt-4 border-t border-purple-100 dark:bg-gray-700 ${className}`}
                             >
                                 <ul className="space-y-1">
                                     {treatment.subtypes.map(
                                         (subtype, subIndex) => (
                                             <li
                                                 key={subIndex}
-                                                className="text-sm hover:text-primary transition-colors px-2 py-2 hover:bg-purple-50 rounded-md text-primary underline"
+                                                className="text-sm hover:text-primary transition-colors px-2 py-2 hover:bg-purple-50 dark:hover:bg-primary rounded-md text-primary underline"
                                                 onClick={() =>
                                                     handleClick(subtype)
                                                 }

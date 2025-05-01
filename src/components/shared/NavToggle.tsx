@@ -12,5 +12,4 @@ const NavToggle = ({ toggled, className }: NavToggleProps) => {
         </div>
     )
 }
-
 export default NavToggle

@@ -6,26 +6,18 @@ import { useThemeStore } from '@/store/themeStore'
 import PostLoginLayout from './PostLoginLayout'
 import PreLoginLayout from './PreLoginLayout'
 import useHCFApi from '@/utils/hooks/useHcfApi'
-import { useParams } from 'react-router-dom'
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore'
 import { useAuthStore } from './AuthLayout/store/useAuthStore'
 
 const Layout = ({ children }: CommonProps) => {
     const layoutType = useThemeStore((state) => state.layout.type)
     const { hcfData: hcfDataFromApi, loadingStatus } = useHCFApi()
-    const { id } = useParams()
     const { setHcfData } = useAuthStore((state) => state)
-    const { setSelectedConversation } = usGenerativeChatStore()
 
     const { authenticated } = useAuth()
 
     useEffect(() => {
         if (hcfDataFromApi?._id) {
             setHcfData(hcfDataFromApi)
-        }
-
-        if (!id) {
-            setSelectedConversation('')
         }
     }, [hcfDataFromApi])
 

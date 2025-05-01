@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  caddy:
+    image: caddy:2.7-alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # This is important for Docker to resolve host machine
+volumes:
+  caddy_data:
+  caddy_config:

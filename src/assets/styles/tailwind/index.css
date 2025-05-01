@@ -4,11 +4,6 @@
 
 @layer base {
 	:root {
-		--neutral: #ffffff;
-		--primary: #2a85ff;
-		--primary-deep: #0069f6;
-		--primary-mild: #4996ff;
-		--primary-subtle: #2a85ff1a;
 		--error: #ff6a55;
 		--error-subtle: #ff6a551a;
 		--success: #10b981;
@@ -31,13 +26,8 @@
 	}
 
 	.dark {
-		--neutral: #ffffff;
-		--primary: #2a85ff;
-		--primary-deep: #0069f6;
-		--primary-mild: #4996ff;
-		--primary-subtle: #2a85ff1a;
 		--error: #ff6a55;
-		--error-subtle: #ff6a551a; 
+		--error-subtle: #ff6a551a;
 		--success: #10b981;
 		--success-subtle: #05eb7624;
 		--info: #2a85ff;
@@ -59,45 +49,46 @@
 
 
 	body {
-		@apply text-gray-500 dark:text-gray-400 text-sm bg-gray-100 dark:bg-gray-950 leading-normal font-medium;
+		@apply text-gray-500 dark:text-gray-400 text-sm bg-gray-100 dark:bg-gray-950 leading-normal font-medium font-heading;
 		-webkit-font-smoothing: antialiased;
+		font-family: var(--font-family);
 	}
 
 	h1,
 	.h1 {
-		@apply text-4xl font-bold text-gray-900 dark:text-gray-100;
+		@apply text-4xl font-bold text-gray-900 dark:text-gray-100 font-heading;
 	}
 
 	h2,
 	.h2 {
-		@apply text-3xl font-bold text-gray-900 dark:text-gray-100;
+		@apply text-3xl font-bold text-neutral dark:text-gray-100;
 	}
 
 	h3,
 	.h3 {
-		@apply text-2xl font-bold text-gray-900 dark:text-gray-100;
+		@apply text-2xl font-bold text-neutral dark:text-gray-100;
 	}
 
 	h4,
 	.h4 {
-		@apply text-xl font-bold text-gray-900 dark:text-gray-100;
+		@apply text-xl font-bold text-neutral dark:text-gray-100;
 	}
 
 	h5,
 	.h5 {
-		@apply text-lg font-bold text-gray-900 dark:text-gray-100;
+		@apply text-lg font-bold text-neutral dark:text-gray-100;
 	}
 
 	h6,
 	.h6 {
-		@apply text-base font-semibold text-gray-900 dark:text-gray-100;
+		@apply text-base font-semibold text-neutral dark:text-gray-100;
 	}
 
 	hr {
 		@apply border-gray-200 dark:border-gray-600;
 	}
 
-	.heading-text {
+	.heading-text-neutral {
 		@apply text-gray-900 dark:text-gray-100;
 	}
 }

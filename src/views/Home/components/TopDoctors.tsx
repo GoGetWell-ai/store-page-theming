@@ -1,8 +1,9 @@
-import { apiGetDoctors } from '@/services/DoctorService';
-import React, { useEffect, useState } from 'react';
-import { CgLock } from 'react-icons/cg';
-import { LuBuilding2 } from 'react-icons/lu';
-import { useNavigate } from 'react-router-dom';
+import { Button } from '@/components/ui'
+import { apiGetDoctors } from '@/services/DoctorService'
+import React, { useEffect, useState } from 'react'
+import { CgLock } from 'react-icons/cg'
+import { LuBuilding2 } from 'react-icons/lu'
+import { useNavigate } from 'react-router-dom'
 
 interface TopDoctorsProps {
     hcfData: {
@@ -10,8 +11,8 @@ interface TopDoctorsProps {
     }
 }
 const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
-    const navigate = useNavigate();
-    const [doctors, setDoctors] = useState<any>([]);
+    const navigate = useNavigate()
+    const [doctors, setDoctors] = useState<any>([])
 
     useEffect(() => {
         if (hcfData?.doctors?.length) {
@@ -21,27 +22,30 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
 
     console.log('doctors', doctors)
 
-
     useEffect(() => {
         const callApi = async () => {
             if (doctors.length < 3) {
-                const limit = 3 - doctors.length;
+                const limit = 3 - doctors.length
                 try {
-                    const data = await apiGetDoctors({ page: 1, limit, search: '' })
+                    const data = await apiGetDoctors({
+                        page: 1,
+                        limit,
+                        search: '',
+                    })
                     if (data?.data) {
                         setDoctors((prv) => [...prv, ...data.data])
                     }
                 } catch (err) {
-                    console.log('error', err);
+                    console.log('error', err)
                 }
             }
         }
 
-        callApi();
+        callApi()
     }, [doctors])
 
     return (
-        <div className="w-full bg-gradient-to-b py-8">
+        <div className="w-full bg-gradient-to-b py-8" id='doctors'>
             <div className="max-w-7xl mx-auto px-4">
                 <h1 className="text-2xl md:text-4xl font-bold text-center mb-12">
                     Top Doctors
@@ -51,67 +55,84 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                     {doctors.slice(0, 3).map((doctor) => (
                         <div
                             key={doctor._id}
-                            className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
+                            className=" bg-background rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden group"
                         >
-                            {/* <div className="relative h-64 overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200">
+                            <div className="relative h-64 overflow-hidden bg-gradient-to-b from-gray-100 to-gray-200">
                                 <img
                                     src={doctor.profileImage}
                                     alt={doctor.name}
                                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
-                                        e.target.src = 'https://doctoryouneed.org/wp-content/uploads/2020/08/dummy_gn-300x300.jpg';
+                                        e.target.src =
+                                            'https://doctoryouneed.org/wp-content/uploads/2020/08/dummy_gn-300x300.jpg'
                                     }}
                                 />
-                            </div> */}
+                            </div>
 
-                            <div className="p-3">
-                                <h2 className="text-xl font-bold text-primary mb-2">{doctor.name}</h2>
-                                <p className="text-sm text-gray-600 mb-4">{doctor.designation || 'Specialist'}</p>
+                            <div className="p-3 flex flex-col justify-between self-stretch h-1/2">
+                                <h2 className="text-xl font-bold text-primary mb-2">
+                                    {doctor.name}
+                                </h2>
+                                <p className="text-sm text-gray-600 mb-4">
+                                    {doctor.designation || 'Specialist'}
+                                </p>
 
                                 <div className="space-y-3">
                                     <InfoRow
                                         icon={<CgLock className="w-4 h-4" />}
                                         label="Experience"
-                                        value={doctor.experience?.surgeries || 'N/A'}
+                                        value={
+                                            doctor.experience?.surgeries ||
+                                            'N/A'
+                                        }
                                     />
                                     <InfoRow
-                                        icon={<LuBuilding2 className="w-4 h-4" />}
+                                        icon={
+                                            <LuBuilding2 className="w-4 h-4" />
+                                        }
                                         label="Hospital"
                                         value={doctor.hospitals?.[0] || 'N/A'}
                                         className="line-clamp-1"
                                     />
                                 </div>
 
-                                <button
-                                    onClick={() => navigate(`/doctors/${doctor._id}`)}
+                                <Button
+                                    variant="solid"
                                     className="mt-6 w-full bg-primary text-white py-3 px-6 rounded-lg hover:bg-primary/90 transition-colors font-medium"
+                                    onClick={() =>
+                                        navigate(`/doctors/${doctor._id}`)
+                                    }
                                 >
                                     More details
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     ))}
                 </div>
 
                 <div className="mt-10 text-center">
-                    <button
+                    <Button
+                        className=" text-primary border border-primary px-8 py-3 rounded-lg font-medium transition-colors hover:text-primary"
                         onClick={() => navigate(`/doctors`)}
-                        className="bg-white hover:bg-primary/5 text-primary border border-primary/20 px-8 py-3 rounded-lg font-medium transition-colors"
                     >
                         Load More
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 const InfoRow = ({ icon, label, value, className = '' }) => (
     <div className="flex items-center text-sm">
         <div className="text-primary/60">{icon}</div>
         <span className="ml-2 text-gray-500">{label}:</span>
-        <span className={`ml-2 text-gray-700 font-medium truncate ${className}`}>{value}</span>
+        <span
+            className={`ml-2 text-gray-700 font-medium truncate ${className}`}
+        >
+            {value}
+        </span>
     </div>
-);
+)
 
-export default TopDoctors;
+export default TopDoctors

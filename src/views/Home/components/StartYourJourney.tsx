@@ -7,7 +7,6 @@ import { FiFileText } from 'react-icons/fi';
 import UploadMedicalReports from '@/components/shared/UploadMedicalReports';
 import { treatmentTypesData } from '../data/treatmentTypesData';
 import { useNavigate } from 'react-router-dom';
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore';
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore';
 
 const StartYourJourney = () => {
@@ -20,7 +19,6 @@ const StartYourJourney = () => {
   const [searchResults, setSearchResults] = useState([]);
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
-  const { setPushedMessages } = usGenerativeChatStore()
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -106,8 +104,6 @@ const StartYourJourney = () => {
   const handleSelectTreatment = (treatment) => {
     setSearchTerm(treatment.subtype);
     setIsInputFocused(false);
-    setPushedMessages(treatment.subtype)
-    navigate(`/chat-bot`)
     // You can add additional logic here, like navigating to a treatment page
   };
 
@@ -115,20 +111,20 @@ const StartYourJourney = () => {
   return (
     <div className="py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20">
       <div className="flex justify-center items-center gap-x-2 sm:flex-row flex-col my-5">
-        <div className="relative w-full md:w-96" ref={wrapperRef}>
-          <form onSubmit={handleSearch} className="relative w-full md:w-96 group">
+        <div ref={wrapperRef} className="relative w-full md:w-96">
+          <form className="relative w-full md:w-96 group" onSubmit={handleSearch}>
             <Input
               type="text"
               value={searchTerm}
+              placeholder="Search Your Treatment"
+              className="w-full px-6 py-3 pr-12 rounded-full border-2 border-[#c0bada] focus:outline-none 
+            text-gray-700 placeholder-gray-400 transition-all duration-300
+            group-hover:border-primary focus:border-primary"
               onChange={handleInputChange}
               onFocus={() => {
                 setIsInputFocused(true);
                 searchTreatments(searchTerm);
               }}
-              placeholder="Search Your Treatment"
-              className="w-full px-6 py-3 pr-12 rounded-full border-2 border-[#c0bada] focus:outline-none 
-            text-gray-700 placeholder-gray-400 transition-all duration-300
-            group-hover:border-primary focus:border-primary"
             />
             <button
               type="submit"

@@ -65,6 +65,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         iconAlignment = 'start',
         ...rest
     } = props
+
+    // Get theme variables
     const { controlSize, ui } = useConfig()
     const formControlSize = useForm()?.size
     const inputGroupSize = useInputGroup()?.size
@@ -123,36 +125,39 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
     const solidColor = () => {
         const btn = {
             bgColor: active ? `bg-primary-deep` : `bg-primary`,
-            textColor: 'text-neutral',
-            hoverColor: active ? '' : `hover:bg-primary-mild`,
-            activeColor: ``,
+            textColor: 'text-white',
+            hoverColor: active
+                ? ''
+                : `hover:bg-primary-dark dark:hover:bg-primary-light`,
+            activeColor: `active:bg-primary-deep`,
         }
         return getBtnColor(btn)
     }
+    
 
     const plainColor = () => {
         const btn = {
-            bgColor: active
-                ? ``
-                : `dark:primary-mild dark:bg-opacity-20`,
-            textColor: ``,
-            hoverColor: active ? '' : `hover:text-primary-mild`,
-            activeColor: `dark:active:primary-mild dark:active:bg-opacity-40`,
+            bgColor: active ? `bg-primary-subtle` : `bg-transparent`,
+            textColor: `text-primary`,
+            hoverColor: active
+                ? ''
+                : `hover:bg-primary-light hover:text-primary-deep dark:hover:bg-primary-deep dark:hover:text-white`,
+            activeColor: `active:bg-primary-light active:text-primary-deep dark:active:bg-primary-deep dark:active:text-white`,
         }
         return getBtnColor(btn)
     }
+    
 
     const defaultColor = () => {
         const btn = {
-            bgColor: active
-                ? `bg-gray-100 border border-gray-300 dark:bg-gray-500 dark:border-gray-500`
-                : `bg-white border border-gray-300 dark:bg-gray-700 dark:border-gray-700`,
-            textColor: `text-gray-600 dark:text-gray-100`,
-            hoverColor: active
-                ? ''
-                : `ring-primary dark:ring-white hover:border-primary dark:hover:border-white hover:ring-1 hover:text-primary dark:hover:text-white dark:hover:bg-transparent`,
-            activeColor: ``,
+            bgColor: 'border border-primary',
+            textColor: 'text-primary',
+            hoverColor:
+                'hover:bg-primary hover:text-primary-deep dark:hover:bg-primary-deep dark:hover:text-white',
+            activeColor:
+                'active:bg-primary active:text-primary-deep dark:active:bg-primary-deep dark:active:text-white',
         }
+
         return getBtnColor(btn)
     }
 
@@ -206,14 +211,14 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
         if (loading && children) {
             return (
                 <span className="flex items-center justify-center">
-                    <Spinner enableTheme={false} className="mr-1" />
+                    <Spinner enableTheme={true} className="mr-1" />
                     {children}
                 </span>
             )
         }
 
         if (icon && !children && loading) {
-            return <Spinner enableTheme={false} />
+            return <Spinner enableTheme={true} />
         }
 
         if (icon && !children && !loading) {

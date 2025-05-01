@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Button } from '@/components/ui';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Button } from '@/components/ui'
+import { useNavigate } from 'react-router-dom'
 import { defaultHospitals } from '../data/treatmentTypesData'
-
 
 // Define the props type
 interface TopHospitalsProps {
@@ -11,35 +10,34 @@ interface TopHospitalsProps {
     }
 }
 
-
 const InfoRow = ({ label, value }: { label: string; value: string }) => (
     <div className="flex justify-between items-center">
         <span className="text-gray-500">{label}:</span>
         <span className="font-medium">{value}</span>
     </div>
-);
+)
 
 const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
-    const navigate = useNavigate();
-    const [hospitals, setHospital] = useState<any>([]);
+    const navigate = useNavigate()
+    const [hospitals, setHospital] = useState<any>([])
 
     useEffect(() => {
         const callApi = async () => {
             const data = hcfData.hospitals.slice(0, 3)
-            const limit = 3 - data?.length || 0;
+            const limit = 3 - data?.length || 0
             try {
-                const againData = [];
+                const againData = []
                 for (let i = data?.length; i < limit + 1; i++) {
                     againData.push(defaultHospitals[i])
                 }
 
                 setHospital([...data, ...againData.splice(0, limit)])
             } catch (err) {
-                console.log('error', err);
+                console.log('error', err)
             }
         }
 
-        callApi();
+        callApi()
     }, [hcfData])
 
     return (
@@ -53,17 +51,24 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                     {hospitals.slice(0, 3).map((hospital) => (
                         <div
                             key={hospital._id}
-                            onClick={() => navigate(`/hospitals-details/${hospital._id}`)}
-                            className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group  w-full flex flex-col justify-between h-full mx-auto"
+                            className="bg-background rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group  w-full flex flex-col justify-between h-full mx-auto"
+                            onClick={() =>
+                                navigate(`/hospitals-details/${hospital._id}`)
+                            }
                         >
                             <div>
                                 <div className="relative h-48 overflow-hidden">
                                     <img
-                                        src={hospital.images?.[0] || hospital.galleryImages?.[0] || 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'}
+                                        src={
+                                            hospital.images?.[0] ||
+                                            hospital.galleryImages?.[0] ||
+                                            'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'
+                                        }
                                         alt={hospital.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                                         onError={(e) => {
-                                            e.target.src = 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'; // Fallback URL
+                                            e.target.src =
+                                                'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'
                                         }}
                                     />
                                 </div>
@@ -76,28 +81,35 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                                     <div className="space-y-2 text-gray-600 text-sm">
                                         <InfoRow
                                             label="Established"
-                                            value={hospital.establishedYear || 'N/A'}
+                                            value={
+                                                hospital.establishedYear ||
+                                                'N/A'
+                                            }
                                         />
                                         <InfoRow
                                             label="Beds"
-                                            value={hospital.infrastructure?.bedCount || 'N/A'}
+                                            value={
+                                                hospital.infrastructure
+                                                    ?.bedCount || 'N/A'
+                                            }
                                         />
                                         <InfoRow
                                             label="Location"
                                             value={`${hospital.city || 'N/A'}, ${hospital.country || 'N/A'}`}
                                         />
                                     </div>
-
                                 </div>
                             </div>
                             <div className="p-3">
                                 <Button
                                     block
                                     className=""
-                                    variant='solid'
+                                    variant="solid"
                                     onClick={(e) => {
-                                        e.stopPropagation();
-                                        navigate(`/hospitals-details/${hospital._id}`);
+                                        e.stopPropagation()
+                                        navigate(
+                                            `/hospitals-details/${hospital._id}`,
+                                        )
                                     }}
                                 >
                                     More details
@@ -108,17 +120,16 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                 </div>
 
                 <div className="mt-4 text-center">
-                    <button
+                    <Button
+                        className=" text-primary border border-primary px-8 py-3 rounded-lg font-medium transition-colors hover:text-primary"
                         onClick={() => navigate(`/hospitals`)}
-                        className="bg-white hover:bg-primary/5 text-primary border border-primary/20 px-8 py-3 rounded-lg font-medium transition-colors"
                     >
                         Load More
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-
-export default TopHospitals;
+export default TopHospitals

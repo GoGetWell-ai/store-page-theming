@@ -1,13 +1,18 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { useLocation, Navigate, Outlet } from 'react-router-dom'
 import appConfig from '@/configs/app.config'
 import { useAuth } from '@/auth'
 
-const { authenticatedEntryPath } = appConfig
+const allowedForAll = ['/themes']
 
 const PublicRoute = () => {
     const { authenticated } = useAuth()
+    const location = useLocation()
 
-    return authenticated ? <Navigate to={authenticatedEntryPath} /> : <Outlet />
+    if (authenticated && !allowedForAll.includes(location.pathname)) {
+        return <Navigate to={appConfig.authenticatedEntryPath} />
+    }
+
+    return <Outlet />
 }
 
 export default PublicRoute
