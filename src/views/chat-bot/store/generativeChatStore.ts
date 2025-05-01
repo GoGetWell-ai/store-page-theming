@@ -70,7 +70,7 @@ const initialState: GenerativeChatState = {
     isTyping: false,
     selectedConversationMessages: [],
     messageConversation: [],
-    file: null,
+    file: [],
     conversationsMessages: [],
     suggestedQuestions: [],
     uploadedFileUrls: [],
@@ -78,6 +78,7 @@ const initialState: GenerativeChatState = {
     pushedMessages: '',
     fileUploadStatus: false,
     unauthorizedFileStore: null,
+    isLoading: false,
 }
 
 export const usGenerativeChatStore = create<

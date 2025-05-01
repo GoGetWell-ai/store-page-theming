@@ -6,6 +6,7 @@ import LayoutBase from '@/components//template/LayoutBase'
 import useResponsive from '@/utils/hooks/useResponsive'
 import { LAYOUT_STACKED_SIDE } from '@/constants/theme.constant'
 import type { CommonProps } from '@/@types/common'
+import ThemeIcon from '@/components/template/ThemeIcon'
 
 const StackedSide = ({ children }: CommonProps) => {
     const { larger, smaller } = useResponsive()
@@ -27,6 +28,7 @@ const StackedSide = ({ children }: CommonProps) => {
                         }
                         headerEnd={
                             <>
+                                <ThemeIcon className="mr-4" />
                                 <UserProfileDropdown hoverable={false} />
                             </>
                         }

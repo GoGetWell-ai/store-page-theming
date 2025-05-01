@@ -17,7 +17,7 @@ const LayoutBase = (props: LayoutBaseProps) => {
         <LayoutContext.Provider
             value={{ adaptiveCardActive, pageContainerReassemble, type }}
         >
-            <div className={className}>{children}</div>
+            <div className={`${className} dark:bg-background`}>{children}</div>
         </LayoutContext.Provider>
     )
 }

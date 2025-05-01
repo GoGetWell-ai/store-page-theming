@@ -11,6 +11,7 @@ import useResponsive from '@/utils/hooks/useResponsive'
 import { LAYOUT_FRAMELESS_SIDE } from '@/constants/theme.constant'
 import type { CommonProps } from '@/@types/common'
 import type { FooterPageContainerType } from '@/components/template/Footer'
+import ThemeIcon from '@/components/template/ThemeIcon'
 
 const FrameLessSide = ({ children }: CommonProps) => {
     const { isSticky } = useScrollTop()
@@ -98,6 +99,7 @@ const FrameLessSide = ({ children }: CommonProps) => {
                             }
                             headerEnd={
                                 <>
+                                    <ThemeIcon className="mr-4" />
                                     <UserProfileDropdown hoverable={false} />
                                 </>
                             }

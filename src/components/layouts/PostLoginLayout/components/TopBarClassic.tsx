@@ -7,6 +7,7 @@ import LayoutBase from '@/components//template/LayoutBase'
 import useResponsive from '@/utils/hooks/useResponsive'
 import { LAYOUT_TOP_BAR_CLASSIC } from '@/constants/theme.constant'
 import type { CommonProps } from '@/@types/common'
+import ThemeIcon from '@/components/template/ThemeIcon'
 
 const TopBarClassic = ({ children }: CommonProps) => {
     const { larger, smaller } = useResponsive()
@@ -30,6 +31,7 @@ const TopBarClassic = ({ children }: CommonProps) => {
                         headerMiddle={<>{larger.lg && <HorizontalNav />}</>}
                         headerEnd={
                             <>
+                                <ThemeIcon className="mr-4" />
                                 <UserProfileDropdown hoverable={false} />
                             </>
                         }

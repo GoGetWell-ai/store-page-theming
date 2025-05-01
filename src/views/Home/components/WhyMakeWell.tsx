@@ -12,10 +12,10 @@ const WhyMakeWell = () => {
         <div className="w-full">
             <div className="max-w-7xl px-6 mx-auto py-4">
                 <TitleAnimation>
-                    <h1 className="text-2xl sm:text-4xl  font-bold text-black  bg-clip-text">
+                    <h1 className="text-2xl sm:text-4xl font-bold text-black dark:text-text bg-clip-text">
                         Why Gogetwell.ai
                     </h1>
-                    <p className="text-lg text-gray-600">We help you with comprehensive healthcare solutions</p>
+                    <p className="text-lg text-gray-600 dark:text-text-light">We help you with comprehensive healthcare solutions</p>
                 </TitleAnimation>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mt-16">
@@ -23,10 +23,10 @@ const WhyMakeWell = () => {
                         <ItemAnimation key={index} index={index}>
                             <div className="p-6">
                                 <div className="text-center space-y-1 leading-6">
-                                    <span className="text-xl md:text-4xl font-bold bg-gradient-to-r from-primary-deep to-primary text-transparent bg-clip-text">
+                                    <span className="text-xl md:text-4xl font-bold bg-gradient-to-r from-primary-deep to-primary dark:from-primary dark:to-primary-mild text-transparent bg-clip-text">
                                         {item.quantity}
                                     </span>
-                                    <h2 className="text-lg md:text-xl font-semibold text-gray-800">
+                                    <h2 className="text-lg md:text-xl font-semibold text-gray-800 dark:text-text">
                                         {item.title}
                                     </h2>
                                 </div>

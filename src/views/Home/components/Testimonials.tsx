@@ -11,7 +11,7 @@ const Testimonials: React.FC = () => {
         {
             imageSrc:
                 'https://a.storyblok.com/f/191576/1200x800/faa88c639f/round_profil_picture_before_.webp', // Profile image source will be inserted here
-            reviewContent: `I would like to express my heartfelt gratitude to ${hcfData.fullname} for making my medical journey to India smooth and stress-free. From the moment I reached out for assistance, ${hcfData.name} took care of every detail – from finding the best doctor to arranging my travel and accommodation. Their professionalism, kindness, and quick responses reassured me throughout the process. Thanks to their expertise and dedication, I was able to focus entirely on my recovery, knowing I was in capable hands.`,
+            reviewContent: `I would like to express my heartfelt gratitude to ${hcfData.name} for making my medical journey to India smooth and stress-free. From the moment I reached out for assistance, ${hcfData.name} took care of every detail – from finding the best doctor to arranging my travel and accommodation. Their professionalism, kindness, and quick responses reassured me throughout the process. Thanks to their expertise and dedication, I was able to focus entirely on my recovery, knowing I was in capable hands.`,
             reviewer: {
                 name: 'Ava Robert',
                 designation: 'Golio',
@@ -70,15 +70,15 @@ const Testimonials: React.FC = () => {
 
 
     return (
-        <div className="w-full bg-gradient-to-br from-primary-mild/5 via-white to-primary-mild/10 py-6">
+        <div className="w-full bg-gradient-to-br from-primary-mild/5 via-white to-primary-mild/10 dark:from-primary/10 dark:via-background dark:to-primary/5 py-6">
             <div className="max-w-7xl mx-auto px-6">
                 <div
                     className="text-center mb-6 space-y-2"
                 >
-                    <h2 className="text-2xl md:text-4xl font-bold text-gray-900">
+                    <h2 className="text-2xl md:text-4xl font-bold text-gray-900 dark:text-text">
                         What our patients says
                     </h2>
-                    <h3 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-primary-deep to-primary bg-clip-text text-transparent">
+                    <h3 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-primary-deep to-primary dark:from-primary dark:to-primary-mild bg-clip-text text-transparent">
                         about {hcfData.name}
                     </h3>
                 </div>
@@ -86,18 +86,18 @@ const Testimonials: React.FC = () => {
                 <div className="relative">
                     <div className="flex items-center justify-center">
                         <div
-                            className="bg-white rounded-2xl shadow-xl p-8 md:p-12 max-w-3xl relative"
+                            className="bg-white dark:bg-card-bg rounded-2xl shadow-xl p-8 md:p-12 max-w-3xl relative dark:border dark:border-border"
                         >
-                            <div className="absolute -top-4 -left-4 w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                                <FaQuoteLeft className="text-primary text-xl" />
+                            <div className="absolute -top-4 -left-4 w-12 h-12 bg-primary/10 dark:bg-primary/20 rounded-full flex items-center justify-center">
+                                <FaQuoteLeft className="text-primary dark:text-primary-mild text-xl" />
                             </div>
 
                             <div className="space-y-8">
-                                <p className="text-gray-600 text-[13px] sm:text-md leading-relaxed italic">
+                                <p className="text-gray-600 dark:text-text-light text-[13px] sm:text-md leading-relaxed italic">
                                     {testimonialsData[currentIndex].reviewContent}
                                 </p>
 
-                                <div className="flex items-center gap-4 pt-6 border-t border-gray-100">
+                                <div className="flex items-center gap-4 pt-6 border-t border-gray-100 dark:border-gray-700">
                                     <div className="relative w-16 h-16 overflow-hidden rounded-full">
                                         <img
                                             src={testimonialsData[currentIndex].imageSrc}
@@ -106,10 +106,10 @@ const Testimonials: React.FC = () => {
                                         />
                                     </div>
                                     <div>
-                                        <h4 className="font-semibold text-lg text-gray-900">
+                                        <h4 className="font-semibold text-lg text-gray-900 dark:text-text">
                                             {testimonialsData[currentIndex].reviewer.name}
                                         </h4>
-                                        <p className="text-sm text-gray-500">
+                                        <p className="text-sm text-gray-500 dark:text-text-light">
                                             {testimonialsData[currentIndex].reviewer.designation}
                                         </p>
                                     </div>
@@ -120,15 +120,15 @@ const Testimonials: React.FC = () => {
 
                     <div className="absolute top-1/2 -translate-y-1/2 -left-4">
                         <button
-                            onClick={handlePrevious} className="p-3 rounded-full bg-white shadow-lg hover:bg-primary-mild/10 transition-colors">
-                            <FaChevronLeft className="text-primary text-xl" />
+                            onClick={handlePrevious} className="p-3 rounded-full bg-white dark:bg-card-bg shadow-lg hover:bg-primary-mild/10 dark:hover:bg-primary/20 transition-colors dark:border dark:border-border">
+                            <FaChevronLeft className="text-primary dark:text-primary-mild text-xl" />
                         </button>
                     </div>
 
                     <div className="absolute top-1/2 -translate-y-1/2 -right-4">
                         <button
-                            onClick={handleNext} className="p-3 rounded-full bg-white shadow-lg hover:bg-primary-mild/10 transition-colors">
-                            <FaChevronRight className="text-primary text-xl" />
+                            onClick={handleNext} className="p-3 rounded-full bg-white dark:bg-card-bg shadow-lg hover:bg-primary-mild/10 dark:hover:bg-primary/20 transition-colors dark:border dark:border-border">
+                            <FaChevronRight className="text-primary dark:text-primary-mild text-xl" />
                         </button>
                     </div>
                 </div>
@@ -138,7 +138,10 @@ const Testimonials: React.FC = () => {
                         <button
                             key={index}
                             onClick={() => handleDotClick(index)}
-                            className={`rounded-full transition-all duration-300 ${index === currentIndex ? 'w-8 bg-primary' : 'w-2 bg-gray-300'
+                            className={`rounded-full transition-all duration-300 ${
+                                index === currentIndex 
+                                    ? 'w-8 bg-primary dark:bg-primary-mild' 
+                                    : 'w-2 bg-gray-300 dark:bg-gray-600'
                                 } h-2`}
                         />
                     ))}

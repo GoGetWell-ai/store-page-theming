@@ -2,4 +2,12 @@
 @import "./components/index.css";
 @import "./template/index.css";
 @import "./vendors/index.css";
+@import "./themes.css";
 @import "./tailwind/index.css";
+
+
+@layer utilities {
+  .bg-primary-subtle {
+    background-color: var(--primary-subtle);
+  }
+}
