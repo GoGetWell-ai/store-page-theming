@@ -1,1 +1,15 @@
 @import "./assets/styles/app.css";
+
+
+   body.theme-theme1 button {
+    background-color: #00796b;
+    color: white;
+  }
+  
+  body.theme-theme2 button {
+    background-color: #d81b60;
+    color: white;
+  }
+
+
+

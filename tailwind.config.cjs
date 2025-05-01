@@ -3,6 +3,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+	
 	mode: 'jit',
 	content:  [
 		"./index.html",
@@ -101,4 +102,5 @@ module.exports = {
 	plugins: [
         require('@tailwindcss/typography'),
 	],
+	
 };
