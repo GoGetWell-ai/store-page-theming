@@ -1,6 +1,6 @@
 import authRoute from '@/configs/routes.config/authRoute'
 import { Routes } from '@/@types/routes'
-import { protectedRoutes } from '@/configs/routes.config'
+import { publicRoutes, protectedRoutes } from '@/configs/routes.config'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 
