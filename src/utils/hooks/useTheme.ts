@@ -3,7 +3,21 @@ import { useThemeStore } from '@/store/themeStore'
 import presetThemeSchemaConfig from '@/configs/preset-theme-schema.config'
 
 export type ThemeVariables = Record<
-    'primary' | 'primaryDeep' | 'primaryMild' | 'primarySubtle' | 'neutral',
+    | 'primary'
+    | 'primaryDeep'
+    | 'primaryMild'
+    | 'primarySubtle'
+    | 'neutral'
+    | 'secondary'
+    | 'secondaryDeep'
+    | 'secondaryMild'
+    | 'accent'
+    | 'background'
+    | 'text'
+    | 'heading'
+    | 'fontFamily'
+    | 'headingSize'
+    | 'bodySize',
     string
 >
 
@@ -18,6 +32,16 @@ export const mapTheme = (variables: ThemeVariables): MappedTheme => {
         '--primary-mild': variables.primaryMild || '',
         '--primary-subtle': variables.primarySubtle || '',
         '--neutral': variables.neutral || '',
+        '--secondary': variables.secondary || '',
+        '--secondary-deep': variables.secondaryDeep || '',
+        '--secondary-mild': variables.secondaryMild || '',
+        '--accent': variables.accent || '',
+        '--background': variables.background || '',
+        '--text': variables.text || '',
+        '--heading': variables.heading || '',
+        '--fontFamily': variables.fontFamily || '',
+        '--headingSize': variables.headingSize || '',
+        '--bodySize': variables.bodySize || '',
     }
 }
 

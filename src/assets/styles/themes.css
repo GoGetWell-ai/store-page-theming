@@ -1,0 +1,178 @@
+/* Theme CSS Variables */
+
+:root {
+    /* Default theme variables */
+    --primary: #6355D9;
+    --primary-deep: #4C3EBF;
+    --primary-mild: #9B92E8;
+    --primary-subtle: #EFEDF9;
+    --secondary: #4CAF50;
+    --secondary-deep: #2E7D32;
+    --secondary-mild: #81C784;
+    --font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    --heading-size: text-2xl;
+    --body-size: text-base;
+    
+    /* Default background and text colors */
+    --background: #FFFFFF;
+    --text: #333333;
+    --text-light: #666666;
+    --heading: #111111;
+  }
+  
+  /* Light mode */
+  .light {
+    --background: #FFFFFF;
+    --text: #333333;
+    --text-light: #666666;
+    --heading: #111111;
+    --card-bg: #FFFFFF;
+    --card-border: #EEEEEE;
+    --input-bg: #F8F8F8;
+    --input-border: #DDDDDD;
+  }
+  
+  /* Dark mode */
+  .dark {
+    --background: #121212;
+    --text: #E0E0E0;
+    --text-light: #A0A0A0;
+    --heading: #FFFFFF;
+    --card-bg: #1E1E1E;
+    --card-border: #333333;
+    --input-bg: #2A2A2A;
+    --input-border: #444444;
+  }
+  
+  /* Organ Transplant Theme */
+  .theme-organTransplant {
+    --primary: #2D87BB;
+    --primary-deep: #1A5D8F;
+    --primary-mild: #7FBEE4;
+    --primary-subtle: #E6F4FB;
+    --secondary: #F5A623;
+    --secondary-deep: #D68900;
+    --secondary-mild: #FFCC80;
+    --font-family: "Nunito", sans-serif;
+    --heading-size: text-2xl;
+    --body-size: text-base;
+  }
+  
+  .theme-organTransplant.light {
+    --heading: #1A5D8F;
+  }
+  
+  .theme-organTransplant.dark {
+    --primary: #7FBEE4;
+    --primary-deep: #2D87BB;
+    --primary-mild: #E6F4FB;
+    --secondary: #FFCC80;
+    --secondary-deep: #F5A623;
+  }
+  
+  /* Cosmetic Surgery Theme */
+  .theme-cosmeticSurgery {
+    --primary: #D65DB1;
+    --primary-deep: #B23592;
+    --primary-mild: #F297DA;
+    --primary-subtle: #FDE8F5;
+    --secondary: #6C63FF;
+    --secondary-deep: #4F46E5;
+    --secondary-mild: #A5A0FF;
+    --font-family: "Playfair Display", serif;
+    --heading-size: text-3xl;
+    --body-size: text-base;
+  }
+  
+  .theme-cosmeticSurgery.light {
+    --heading: #B23592;
+  }
+  
+  .theme-cosmeticSurgery.dark {
+    --primary: #F297DA;
+    --primary-deep: #D65DB1;
+    --primary-mild: #FDE8F5;
+    --secondary: #A5A0FF;
+    --secondary-deep: #6C63FF;
+  }
+  
+  /* Apply theme variables to elements */
+  body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: var(--font-family);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--heading);
+  }
+  
+  /* Use gradient classes through data attributes for components that need them */
+  .header-bg {
+    @apply bg-gradient-to-r;
+    background-image: linear-gradient(to right, var(--primary-deep), var(--primary));
+  }
+  
+  .button-gradient {
+    @apply bg-gradient-to-r;
+    background-image: linear-gradient(to right, var(--primary), var(--primary-deep));
+  }
+  
+  .hero-overlay {
+    @apply bg-gradient-to-r;
+    background-image: linear-gradient(to right, var(--primary-deep), rgba(0, 0, 0, 0.5));
+    opacity: 0.8;
+  }
+  
+  /* Utility classes for theme colors */
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  
+  .bg-primary-deep {
+    background-color: var(--primary-deep);
+  }
+  
+  .bg-primary-mild {
+    background-color: var(--primary-mild);
+  }
+  
+  .bg-primary-subtle {
+    background-color: var(--primary-subtle);
+  }
+  
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+  
+  .text-primary {
+    color: var(--primary);
+  }
+  
+  .text-primary-deep {
+    color: var(--primary-deep);
+  }
+  
+  .text-secondary {
+    color: var(--secondary);
+  }
+  
+  .border-primary {
+    border-color: var(--primary);
+  }
+  
+  .border-primary-mild {
+    border-color: var(--primary-mild);
+  }
+  
+  .hover\:bg-primary-deep:hover {
+    background-color: var(--primary-deep);
+  }
+  
+  .hover\:text-primary:hover {
+    color: var(--primary);
+  }
+  
+  .hover\:border-primary:hover {
+    border-color: var(--primary);
+  }

@@ -1,110 +1,329 @@
-import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore';
-import HCFHeader from '@/components/shared/HCFHeader';
-
-// Define the structure of the expected props
+import React from 'react'
+import { useThemeStore } from '@/store/themeStore'
+import MenuBar from '@/components/shared/MenuBar'
 
 const Hero: React.FC = () => {
+    const { specialty } = useThemeStore()
 
-    return (
-        <div className='relative'>
-            <HCFHeader leftSide={
-                <>
-                    <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight text-center">
-                        We Handle Everything,{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                            You Focus on Healing
-                        </span>
-                    </h1>
-                    <p className="text-[15px] sm:text-[17px] text-gray-300 mx-auto mt-2 sm:mt-6 leading-shorter md:leading-normal text-center">
-                        Upload Your Medical Reports to Explore the Best and Most Cost-Effective Treatments in Your Language
-                    </p>
-                </>
-            } />
-
-            <div className='md:block hidden z-5 absolute bottom-[-25%] w-[70%] left-[15%] lg:w-[50%] lg:left-[25%]'>
-                <ProfileCard />
-            </div>
-            <div className='w-full md:hidden block'>
-                <ProfileCard />
-            </div>
-        </div>
-    );
-};
-
-export default Hero;
-
-
-
-const calculateAge = (dateOfBirth: string) => {
-    const birthDate = new Date(dateOfBirth);
-    const today = new Date();
-
-    let age = today.getFullYear() - birthDate.getFullYear();
-    const monthDifference = today.getMonth() - birthDate.getMonth();
-
-    // Adjust if the current date is before the birth date in the current year
-    if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
+    // Theme-specific content
+    const getThemeContent = () => {
+        switch (specialty) {
+            case 'organTransplant':
+                return {
+                    title: 'Leading Organ Transplant Center',
+                    subtitle:
+                        'Giving the gift of life through advanced transplant procedures',
+                    description:
+                        'Our world-class transplant center provides comprehensive care for patients needing organ transplantation. With cutting-edge technology and a compassionate approach, we&apos;re committed to giving patients a second chance at life.',
+                    features: [
+                        'Comprehensive pre and post-transplant care',
+                        'Living donor programs',
+                        'Leading-edge transplant surgery techniques',
+                        'Multidisciplinary transplant teams',
+                    ],
+                    ctaText: 'Schedule a Consultation',
+                    imageSrc: '/img/hospitals/hospital2.jpg',
+                }
+            case 'cosmeticSurgery':
+                return {
+                    title: 'Transform Your Confidence',
+                    subtitle:
+                        'Premium cosmetic procedures tailored to your vision',
+                    description:
+                        'Our cosmetic surgery clinic offers a range of procedures designed to enhance your natural beauty and restore your confidence. Our board-certified surgeons provide personalized care with stunning, natural-looking results.',
+                    features: [
+                        'Facial rejuvenation procedures',
+                        'Body contouring and sculpting',
+                        'Non-invasive cosmetic treatments',
+                        'Reconstructive surgery options',
+                    ],
+                    ctaText: 'Book Your Consultation',
+                    imageSrc: '/img/hospitals/hospital1.jpg',
+                }
+            default:
+                return {
+                    title: 'Advanced Healthcare Solutions',
+                    subtitle: 'Innovative care for better health outcomes',
+                    description:
+                        'Our healthcare center provides comprehensive medical services with a focus on patient-centered care. Using the latest medical technologies and evidence-based practices, we strive to deliver the best possible health outcomes.',
+                    features: [
+                        'Primary and specialty care',
+                        'Advanced diagnostic services',
+                        'Personalized treatment plans',
+                        'Preventive health programs',
+                    ],
+                    ctaText: 'Make an Appointment',
+                    imageSrc: '/img/hospitals/hospital3.jpg',
+                }
+        }
     }
 
-    return age;
-};
-
-const ProfileCard = () => {
-    const { hcfData } = useAuthStore();
-
-    const age = calculateAge(hcfData?.dob)
+    const content = getThemeContent()
 
     return (
-        <div className="w-full mx-auto bg-white rounded-xl md:shadow-lg p-4 md:p-6">
-            <div className="flex flex-col gap-1">
-                {/* Header with title and button */}
-                <div className="flex justify-between items-center">
-                    <h1 className="text-xl font-bold">{hcfData.name}</h1>
-                    <a href={`https://api.whatsapp.com/send?phone=${hcfData?.phone || hcfData?.auth?.phoneNumber}&text=Hi!%20Dear,%20I%20have%20a%20inquiry`} target='_blank' rel='noreferrer' className="bg-primary text-white px-4 md:px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-primary-deep transition-colors text-sm md:text-base">
-                        <svg className="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
-                        </svg>
-                        Contact me
-                    </a>
+        <div className="bg-background">
+            <MenuBar />
+            {/* Hero Section */}
+            <div className="relative">
+                <div
+                    className="absolute inset-0 hero-overlay"
+                    aria-hidden="true"
+                ></div>
+                <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="py-24 md:py-32">
+                        <h1 className="text-4xl md:text-5xl font-bold text-white">
+                            {content.title}
+                        </h1>
+                        <p className="mt-6 max-w-3xl text-xl text-white">
+                            {content.subtitle}
+                        </p>
+                        <div className="mt-10">
+                            <button className="button-gradient text-white font-medium py-3 px-6 rounded-md shadow-md hover:shadow-lg transition duration-300">
+                                {content.ctaText}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Main Content */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+                    <div>
+                        <h1 className="font-bold">
+                            Why Choose Our{' '}
+                            {specialty === 'organTransplant'
+                                ? 'Transplant Center'
+                                : specialty === 'cosmeticSurgery'
+                                  ? 'Cosmetic Surgery Clinic'
+                                  : 'Healthcare Center'}
+                        </h1>
+                        <p className="mt-4 text-lg text-text-light">
+                            {content.description}
+                        </p>
+                        <div className="mt-8">
+                            <ul className="space-y-4">
+                                {content?.features?.map((feature, index) => (
+                                    <li
+                                        key={index}
+                                        className="flex items-start"
+                                    >
+                                        <div className="flex-shrink-0">
+                                            <svg
+                                                className="h-6 w-6 text-primary"
+                                                fill="currentColor"
+                                                viewBox="0 0 20 20"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
+                                        </div>
+                                        <p className="ml-3 text-base text-text">
+                                            {feature}
+                                        </p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="mt-10 lg:mt-0">
+                        <div className="aspect-w-5 aspect-h-3 rounded-lg overflow-hidden shadow-lg">
+                            <img
+                                className="object-cover"
+                                src={content.imageSrc}
+                                alt={`${specialty || 'default'} healthcare facility`}
+                            />
+                        </div>
+                    </div>
                 </div>
 
-                {/* Info grid */}
-                <div className="grid grid-cols-1 xs:grid-cols-2 gap-1">
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        <span className="text-gray-600 text-sm">Location: </span>
-                        <span className="text-primary text-sm">{`${hcfData?.address?.city ? `${hcfData?.address?.city}, ` : ''}${hcfData?.address?.country ? `${hcfData?.address?.country}, ` : ''}`}</span>
-                    </div>
+                {/* Cards Section */}
+                <div className="mt-16" id='services'>
+                    <h1 className=" font-bold mb-8">Our Services</h1>
+                    <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        {/* Card 1 */}
+                        <div className="bg-card-bg border border-card-border rounded-lg shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
+                            <div className="p-6">
+                                <div className="bg-primary-subtle inline-flex p-3 rounded-md mb-4">
+                                    <svg
+                                        className="h-6 w-6 text-primary"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl font-semibold">
+                                    {specialty === 'organTransplant'
+                                        ? 'Heart Transplantation'
+                                        : specialty === 'cosmeticSurgery'
+                                          ? 'Facial Rejuvenation'
+                                          : 'Cardiology Services'}
+                                </h3>
+                                <p className="mt-3 text-text-light">
+                                    {specialty === 'organTransplant'
+                                        ? 'Advanced heart transplant procedures for end-stage heart failure patients.'
+                                        : specialty === 'cosmeticSurgery'
+                                          ? 'Comprehensive facial procedures to restore youthful appearance and confidence.'
+                                          : 'Comprehensive cardiac care including diagnostic testing and interventional procedures.'}
+                                </p>
+                                <a
+                                    href="#"
+                                    className="mt-4 inline-flex items-center text-primary hover:text-primary-deep"
+                                >
+                                    Learn more
+                                    <svg
+                                        className="ml-2 h-5 w-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
 
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                        </svg>
-                        <span className="text-gray-600 text-sm">Age: </span>
-                        <span className="text-sm">{age} years</span>
-                    </div>
+                        {/* Card 2 */}
+                        <div className="bg-card-bg border border-card-border rounded-lg shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
+                            <div className="p-6">
+                                <div className="bg-primary-subtle inline-flex p-3 rounded-md mb-4">
+                                    <svg
+                                        className="h-6 w-6 text-primary"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M7 2a1 1 0 00-.707 1.707L7 4.414v3.758a1 1 0 01-.293.707l-4 4C.817 14.769 2.156 18 4.828 18h10.343c2.673 0 4.012-3.231 2.122-5.121l-4-4A1 1 0 0113 8.172V4.414l.707-.707A1 1 0 0013 2H7zm2 6.172V4h2v4.172a3 3 0 00.879 2.12l1.168 1.168a4 4 0 01-8.092.67L4 10.172a3 3 0 00.879-2.12L6.047 6.172z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl font-semibold text-heading">
+                                    {specialty === 'organTransplant'
+                                        ? 'Kidney Transplantation'
+                                        : specialty === 'cosmeticSurgery'
+                                          ? 'Body Contouring'
+                                          : 'Diagnostic Imaging'}
+                                </h3>
+                                <p className="mt-3 text-text-light">
+                                    {specialty === 'organTransplant'
+                                        ? 'Innovative kidney transplant solutions for patients with renal failure.'
+                                        : specialty === 'cosmeticSurgery'
+                                          ? 'Sculpt and refine your body with our advanced contouring procedures.'
+                                          : 'Comprehensive imaging services using state-of-the-art technology for accurate diagnosis.'}
+                                </p>
+                                <a
+                                    href="#"
+                                    className="mt-4 inline-flex items-center text-primary hover:text-primary-deep"
+                                >
+                                    Learn more
+                                    <svg
+                                        className="ml-2 h-5 w-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
 
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
-                        </svg>
-                        <span className="text-gray-600 text-sm">Language: </span>
-                        <span className="text-sm">{hcfData?.languages?.length ? hcfData?.languages.map((data) => ` ${data},`) : ''}</span>
+                        {/* Card 3 */}
+                        <div className="bg-card-bg border border-card-border rounded-lg shadow-sm hover:shadow-md transition duration-300 overflow-hidden">
+                            <div className="p-6">
+                                <div className="bg-primary-subtle inline-flex p-3 rounded-md mb-4">
+                                    <svg
+                                        className="h-6 w-6 text-primary"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </div>
+                                <h3 className="text-xl font-semibold text-heading">
+                                    {specialty === 'organTransplant'
+                                        ? 'Transplant Evaluation'
+                                        : specialty === 'cosmeticSurgery'
+                                          ? 'Non-Surgical Treatments'
+                                          : 'Preventive Medicine'}
+                                </h3>
+                                <p className="mt-3 text-text-light">
+                                    {specialty === 'organTransplant'
+                                        ? 'Comprehensive evaluation process to determine transplant candidacy and improve outcomes.'
+                                        : specialty === 'cosmeticSurgery'
+                                          ? 'Minimally invasive procedures for facial rejuvenation with little to no downtime.'
+                                          : 'Personalized preventive care programs to maintain health and prevent disease.'}
+                                </p>
+                                <a
+                                    href="#"
+                                    className="mt-4 inline-flex items-center text-primary hover:text-primary-deep"
+                                >
+                                    Learn more
+                                    <svg
+                                        className="ml-2 h-5 w-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                    >
+                                        <path
+                                            fillRule="evenodd"
+                                            d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+                                            clipRule="evenodd"
+                                        />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <span className="text-gray-600 text-sm">Gender: </span>
-                        <span className="text-primary text-sm capitalize">{hcfData?.gender || 'N/A'}</span>
+                {/* CTA Section */}
+                <div className="mt-16 bg-primary rounded-lg shadow-sm overflow-hidden">
+                    <div className="px-6 py-12 sm:px-12 lg:flex lg:items-center lg:py-16">
+                        <div className="lg:w-0 lg:flex-1">
+                            <h2 className="tracking-tight text-white">
+                                Ready to{' '}
+                                {specialty === 'organTransplant'
+                                    ? 'learn more about our transplant programs'
+                                    : specialty === 'cosmeticSurgery'
+                                      ? 'transform your appearance'
+                                      : 'take the next step for your health'}
+                                ?
+                            </h2>
+                            <p className="mt-4 max-w-3xl text-lg text-text text-white">
+                                Our team of specialists is here to provide
+                                personalized care and answer all your questions.
+                            </p>
+                        </div>
+                        <div className="mt-8 lg:mt-0 lg:ml-8">
+                            <button className="button-gradient text-white font-medium py-3 px-6 rounded-md shadow-md hover:shadow-lg transition duration-300">
+                                Contact Us Today
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
+
+export default Hero

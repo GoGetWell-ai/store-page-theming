@@ -27,7 +27,7 @@ const AuthLayout = ({ children, path }: AuthLayoutProps) => {
     console.log('here is the path of auth', path)
     const Layout = useMemo(() => {
         return layouts[path?.meta?.layout === 'blank' ? 'blank' : currentLayoutType]
-    }, [])
+    }, [path?.meta?.layout])
 
     return <Layout>{children}</Layout>
 }

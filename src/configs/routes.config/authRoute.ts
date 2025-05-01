@@ -33,8 +33,9 @@ const authRoute: Routes = [
         authority: [],
         meta: {
             layout: 'blank',
-        }
+        },
     },
+  
     {
         key: `chatBotId`,
         path: '/chat-bot',

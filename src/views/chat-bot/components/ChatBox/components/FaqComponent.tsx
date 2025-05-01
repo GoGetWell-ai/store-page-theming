@@ -21,7 +21,7 @@ const RelatedQuestionsComponent: React.FC<RelatedQuestionsComponentProps> = ({ q
   };
 
   return (
-    <div className="bg-white text-gray-900 p-6 font-sans">
+    <div className="bg-white text-gray-900 p-6 font-body">
       <div className="w-full mx-auto">
         <div className="flex items-center mb-3">
           <h2 className="text-xl font-semibold text-gray-800">Related</h2>
