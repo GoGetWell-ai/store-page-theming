@@ -5,6 +5,7 @@ import { AuthProvider } from '@/auth'
 import Views from '@/views'
 import appConfig from './configs/app.config'
 import './locales'
+import MenuBar from '@/components/shared/MenuBar'
 
 if (appConfig.enableMock) {
     import('./mock')
@@ -15,6 +16,7 @@ function App() {
         <Theme>
             <BrowserRouter>
                 <AuthProvider>
+                    <MenuBar/>
                     <Layout>
                         <Views />
                     </Layout>

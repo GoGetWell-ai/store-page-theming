@@ -1,7 +1,7 @@
 import { themeConfig } from '@/configs/theme.config'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import type { Theme, LayoutType, Direction } from '@/@types/theme'
+import type { Theme, LayoutType, Direction, Medicaltheme } from '@/@types/theme'
 
 type ThemeState = Theme
 
@@ -13,6 +13,7 @@ type ThemeAction = {
     setPanelExpand: (payload: boolean) => void
     setLayout: (payload: LayoutType) => void
     setPreviousLayout: (payload: LayoutType | '') => void
+    setTheme: (payload: Medicaltheme) => void
 }
 
 const inititialThemeState = themeConfig
@@ -37,6 +38,7 @@ export const useThemeStore = create<ThemeState & ThemeAction>()(
                 set((state) => ({
                     layout: { ...state.layout, previousType: payload },
                 })),
+                setTheme: (payload) => set(()=> ({ specialty: payload })),
         }),
         {
             name: 'theme',

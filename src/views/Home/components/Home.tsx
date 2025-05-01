@@ -1,22 +1,45 @@
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore';
 import HCFHeader from '@/components/shared/HCFHeader';
+import { useThemeStore } from '@/store/themeStore';
 
 // Define the structure of the expected props
 
 const Hero: React.FC = () => {
+    const { specialty } = useThemeStore();
+
+    // Different hero content based on theme
+    const heroContent = {
+        default: {
+            title: "We Handle Everything, You Focus on Healing",
+            subtitle: "Upload Your Medical Reports to Explore the Best and Most Cost-Effective Treatments in Your Language",
+            gradientClass: "from-purple-400 to-pink-400"
+        },
+        organTransplant: {
+            title: "Don't wait for a miracle, be a miracle.",
+            subtitle: "Expert Organ Transplant Specialists Ready to Guide Your Journey to Recovery",
+            gradientClass: "from-green-500 to-emerald-400"
+        },
+        cosmeticSurgery: {
+            title: "Your Best Version, Embrace Your Unique Beauty.",
+            subtitle: "Premium Cosmetic Surgery Solutions Tailored to Your Aesthetic Goals",
+            gradientClass: "from-pink-500 to-rose-400"
+        }
+    };
+
+    const content = heroContent[specialty] || heroContent.default;
 
     return (
         <div className='relative'>
             <HCFHeader leftSide={
                 <>
                     <h1 className="text-3xl lg:text-5xl font-bold text-white mb-6 leading-tight text-center">
-                        We Handle Everything,{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                            You Focus on Healing
+                        {content.title.split(',')[0]},{" "}
+                        <span className={`text-transparent bg-clip-text bg-gradient-to-r ${content.gradientClass}`}>
+                            {content.title.split(',')[1] || ''}
                         </span>
                     </h1>
                     <p className="text-[15px] sm:text-[17px] text-gray-300 mx-auto mt-2 sm:mt-6 leading-shorter md:leading-normal text-center">
-                        Upload Your Medical Reports to Explore the Best and Most Cost-Effective Treatments in Your Language
+                        {content.subtitle}
                     </p>
                 </>
             } />
@@ -32,8 +55,6 @@ const Hero: React.FC = () => {
 };
 
 export default Hero;
-
-
 
 const calculateAge = (dateOfBirth: string) => {
     const birthDate = new Date(dateOfBirth);
@@ -52,11 +73,19 @@ const calculateAge = (dateOfBirth: string) => {
 
 const ProfileCard = () => {
     const { hcfData } = useAuthStore();
+    const { specialty } = useThemeStore();
 
-    const age = calculateAge(hcfData?.dob)
+    const age = calculateAge(hcfData?.dob);
+
+    // Different card styles based on theme
+    const cardStyle = specialty === 'cosmeticSurgery' 
+        ? 'bg-white rounded-xl md:shadow-lg p-4 md:p-6 border border-pink-200' 
+        : specialty === 'organTransplant'
+        ? 'bg-white rounded-xl md:shadow-lg p-4 md:p-6 border-l-4 border-l-green-500'
+        : 'bg-white rounded-xl md:shadow-lg p-4 md:p-6';
 
     return (
-        <div className="w-full mx-auto bg-white rounded-xl md:shadow-lg p-4 md:p-6">
+        <div className={cardStyle}>
             <div className="flex flex-col gap-1">
                 {/* Header with title and button */}
                 <div className="flex justify-between items-center">
