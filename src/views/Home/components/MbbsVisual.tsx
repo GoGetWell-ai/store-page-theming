@@ -53,7 +53,7 @@ const HeroSection = () => {
                                 <div className="absolute inset-0 bg-green-500/10 rounded-full filter blur-3xl animate-blob"></div>
                                 <div className="relative z-10 animate-float-slow">
                                     <img
-                                        src={organthemeplant}
+                                    src="https://placehold.co/600x400/16a34a/FFFFFF?text=Organ+Transplant" 
                                         alt="Organ Transplant Specialists"
                                         className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
                                     />

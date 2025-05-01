@@ -220,7 +220,7 @@ const ProfileCard = () => {
                         </div>
                         <div>
                             <p className="text-text-light text-sm">Medical Professional</p>
-                            <p className="text-primary font-medium">{'specialty' in hcfData ? hcfData.specialty : 'General Medicine'}</p>
+                            <p className="text-primary font-medium">{hcfData && 'specialty' in hcfData ? (hcfData.specialty as string) : 'General Medicine'}</p>
                         </div>
                     </div>
                     
