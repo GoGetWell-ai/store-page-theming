@@ -1,0 +1,87 @@
+
+:root,
+.theme-default {
+  --primary: #2563eb;
+  --primary-deep: #1d4ed8;
+  --primary-mild: #e0e7ff;
+  --font-family: 'Inter', sans-serif;
+}
+
+
+.theme-theme1 {
+  --primary: #065f46;
+  --primary-deep: #064e3b;
+  --primary-mild: #d1fae5;
+  --font-family: 'Roboto Slab', serif;
+}
+
+
+.theme-theme2 {
+  --primary: #be185d;
+  --primary-deep: #9d174d;
+  --primary-mild: #fce7f3;
+  --font-family: 'Playfair Display', serif;
+}
+
+
+.theme1-nav {
+    background-color: #166534; /* Tailwind green-800 */
+    color: white;
+  }
+  
+  .theme2-nav {
+    background-color: #bd2e62; /* Tailwind pink-700 */
+    color: white;
+  }
+
+
+  /* Theme: Organ Transplant (theme1) */
+body.theme-theme1 .btn {
+    background-color: #0f766e; /* teal-700 */
+    color: white;
+  }
+  body.theme-theme1 .btn:hover {
+    background-color: #115e59; /* teal-800 */
+  }
+  body.theme-theme1 .card {
+    background-color: white;
+    border: 1px solid #0f766e;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  body.theme-theme1 .form-input {
+    border-color: #0f766e;
+  }
+  
+  
+  body.theme-theme2 .btn {
+    background-color: #db2777; 
+    color: white;
+  }
+  body.theme-theme2 .btn:hover {
+    background-color: #be185d; 
+  }
+  body.theme-theme2 .card {
+    background-color: white;
+    border: 1px solid #db2777;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  }
+  body.theme-theme2 .form-input {
+    border-color: #db2777;
+  }
+  
+  
+  body.theme-default .btn {
+    background-color: var(--primary);
+    color: white;
+  }
+  body.theme-default .btn:hover {
+    background-color: var(--primary-deep);
+  }
+  body.theme-default .card {
+    background-color: white;
+    border: 1px solid #d1d5db; 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  }
+  body.theme-default .form-input {
+    border-color: #d1d5db;
+  }
