@@ -22,7 +22,8 @@ const AppRoute = <T extends Record<string, unknown>>({
         (state) => state,
     )
 
-    const { type: layoutType, previousType: previousLayout } = layout
+    const layoutType = layout?.type || ''
+    const previousLayout = layout?.previousType || ''
 
     const setCurrentRouteKey = useRouteKeyStore(
         (state) => state.setCurrentRouteKey,
@@ -32,16 +33,34 @@ const AppRoute = <T extends Record<string, unknown>>({
         setCurrentRouteKey(routeKey)
 
         if (props.layout && props.layout !== layoutType) {
-            setPreviousLayout(layoutType)
-            setLayout(props.layout)
+            if (setPreviousLayout) {
+                setPreviousLayout(layoutType)
+            } else {
+                console.error('setPreviousLayout is not defined')
+            }
+
+            if (setLayout) {
+                setLayout(props.layout)
+            } else {
+                console.error('setLayout is not defined')
+            }
         }
 
         if (!props.layout && previousLayout && layoutType !== previousLayout) {
-            setLayout(previousLayout)
-            setPreviousLayout('')
+            if (setLayout) {
+                setLayout(previousLayout)
+            } else {
+                console.error('setLayout is not defined')
+            }
+
+            if (setPreviousLayout) {
+                setPreviousLayout('')
+            } else {
+                console.error('setPreviousLayout is not defined')
+            }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.layout, routeKey])
+    }, [props.layout, routeKey, layoutType, previousLayout, setPreviousLayout, setLayout])
 
     useEffect(() => {
         handleLayoutChange()
