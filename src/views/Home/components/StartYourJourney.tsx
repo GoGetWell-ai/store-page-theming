@@ -287,9 +287,9 @@ const StartYourJourney = () => {
                 </div>
             </div>
 
-            <div className="text-center mb-8 mt-28 stagger-fade-in">
+            <div className="text-center mb-8 mt-12 stagger-fade-in">
                 <h2
-                    className={`text-3xl sm:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.gradient}`}
+                    className={`text-3xl sm:text-4xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.gradient}`}
                 >
                     Start Your Journey
                 </h2>
@@ -299,10 +299,10 @@ const StartYourJourney = () => {
                 </p>
             </div>
 
-            <div className="relative py-4 mt-5">
-                {/* Progress Line */}
-                <div className="absolute top-[calc(55%)] left-[7.5%] w-[85%] hidden md:block z-[2]">
-                    <div className="h-1 bg-gray-200 rounded-full relative">
+            <div className="relative py-12 mt-8">
+                {/* Progress Line - positioned lower to avoid text overlap */}
+                <div className="absolute top-[calc(75%)] left-[9%] w-[82%] hidden md:block z-[1]">
+                    <div className="h-1.5 bg-gray-200 rounded-full relative">
                         <div
                             className={`absolute top-0 left-0 h-full ${themeClasses.progressBar} rounded-full transition-all duration-1000 ease-in-out`}
                             style={{
@@ -312,43 +312,52 @@ const StartYourJourney = () => {
                     </div>
                 </div>
 
-                <div className="relative flex flex-col md:flex-row justify-between gap-y-4 md:gap-0 z-[3]">
+                {/* Journey steps with proper spacing */}
+                <div className="relative flex flex-col md:flex-row justify-between gap-y-6 md:gap-x-2 z-[3]">
                     {steps.map((step, index) => (
                         <div
                             key={index}
-                            className={`flex flex-col items-center w-full md:w-40 transition-all duration-500
-                ${index === activeStep ? 'scale-110' : 'scale-100'}
+                            className={`flex flex-col items-center md:px-2 w-full transition-all duration-500
+                ${index === activeStep ? 'scale-105' : 'scale-100'}
               `}
                         >
                             <div
-                                className={`w-16 h-16 rounded-full flex items-center justify-center mb-3 relative z-[2]
-                  transition-all duration-300 transform shadow-md
+                                className={`w-16 h-16 rounded-full flex items-center justify-center mb-5 relative z-[2]
+                  transition-all duration-300 transform shadow-lg border
                   ${
                       index === activeStep
-                          ? `${themeClasses.activeStepBg} text-white shadow-lg scale-110`
-                          : `${themeClasses.inactiveStepBg} ${themeClasses.primary} hover:${themeClasses.hoverStepBg}`
+                          ? `${themeClasses.activeStepBg} text-white shadow-xl border-white`
+                          : `${themeClasses.inactiveStepBg} ${themeClasses.primary} hover:${themeClasses.hoverStepBg} border-gray-100`
                   }
                 `}
                             >
                                 {step.icon}
                             </div>
-                            <p
-                                className={`text-sm font-medium text-center transition-colors duration-300
-                ${index === activeStep ? themeClasses.primary : 'text-gray-600'}
-              `}
-                            >
-                                {step.text}
-                            </p>
-                            <p
-                                className={`text-xs text-center mt-1 transition-all duration-300
-                ${index === activeStep ? 'opacity-100 scale-100' : 'opacity-0 scale-0 h-0'}
-              `}
-                            >
-                                {step.description}
-                            </p>
+                            {/* Text moved far enough from the progress line */}
+                            <div className="h-8 mb-8">
+                                <p
+                                    className={`text-sm font-medium text-center transition-colors duration-300
+                    ${index === activeStep ? themeClasses.primary : 'text-gray-600'}
+                  `}
+                                >
+                                    {step.text}
+                                </p>
+                                {index === activeStep && (
+                                    <p className="text-xs text-center mt-1 text-gray-500 transition-all duration-300 opacity-100 scale-100">
+                                        {step.description}
+                                    </p>
+                                )}
+                            </div>
                         </div>
                     ))}
                 </div>
+            </div>
+            
+            <div className="text-center mt-16 mb-8">
+                <h2 className={`text-2xl sm:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.gradient}`}>
+                    Explore more about Treatments
+                </h2>
+                <div className="w-20 h-1 mx-auto rounded-full bg-gradient-to-r from-purple-400 to-blue-500"></div>
             </div>
         </div>
     )
