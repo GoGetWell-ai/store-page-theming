@@ -1,0 +1,40 @@
+:root {
+    /* Global Theme Variables (default values) */
+    --direction: ltr;
+    --mode: light;
+    --panel-expand: false;
+    --control-size: md;
+    --layout-type: collapsibleSide;
+    --side-nav-collapse: false;
+  
+    /* Specialty Theme Variables (default values) */
+    --primary: #6B48FF;
+    --secondary: #FF48B0;
+    --background: #FFFFFF;
+    --text: #333333;
+    --accent: #00C4FF;
+    --font-family: 'Inter, sans-serif';
+    --font-size-h1: 2.25rem;
+    --font-size-h2: 1.5rem;
+    --font-size-body: 1rem;
+    --font-weight-bold: 700;
+    --font-weight-regular: 400;
+    --button-border-radius: 0.375rem;
+    --button-padding: 0.5rem 1rem;
+  }
+  
+  /* Theme-specific overrides */
+  .theme-default .theme1-nav,
+  .theme-default .theme2-nav {
+    /* Reset any theme-specific nav styles */
+  }
+  
+  .theme-theme1 .theme1-nav {
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--accent);
+  }
+  
+  .theme-theme2 .theme2-nav {
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--secondary);
+  }
