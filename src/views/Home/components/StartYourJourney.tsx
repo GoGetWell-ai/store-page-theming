@@ -7,7 +7,6 @@ import { FiFileText } from 'react-icons/fi';
 import UploadMedicalReports from '@/components/shared/UploadMedicalReports';
 import { treatmentTypesData } from '../data/treatmentTypesData';
 import { useNavigate } from 'react-router-dom';
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore';
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore';
 
 const StartYourJourney = () => {
@@ -20,7 +19,6 @@ const StartYourJourney = () => {
   const [searchResults, setSearchResults] = useState([]);
   const wrapperRef = useRef(null);
   const navigate = useNavigate();
-  const { setPushedMessages } = usGenerativeChatStore()
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -106,8 +104,6 @@ const StartYourJourney = () => {
   const handleSelectTreatment = (treatment) => {
     setSearchTerm(treatment.subtype);
     setIsInputFocused(false);
-    setPushedMessages(treatment.subtype)
-    navigate(`/chat-bot`)
     // You can add additional logic here, like navigating to a treatment page
   };
 

@@ -1,9 +1,7 @@
 import { Alert, Button, Dialog, Upload } from '@/components/ui';
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore';
 import { AxiosError } from 'axios';
 import { ReactNode, useEffect, useState } from 'react';
 import { MdError } from 'react-icons/md';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 /**
  * Props interface for the UploadMedicalReports component
@@ -47,9 +45,6 @@ const UploadMedicalReports: React.FC<UploadMedicalReportsProps> = ({ setPopupSta
 	const [fileUrls, setFileUrl] = useState<string[]>([]);
 	const [filesUpload, setFilesUpload] = useState<File[]>([]);
 	const [successMessage, setSuccessMessage] = useState('');
-	const { setFile, setUploadedFileUrls } = usGenerativeChatStore();
-	const [searchParams] = useSearchParams()
-	const navigate = useNavigate();
 
 	/**
 	 * Validates and processes files before upload
@@ -129,11 +124,7 @@ const UploadMedicalReports: React.FC<UploadMedicalReportsProps> = ({ setPopupSta
 				if (setDeleteConfirmationOpen) {
 					setDeleteConfirmationOpen(false);
 				}
-				setFile(filesUpload);
-				if (fileUrls?.length) {
-					setUploadedFileUrls(fileUrls);
-				}
-				navigate(`/chat-bot`);
+				
 				onDialogClose();
 			} else {
 				setSuccessMessage('Please upload at least one file');
@@ -160,8 +151,8 @@ const UploadMedicalReports: React.FC<UploadMedicalReportsProps> = ({ setPopupSta
 		<div className=''>
 			<Dialog
 				isOpen={dialogIsOpen}
-				onClose={onDialogClose}
 				closable={true}
+				onClose={onDialogClose}
 			>
 				<h4 className='text-center mb-5'>Upload Medical Reports</h4>
 				{
@@ -169,12 +160,12 @@ const UploadMedicalReports: React.FC<UploadMedicalReportsProps> = ({ setPopupSta
 						{successMessage}
 					</Alert> : <div></div>
 				}
-				<Upload onFileRemove={(files: File[], fileIndex: number) => {
+				<Upload beforeUpload={beforeUploadFile} draggable={true} className='w-full' onFileRemove={(files: File[], fileIndex: number) => {
 					const list = [...fileUrls];
 					list.splice(fileIndex, 1);
 					setFileUrl(list);
-				}} beforeUpload={beforeUploadFile} draggable={true} className='w-full' />
-				<Button onClick={handleMedicalReports} loading={buttonLoader} variant='solid' className='w-full !rounded-md'>Upload</Button>
+				}} />
+				<Button loading={buttonLoader} variant='solid' className='w-full !rounded-md' onClick={handleMedicalReports}>Upload</Button>
 			</Dialog>
 		</div>
 	);

@@ -35,16 +35,6 @@ const authRoute: Routes = [
             layout: 'blank',
         },
     },
-  
-    {
-        key: `chatBotId`,
-        path: '/chat-bot',
-        component: lazy(() => import('@/views/chat-bot')),
-        authority: [],
-        meta: {
-            layout: 'topBarClassic',
-        },
-    },
 ]
 
 export default authRoute

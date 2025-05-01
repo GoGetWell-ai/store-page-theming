@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { BiChevronDown, BiChevronUp } from 'react-icons/bi'
 import { treatmentTypesData } from '../data/treatmentTypesData'
-import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore'
 import { useNavigate } from 'react-router-dom'
 import {
     FaHeartPulse,
@@ -99,7 +98,6 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
     rowIndex,
 }) => {
     const [className, setClassNames] = useState<string>('')
-    const { setPushedMessages } = usGenerativeChatStore()
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -124,8 +122,6 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
     }, [])
 
     const handleClick = (line: string) => {
-        setPushedMessages(line)
-        navigate(`/chat-bot`)
     }
 
     return (

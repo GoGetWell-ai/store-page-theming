@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui'
 import React, { ReactNode, useEffect, useState } from 'react'
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { useLocation, useSearchParams } from 'react-router-dom'
 import UploadMedicalReports from '../UploadMedicalReports'
 
 interface HCFHeaderProps {
@@ -10,7 +10,6 @@ interface HCFHeaderProps {
 const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
     const [uploadReport, setUploadReport] = useState(false)
     const [searchParams] = useSearchParams()
-    const navigate = useNavigate()
     const { pathname } = useLocation()
 
     useEffect(() => {
@@ -33,15 +32,6 @@ const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
                             className="min-w-[150px] rounded-[5px] bg-primary border-0 text-white hover:text-white"
                         >
                             Upload now
-                        </Button>
-
-                        <Button
-                            type="button"
-                            className="min-w-[150px] bg-transparent border-[2px] border-white rounded-[5px] hover:bg-primary hover:border-primary transition-all duration-300"
-                            variant="solid"
-                            onClick={() => navigate('/chat-bot')}
-                        >
-                            Get Started
                         </Button>
 
                         {uploadReport && (
