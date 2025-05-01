@@ -1,0 +1,6 @@
+/* Custom styles for date-picker components */
+@layer utilities {
+    .date-picker {
+      @apply border border-gray-300 p-2 rounded focus:ring-1 focus:ring-primary focus:border-primary;
+    }
+  }

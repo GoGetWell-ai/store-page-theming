@@ -1,0 +1,45 @@
+/* Custom styles for input components */
+@layer utilities {
+    .bg-error-subtle {
+      background-color: #fee2e2;
+    }
+    .ring-error {
+      --tw-ring-color: #ef4444;
+    }
+    .border-error {
+      border-color: #ef4444;
+    }
+    .focus\:ring-1 {
+      --tw-ring-offset-width: 0px;
+      --tw-ring-width: 1px;
+      --tw-ring-opacity: 1;
+      --tw-ring-color: rgba(59, 130, 246, 0.5);
+    }
+    .focus\:ring-error {
+      --tw-ring-color: #ef4444;
+    }
+    .focus\:border-error {
+      border-color: #ef4444;
+    }
+    .focus\:bg-transparent {
+      background-color: transparent;
+    }
+    .focus-within\:ring-1 {
+      --tw-ring-offset-width: 0px;
+      --tw-ring-width: 1px;
+      --tw-ring-opacity: 1;
+      --tw-ring-color: rgba(59, 130, 246, 0.5);
+    }
+    .focus-within\:ring-error {
+      --tw-ring-color: #ef4444;
+    }
+    .focus-within\:border-error {
+      border-color: #ef4444;
+    }
+    .focus-within\:bg-transparent {
+      background-color: transparent;
+    }
+    .input-invalid {
+      @apply focus:ring-1 focus:ring-error focus:border-error focus:bg-transparent bg-error-subtle focus-within:ring-1 focus-within:ring-error focus-within:border-error focus-within:bg-transparent;
+    }
+  }
