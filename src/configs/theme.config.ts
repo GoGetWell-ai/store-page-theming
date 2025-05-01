@@ -1,5 +1,11 @@
+import {
+    ControlSize,
+    Direction,
+    LayoutType,
+    Mode,
+    SpecialtyType,
+} from '@/@types/theme'
 import { THEME_ENUM } from '@/constants/theme.constant'
-import { Direction, Mode, ControlSize, LayoutType } from '@/@types/theme'
 
 export type ThemeConfig = {
     themeSchema: string
@@ -7,6 +13,7 @@ export type ThemeConfig = {
     mode: Mode
     panelExpand: boolean
     controlSize: ControlSize
+    specialty: SpecialtyType
     layout: {
         type: LayoutType
         sideNavCollapse: boolean
@@ -23,6 +30,7 @@ export const themeConfig: ThemeConfig = {
     mode: THEME_ENUM.MODE_LIGHT,
     panelExpand: false,
     controlSize: 'md',
+    specialty: 'default',
     layout: {
         type: THEME_ENUM.LAYOUT_COLLAPSIBLE_SIDE,
         sideNavCollapse: false,

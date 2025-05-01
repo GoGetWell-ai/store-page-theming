@@ -9,11 +9,14 @@ export type LayoutType =
     | 'framelessSide'
     | 'contentOverlay'
 
+export type SpecialtyType = 'default' | 'organ-transplant' | 'cosmetic-surgery'
+
 export type Theme = {
     themeSchema: string
     direction: Direction
     mode: Mode
     panelExpand: boolean
+    specialty: SpecialtyType
     layout: {
         type: LayoutType
         sideNavCollapse: boolean

@@ -1,12 +1,14 @@
-import authRoute from '@/configs/routes.config/authRoute'
 import { Routes } from '@/@types/routes'
-import { publicRoutes, protectedRoutes } from '@/configs/routes.config'
+import { protectedRoutes, publicRoutes } from '@/configs/routes.config'
+import authRoute from '@/configs/routes.config/authRoute'
+import { useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const useSubdomainNavigation = () => {
     // Get hostname and determine if it's a subdomain
     const hostname = window.location.hostname
     const { pathname } = useLocation()
+    const navigate = useNavigate()
 
     const hostParts = hostname.split('.')
     const subdomain = hostname.includes('localhost')
@@ -31,13 +33,21 @@ const useSubdomainNavigation = () => {
           subdomain !== 'dev' &&
           subdomain !== 'in'
 
-    const navigate = useNavigate()
+    // Use useEffect to handle navigation after render
+    useEffect(() => {
+        // Skip redirection for specific routes
+        const excludedPaths = ['/themes']
+        if (excludedPaths.includes(pathname)) {
+            return
+        }
 
-    const subdomainRoute = authRoute.find((route) => route.path === pathname)
-
-    if (subdomainRoute) {
-        navigate('/')
-    }
+        const subdomainRoute = authRoute.find(
+            (route) => route.path === pathname,
+        )
+        if (subdomainRoute) {
+            navigate('/')
+        }
+    }, [pathname, navigate])
 
     // Initialize routes
     let newPublicRoutes: Routes = publicRoutes
