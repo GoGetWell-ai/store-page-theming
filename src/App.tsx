@@ -5,6 +5,7 @@ import { AuthProvider } from '@/auth'
 import Views from '@/views'
 import appConfig from './configs/app.config'
 import './locales'
+import ThemeProvider from './components/template/ThemeProvider'
 
 if (appConfig.enableMock) {
     import('./mock')
@@ -15,9 +16,11 @@ function App() {
         <Theme>
             <BrowserRouter>
                 <AuthProvider>
-                    <Layout>
-                        <Views />
-                    </Layout>
+                    <ThemeProvider>
+                        <Layout>
+                            <Views />
+                        </Layout>
+                    </ThemeProvider>
                 </AuthProvider>
             </BrowserRouter>
         </Theme>

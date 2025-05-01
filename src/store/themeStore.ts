@@ -3,7 +3,9 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import type { Theme, LayoutType, Direction } from '@/@types/theme'
 
-type ThemeState = Theme
+type ThemeState = Theme & {
+    specialty: 'default' | 'theme1' | 'theme2'
+}
 
 type ThemeAction = {
     setSchema: (payload: string) => void
@@ -13,6 +15,7 @@ type ThemeAction = {
     setPanelExpand: (payload: boolean) => void
     setLayout: (payload: LayoutType) => void
     setPreviousLayout: (payload: LayoutType | '') => void
+    setSpecialty: (payload: ThemeState['specialty']) => void
 }
 
 const inititialThemeState = themeConfig
@@ -21,6 +24,7 @@ export const useThemeStore = create<ThemeState & ThemeAction>()(
     persist(
         (set) => ({
             ...inititialThemeState,
+            specialty: 'default',
             setSchema: (payload) => set(() => ({ themeSchema: payload })),
             setMode: (payload) => set(() => ({ mode: payload })),
             setSideNavCollapse: (payload) =>
@@ -37,6 +41,7 @@ export const useThemeStore = create<ThemeState & ThemeAction>()(
                 set((state) => ({
                     layout: { ...state.layout, previousType: payload },
                 })),
+            setSpecialty: (payload) => set(() => ({ specialty: payload })),
         }),
         {
             name: 'theme',
