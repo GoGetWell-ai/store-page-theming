@@ -8,7 +8,7 @@ export const publicRoutes: Routes = [
     {
         key: 'themes',
         path: '/themes',
-        component: lazy(() => import('@/views/Home/Themes')),
+        component: lazy(() => import('@/views/Home/themes')),
         authority: [],
         meta: {
             layout: 'default',
