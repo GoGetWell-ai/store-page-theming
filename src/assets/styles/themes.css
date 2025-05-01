@@ -1,0 +1,35 @@
+/* Default Theme */
+:root {
+    --primary: #4038d6;
+    --primary-deep: #312b92;
+    --primary-mild: #747fe1;
+    --primary-subtle: #c7d2fe;
+    --font-family: 'Inter', sans-serif;
+    --heading-font: 'Inter', sans-serif;
+    --body-font: 'Inter', sans-serif;
+    --hero-gradient: linear-gradient(to right, #4f46e5, #818cf8);
+  }
+  
+  /* Organ Transplant Theme */
+  .theme-organTransplant {
+    --primary: #39c129;
+    --primary-deep: #063c1b;
+    --primary-mild: #26c136;
+    --primary-subtle: #dcfce7;
+    --font-family: 'Montserrat', sans-serif;
+    --heading-font: 'Montserrat', sans-serif;
+    --body-font: 'Montserrat', sans-serif;
+    --hero-gradient: linear-gradient(to right, #16a34a, #4ade80);
+  }
+  
+  /* Cosmetic Surgery Theme */
+  .theme-cosmeticSurgery {
+    --primary: #de116d;
+    --primary-deep: #7a103a;
+    --primary-mild: #d16b9e;
+    --primary-subtle: #fbcfe8;
+    --font-family: 'Playfair Display', serif;
+    --heading-font: 'Playfair Display', serif;
+    --body-font: 'Inter', sans-serif;
+    --hero-gradient: linear-gradient(to right, #db2777, #f472b6);
+  }
