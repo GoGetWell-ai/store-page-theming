@@ -16,3 +16,15 @@
     --primary-mild: #f5d0fe;
   }
   
+  /* theme.css */
+:root.theme-default,
+:root.theme-theme1,
+:root.theme-theme2 {
+    --border-primary: var(--primary);
+}
+
+.card-border {
+    border-style: solid;
+    border-width: 2px;
+}
+

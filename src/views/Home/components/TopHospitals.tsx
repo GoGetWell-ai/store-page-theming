@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui';
 import { useNavigate } from 'react-router-dom';
-import { defaultHospitals } from '../data/treatmentTypesData'
+import { defaultHospitals } from '../data/treatmentTypesData';
 
-
-// Define the props type
 interface TopHospitalsProps {
-    hcfData: {
-        hospitals: any
-    }
+    hcfData?: {
+        hospitals?: any[];
+    };
 }
-
 
 const InfoRow = ({ label, value }: { label: string; value: string }) => (
     <div className="flex justify-between items-center">
@@ -19,28 +16,31 @@ const InfoRow = ({ label, value }: { label: string; value: string }) => (
     </div>
 );
 
-const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
+const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData = {} }) => {
     const navigate = useNavigate();
-    const [hospitals, setHospital] = useState<any>([]);
+    const [hospitals, setHospitals] = useState<any[]>(defaultHospitals.slice(0, 3)); // Initialize with defaults
 
     useEffect(() => {
         const callApi = async () => {
-            const data = hcfData.hospitals.slice(0, 3)
-            const limit = 3 - data?.length || 0;
             try {
-                const againData = [];
-                for (let i = data?.length; i < limit + 1; i++) {
-                    againData.push(defaultHospitals[i])
-                }
+                // Safely access hospitals array
+                const apiHospitals = hcfData?.hospitals || [];
+                const data = apiHospitals.slice(0, 3);
 
-                setHospital([...data, ...againData.splice(0, limit)])
+                // Fill remaining slots with default hospitals if needed
+                const remainingSlots = Math.max(0, 3 - data.length);
+                const fillHospitals = defaultHospitals.slice(0, remainingSlots);
+
+                setHospitals([...data, ...fillHospitals]);
             } catch (err) {
-                console.log('error', err);
+                console.error('Error fetching hospitals:', err);
+                // Fallback to default hospitals on error
+                setHospitals(defaultHospitals.slice(0, 3));
             }
-        }
+        };
 
         callApi();
-    }, [hcfData])
+    }, [hcfData]);
 
     return (
         <div className="w-full bg-gradient-to-b py-8">
@@ -50,11 +50,11 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                 </h1>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {hospitals.slice(0, 3).map((hospital) => (
+                    {hospitals.map((hospital) => (
                         <div
-                            key={hospital._id}
-                            onClick={() => navigate(`/hospitals-details/${hospital._id}`)}
-                            className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group  w-full flex flex-col justify-between h-full mx-auto"
+                            key={hospital._id || hospital.name}
+                            onClick={() => hospital._id && navigate(`/hospitals-details/${hospital._id}`)}
+                            className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer group w-full flex flex-col justify-between h-full mx-auto"
                         >
                             <div>
                                 <div className="relative h-48 overflow-hidden">
@@ -63,14 +63,14 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                                         alt={hospital.name}
                                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                                         onError={(e) => {
-                                            e.target.src = 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg'; // Fallback URL
+                                            (e.target as HTMLImageElement).src = 'https://media.bizj.us/view/img/10532525/hospital-generic-exterior*900x506x6100-3435-0-0.jpg';
                                         }}
                                     />
                                 </div>
 
                                 <div className="p-6">
                                     <h2 className="text-xl font-semibold text-gray-800 mb-4 line-clamp-2 h-[30px]">
-                                        {hospital.name}
+                                        {hospital.name || 'Hospital Name'}
                                     </h2>
 
                                     <div className="space-y-2 text-gray-600 text-sm">
@@ -87,17 +87,15 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
                                             value={`${hospital.city || 'N/A'}, ${hospital.country || 'N/A'}`}
                                         />
                                     </div>
-
                                 </div>
                             </div>
                             <div className="p-3">
                                 <Button
                                     block
-                                    className=""
                                     variant='solid'
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        navigate(`/hospitals-details/${hospital._id}`);
+                                        hospital._id && navigate(`/hospitals-details/${hospital._id}`);
                                     }}
                                 >
                                     More details
@@ -109,7 +107,7 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
 
                 <div className="mt-4 text-center">
                     <button
-                        onClick={() => navigate(`/hospitals`)}
+                        onClick={() => navigate('/hospitals')}
                         className="bg-white hover:bg-primary/5 text-primary border border-primary/20 px-8 py-3 rounded-lg font-medium transition-colors"
                     >
                         Load More
@@ -119,6 +117,5 @@ const TopHospitals: React.FC<TopHospitalsProps> = ({ hcfData }) => {
         </div>
     );
 };
-
 
 export default TopHospitals;

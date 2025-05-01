@@ -1,14 +1,17 @@
 // src/components/layouts/Layout.tsx
-import React from 'react';
-import MenuBar from '../shared/MenuBar'; // Make sure the path is correct
+import React from 'react'
+import MenuBar from '../shared/MenuBar'
 
-const Layout: React.FC = ({ children }) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     return (
-        <div>
-            <MenuBar /> {/* Make sure this is here */}
-            <div>{children}</div> {/* This will render the Views content */}
+        <div className="min-h-screen flex flex-col">
+            <MenuBar />
+            <main className="flex-grow p-4"> {/* Add proper padding */}
+                {children}
+            </main>
+            {/* Footer would go here if needed */}
         </div>
-    );
-};
+    )
+}
 
-export default Layout;
+export default Layout
