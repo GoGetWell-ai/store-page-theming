@@ -1,48 +1,54 @@
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore';
 import HCFHeader from '@/components/shared/HCFHeader';
 import { useThemeStore } from '@/store/themeStore';
+import DarkModeToggle from '@/components/shared/DarkModeToggle';
 
 const Hero: React.FC = () => {
-    const { specialty } = useThemeStore();
+    const { specialty, mode } = useThemeStore();
     
     return (
-        <div className='relative font-theme'>
-            <HCFHeader leftSide={
-                <>
-                    <h1 className="text-3xl lg:text-5xl font-heading font-heading text-hero-text mb-6 leading-tight text-center">
-                        We Handle Everything,{" "}
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-mild to-primary">
-                            You Focus on Healing
-                        </span>
-                    </h1>
-                    <p className="text-[15px] sm:text-[17px] text-hero-text mx-auto mt-2 sm:mt-6 leading-shorter md:leading-normal text-center opacity-90">
-                        Upload Your Medical Reports to Explore the Best and Most Cost-Effective Treatments in Your Language
-                    </p>
-                </>
-            } />
+        <div className='relative font-theme min-h-screen flex flex-col dark:bg-background'>
+            <div className="flex-grow flex flex-col relative">
+                {/* Dark mode toggle for all themes - positioned with higher z-index */}
+                <div className="fixed top-4 right-4 z-[100]">
+                    <DarkModeToggle />
+                </div>
+                <HCFHeader leftSide={
+                    <>
+                        <h1 className="text-3xl lg:text-5xl font-heading font-heading text-hero-text dark:text-text mb-6 leading-tight text-center">
+                            We Handle Everything,{" "}
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-mild to-primary">
+                                You Focus on Healing
+                            </span>
+                        </h1>
+                        <p className="text-[15px] sm:text-[17px] text-hero-text dark:text-text-light mx-auto mt-2 sm:mt-6 leading-shorter md:leading-normal text-center opacity-90">
+                            Upload Your Medical Reports to Explore the Best and Most Cost-Effective Treatments in Your Language
+                        </p>
+                    </>
+                } />
 
             {/* Only show profile card for default theme */}
             {specialty === 'default' && (
                 <>
                     {/* Desktop version - positioned below hero with proper spacing */}
-                    <div className='md:block hidden relative z-10 mx-auto max-w-4xl px-4 -mt-16'>
+                    <div className='md:block hidden relative z-10 mx-auto max-w-4xl px-4 sm:px-6 -mt-16'>
                         <ProfileCard />
                     </div>
                     {/* Mobile version - full width with proper spacing */}
-                    <div className='w-full md:hidden block mt-6 px-4'>
+                    <div className='w-full md:hidden block mt-6 px-4 sm:px-6'>
                         <ProfileCard />
                     </div>
                     {/* Add spacing after the card for content that follows */}
-                    <div className="md:pt-24 pt-8"></div>
+                    <div className="md:pt-24 pt-12"></div>
                 </>
             )}
             
             {/* For organ transplant theme, add a testimonials section */}
             {specialty === 'organ-transplant' && (
-                <div className="bg-green-50 py-16">
-                    <div className="max-w-7xl mx-auto px-4">
-                        <h2 className="text-3xl font-heading font-bold text-green-800 text-center mb-12">Patient Success Stories</h2>
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-green-50 dark:bg-green-900/20 py-16 w-full">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                        <h2 className="text-3xl font-heading font-bold text-green-800 dark:text-green-400 text-center mb-12">Patient Success Stories</h2>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
                             <TestimonialCard 
                                 name="Michael Johnson"
                                 procedure="Kidney Transplant"
@@ -68,12 +74,12 @@ const Hero: React.FC = () => {
             
             {/* For cosmetic surgery theme, add a before/after gallery */}
             {specialty === 'cosmetic-surgery' && (
-                <div className="bg-gradient-to-b from-pink-50 to-white py-16">
-                    <div className="max-w-7xl mx-auto px-4">
-                        <h2 className="text-3xl font-heading font-bold text-pink-800 text-center mb-4">Transformative Results</h2>
-                        <p className="text-pink-600 text-center max-w-2xl mx-auto mb-12">See the difference our expert procedures can make with these real patient transformations</p>
+                <div className="bg-gradient-to-b from-pink-50 to-white dark:from-pink-900/20 dark:to-background py-16 w-full">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                        <h2 className="text-3xl font-heading font-bold text-pink-800 dark:text-pink-400 text-center mb-4">Transformative Results</h2>
+                        <p className="text-pink-600 dark:text-pink-300 text-center max-w-2xl mx-auto mb-12">See the difference our expert procedures can make with these real patient transformations</p>
                         
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-8">
                             <BeforeAfterCard 
                                 procedure="Rhinoplasty"
                                 description="Refined nose profile with natural-looking results"
@@ -96,6 +102,7 @@ const Hero: React.FC = () => {
                     </div>
                 </div>
             )}
+            </div>
         </div>
     );
 };
@@ -105,15 +112,15 @@ export default Hero;
 // Testimonial Card for Organ Transplant theme
 const TestimonialCard = ({ name, procedure, quote, image }: { name: string, procedure: string, quote: string, image: string }) => {
     return (
-        <div className="bg-white rounded-lg shadow-lg p-6 border border-green-100">
+        <div className="bg-white dark:bg-card-bg rounded-lg shadow-lg p-6 border border-green-100 dark:border-green-900">
             <div className="flex items-center mb-4">
                 <img src={image} alt={name} className="w-16 h-16 rounded-full mr-4" />
                 <div>
-                    <h3 className="font-heading font-bold text-green-800">{name}</h3>
-                    <p className="text-green-600">{procedure}</p>
+                    <h3 className="font-heading font-bold text-green-800 dark:text-green-400">{name}</h3>
+                    <p className="text-green-600 dark:text-green-500">{procedure}</p>
                 </div>
             </div>
-            <p className="text-gray-700 italic">"{quote}"</p>
+            <p className="text-gray-700 dark:text-text-light italic">"{quote}"</p>
             <div className="mt-4 flex">
                 {[1, 2, 3, 4, 5].map((star) => (
                     <svg key={star} className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
@@ -129,7 +136,7 @@ const TestimonialCard = ({ name, procedure, quote, image }: { name: string, proc
 const BeforeAfterCard = ({ procedure, description, beforeImage, afterImage }: 
     { procedure: string, description: string, beforeImage: string, afterImage: string }) => {
     return (
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="bg-white dark:bg-card-bg rounded-lg shadow-lg overflow-hidden">
             <div className="relative">
                 <div className="grid grid-cols-2">
                     <div className="relative">
@@ -143,8 +150,8 @@ const BeforeAfterCard = ({ procedure, description, beforeImage, afterImage }:
                 </div>
             </div>
             <div className="p-4">
-                <h3 className="font-heading font-bold text-pink-800 text-lg">{procedure}</h3>
-                <p className="text-gray-600 text-sm">{description}</p>
+                <h3 className="font-heading font-bold text-pink-800 dark:text-pink-400 text-lg">{procedure}</h3>
+                <p className="text-gray-600 dark:text-text-light text-sm">{description}</p>
             </div>
         </div>
     );
@@ -188,11 +195,11 @@ const ProfileCard = () => {
     };
 
     return (
-        <div className="w-full mx-auto bg-card-bg rounded-card shadow-theme  p-4 md:p-6 border border-border">
+        <div className="w-full mx-auto bg-card-bg dark:bg-card-bg rounded-card shadow-theme p-4 md:p-6 border border-border dark:border-border">
             <div className="flex flex-col gap-3">
                 {/* Header with title and button */}
                 <div className="flex flex-wrap justify-between items-center gap-3">
-                    <h1 className="text-xl font-heading font-bold text-text">
+                    <h1 className="text-xl font-heading font-bold text-text dark:text-text">
                         {hcfData?.name || 'Medical Professional'}
                     </h1>
                     <a 
@@ -211,7 +218,7 @@ const ProfileCard = () => {
                 {/* Profile image section with multiple doctor images */}
                 <div className="flex flex-col mb-4">
                     <div className="flex items-center gap-4 mb-3">
-                        <div className="w-16 h-16 rounded-full bg-primary-subtle flex items-center justify-center overflow-hidden border-2 border-primary">
+                        <div className="w-16 h-16 rounded-full bg-primary-subtle dark:bg-primary-subtle/30 flex items-center justify-center overflow-hidden border-2 border-primary">
                             <img 
                                 src="https://placehold.co/200x200/2a85ff/FFFFFF?text=MD" 
                                 alt="Doctor Profile" 
@@ -219,14 +226,14 @@ const ProfileCard = () => {
                             />
                         </div>
                         <div>
-                            <p className="text-text-light text-sm">Medical Professional</p>
+                            <p className="text-text-light dark:text-text-light text-sm">Medical Professional</p>
                             <p className="text-primary font-medium">{hcfData && 'specialty' in hcfData ? (hcfData.specialty as string) : 'General Medicine'}</p>
                         </div>
                     </div>
                     
                     {/* Multiple doctor images */}
-                    <div className="bg-primary-subtle/20 p-3 rounded-lg">
-                        <p className="text-text-light text-sm mb-2">Our Medical Team</p>
+                    <div className="bg-primary-subtle/20 dark:bg-primary-subtle/10 p-3 rounded-lg">
+                        <p className="text-text-light dark:text-text-light text-sm mb-2">Our Medical Team</p>
                         <div className="flex -space-x-3 overflow-hidden">
                             {[
                                 "https://placehold.co/100x100/2a85ff/FFFFFF?text=Dr.A",
@@ -237,7 +244,7 @@ const ProfileCard = () => {
                             ].map((img, index) => (
                                 <div 
                                     key={index} 
-                                    className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+                                    className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-800 overflow-hidden"
                                 >
                                     <img 
                                         src={img} 
@@ -246,7 +253,7 @@ const ProfileCard = () => {
                                     />
                                 </div>
                             ))}
-                            <div className="w-10 h-10 rounded-full border-2 border-white bg-primary flex items-center justify-center text-white text-xs font-bold">
+                            <div className="w-10 h-10 rounded-full border-2 border-white dark:border-gray-800 bg-primary flex items-center justify-center text-white text-xs font-bold">
                                 +15
                             </div>
                         </div>
@@ -255,53 +262,53 @@ const ProfileCard = () => {
 
                 {/* Info grid */}
                 <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 mt-2">
-                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 dark:hover:bg-primary-subtle/10 transition-colors">
                         <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                         <div>
-                            <span className="text-text-light text-sm block">Location</span>
-                            <span className="text-text font-medium">{location()}</span>
+                            <span className="text-text-light dark:text-text-light text-sm block">Location</span>
+                            <span className="text-text dark:text-text font-medium">{location()}</span>
                         </div>
                     </div>
 
-                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 dark:hover:bg-primary-subtle/10 transition-colors">
                         <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         <div>
-                            <span className="text-text-light text-sm block">Age</span>
-                            <span className="text-text font-medium">{age} years</span>
+                            <span className="text-text-light dark:text-text-light text-sm block">Age</span>
+                            <span className="text-text dark:text-text font-medium">{age} years</span>
                         </div>
                     </div>
 
-                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 dark:hover:bg-primary-subtle/10 transition-colors">
                         <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                         </svg>
                         <div>
-                            <span className="text-text-light text-sm block">Languages</span>
-                            <span className="text-text font-medium">{languages()}</span>
+                            <span className="text-text-light dark:text-text-light text-sm block">Languages</span>
+                            <span className="text-text dark:text-text font-medium">{languages()}</span>
                         </div>
                     </div>
 
-                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 dark:hover:bg-primary-subtle/10 transition-colors">
                         <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
                         <div>
-                            <span className="text-text-light text-sm block">Gender</span>
-                            <span className="text-text font-medium capitalize">{hcfData?.gender || 'N/A'}</span>
+                            <span className="text-text-light dark:text-text-light text-sm block">Gender</span>
+                            <span className="text-text dark:text-text font-medium capitalize">{hcfData?.gender || 'N/A'}</span>
                         </div>
                     </div>
                 </div>
                 
                 {/* Experience and ratings - Added for better visual appeal */}
-                <div className="mt-2 pt-3 border-t border-border flex justify-between">
+                <div className="mt-2 pt-3 border-t border-border dark:border-border flex justify-between">
                     <div className="text-center">
                         <span className="text-primary font-bold text-lg">10+</span>
-                        <p className="text-text-light text-xs">Years Exp.</p>
+                        <p className="text-text-light dark:text-text-light text-xs">Years Exp.</p>
                     </div>
                     <div className="text-center">
                         <div className="flex items-center justify-center">
@@ -311,11 +318,11 @@ const ProfileCard = () => {
                                 </svg>
                             ))}
                         </div>
-                        <p className="text-text-light text-xs">4.9/5 Rating</p>
+                        <p className="text-text-light dark:text-text-light text-xs">4.9/5 Rating</p>
                     </div>
                     <div className="text-center">
                         <span className="text-primary font-bold text-lg">500+</span>
-                        <p className="text-text-light text-xs">Patients</p>
+                        <p className="text-text-light dark:text-text-light text-xs">Patients</p>
                     </div>
                 </div>
             </div>

@@ -168,96 +168,96 @@ const StartYourJourney = () => {
     switch (specialty) {
       case 'organ-transplant':
         return {
-          container: "py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 bg-green-50 rounded-3xl shadow-lg border border-green-100 relative overflow-hidden",
+          container: "py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 bg-green-50 dark:bg-green-900/20 rounded-3xl shadow-lg border border-green-100 dark:border-green-800/30 relative overflow-hidden",
           containerBg: (
             <>
-              <div className="absolute top-0 right-0 w-40 h-40 bg-green-200 rounded-full opacity-20 -mr-10 -mt-10 animate-blob"></div>
-              <div className="absolute bottom-0 left-0 w-60 h-60 bg-green-100 rounded-full opacity-30 -ml-20 -mb-20 animate-float-circle"></div>
-              <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-green-300 rounded-full opacity-20 animate-float-slow"></div>
-              <div className="absolute bottom-1/4 left-1/3 w-12 h-12 bg-green-400 rounded-full opacity-15 animate-float-delay"></div>
-              <div className="absolute top-1/2 left-10 w-8 h-8 bg-green-500 rounded-full opacity-10 animate-pulse-slow"></div>
-              <div className="absolute top-10 right-1/3 w-6 h-6 bg-green-600 rounded-full opacity-10 animate-float-right"></div>
-              <div className="hidden md:block absolute bottom-10 right-10 text-green-800 opacity-5 animate-float">
+              <div className="absolute top-0 right-0 w-40 h-40 bg-green-200 dark:bg-green-700/30 rounded-full opacity-20 -mr-10 -mt-10 animate-blob"></div>
+              <div className="absolute bottom-0 left-0 w-60 h-60 bg-green-100 dark:bg-green-800/30 rounded-full opacity-30 -ml-20 -mb-20 animate-float-circle"></div>
+              <div className="absolute top-1/3 right-1/4 w-16 h-16 bg-green-300 dark:bg-green-600/30 rounded-full opacity-20 animate-float-slow"></div>
+              <div className="absolute bottom-1/4 left-1/3 w-12 h-12 bg-green-400 dark:bg-green-500/30 rounded-full opacity-15 animate-float-delay"></div>
+              <div className="absolute top-1/2 left-10 w-8 h-8 bg-green-500 dark:bg-green-400/30 rounded-full opacity-10 animate-pulse-slow"></div>
+              <div className="absolute top-10 right-1/3 w-6 h-6 bg-green-600 dark:bg-green-300/30 rounded-full opacity-10 animate-float-right"></div>
+              <div className="hidden md:block absolute bottom-10 right-10 text-green-800 dark:text-green-400 opacity-5 animate-float">
                 <FaHeartPulse className="w-20 h-20" />
               </div>
-              <div className="hidden md:block absolute top-20 left-20 text-green-800 opacity-5 animate-float-delay">
+              <div className="hidden md:block absolute top-20 left-20 text-green-800 dark:text-green-400 opacity-5 animate-float-delay">
                 <FaLungs className="w-16 h-16" />
               </div>
-              <div className="hidden md:block absolute bottom-20 left-1/2 text-green-800 opacity-5 animate-float-slow">
+              <div className="hidden md:block absolute bottom-20 left-1/2 text-green-800 dark:text-green-400 opacity-5 animate-float-slow">
                 <FaHeartPulse className="w-24 h-24" />
               </div>
             </>
           ),
-          heading: "text-2xl sm:text-4xl font-bold text-green-800 mb-2 animate-fade-in",
-          subheading: "text-sm text-green-700 max-w-3xl mx-auto animate-slide-up",
-          searchBorder: "border-green-300 group-hover:border-green-600 focus:border-green-600",
-          searchButton: "hover:bg-green-600 hover:text-white",
-          progressLine: "bg-green-200",
-          progressFill: "bg-green-600",
-          stepActive: "bg-green-600 text-white shadow-xl shadow-green-200/50 scale-110",
-          stepInactive: "bg-green-100 text-green-700 hover:bg-green-200 shadow-md shadow-green-100/30",
-          textActive: "text-green-700 font-semibold",
-          uploadButton: "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-200/50",
-          resultItem: "hover:bg-green-50",
-          resultText: "text-green-800",
-          resultSubtext: "text-green-600",
+          heading: "text-2xl sm:text-4xl font-bold text-green-800 dark:text-green-400 mb-2 animate-fade-in",
+          subheading: "text-sm text-green-700 dark:text-green-300 max-w-3xl mx-auto animate-slide-up",
+          searchBorder: "border-green-300 group-hover:border-green-600 focus:border-green-600 dark:border-green-700 dark:group-hover:border-green-500 dark:focus:border-green-500",
+          searchButton: "hover:bg-green-600 hover:text-white dark:hover:bg-green-500",
+          progressLine: "bg-green-200 dark:bg-green-800/50",
+          progressFill: "bg-green-600 dark:bg-green-500",
+          stepActive: "bg-green-600 dark:bg-green-500 text-white shadow-xl shadow-green-200/50 dark:shadow-green-900/30 scale-110",
+          stepInactive: "bg-green-100 dark:bg-green-800/40 text-green-700 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-700/50 shadow-md shadow-green-100/30 dark:shadow-green-900/20",
+          textActive: "text-green-700 dark:text-green-400 font-semibold",
+          uploadButton: "bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white shadow-lg shadow-green-200/50 dark:shadow-green-900/30",
+          resultItem: "hover:bg-green-50 dark:hover:bg-green-800/30",
+          resultText: "text-green-800 dark:text-green-300",
+          resultSubtext: "text-green-600 dark:text-green-400",
           stepContainer: "relative z-10"
         };
       case 'cosmetic-surgery':
         return {
-          container: "py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 bg-gradient-to-r from-pink-50 to-purple-50 rounded-3xl shadow-lg border border-pink-100 relative overflow-hidden",
+          container: "py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-3xl shadow-lg border border-pink-100 dark:border-pink-800/30 relative overflow-hidden",
           containerBg: (
             <>
-              <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-pink-200 to-purple-200 rounded-full opacity-20 -mr-20 -mt-20 animate-blob"></div>
-              <div className="absolute bottom-0 left-0 w-60 h-60 bg-gradient-to-tr from-pink-100 to-purple-100 rounded-full opacity-30 -ml-20 -mb-20 animate-float-circle"></div>
-              <div className="absolute top-1/4 right-1/3 w-20 h-20 bg-pink-200 rounded-full opacity-20 animate-float-slow"></div>
-              <div className="absolute bottom-1/3 left-1/4 w-16 h-16 bg-purple-200 rounded-full opacity-15 animate-float-delay"></div>
-              <div className="absolute top-1/2 right-20 w-10 h-10 bg-pink-300 rounded-full opacity-20 animate-pulse-slow"></div>
-              <div className="absolute bottom-20 left-1/3 w-8 h-8 bg-purple-300 rounded-full opacity-15 animate-float-right"></div>
-              <div className="hidden md:block absolute top-20 right-20 text-pink-500 opacity-5 animate-float">
+              <div className="absolute top-0 right-0 w-80 h-80 bg-gradient-to-br from-pink-200 to-purple-200 dark:from-pink-700/30 dark:to-purple-700/30 rounded-full opacity-20 -mr-20 -mt-20 animate-blob"></div>
+              <div className="absolute bottom-0 left-0 w-60 h-60 bg-gradient-to-tr from-pink-100 to-purple-100 dark:from-pink-800/30 dark:to-purple-800/30 rounded-full opacity-30 -ml-20 -mb-20 animate-float-circle"></div>
+              <div className="absolute top-1/4 right-1/3 w-20 h-20 bg-pink-200 dark:bg-pink-700/30 rounded-full opacity-20 animate-float-slow"></div>
+              <div className="absolute bottom-1/3 left-1/4 w-16 h-16 bg-purple-200 dark:bg-purple-700/30 rounded-full opacity-15 animate-float-delay"></div>
+              <div className="absolute top-1/2 right-20 w-10 h-10 bg-pink-300 dark:bg-pink-600/30 rounded-full opacity-20 animate-pulse-slow"></div>
+              <div className="absolute bottom-20 left-1/3 w-8 h-8 bg-purple-300 dark:bg-purple-600/30 rounded-full opacity-15 animate-float-right"></div>
+              <div className="hidden md:block absolute top-20 right-20 text-pink-500 dark:text-pink-400 opacity-5 animate-float">
                 <GiLipstick className="w-20 h-20" />
               </div>
-              <div className="hidden md:block absolute bottom-20 left-20 text-purple-500 opacity-5 animate-float-delay">
+              <div className="hidden md:block absolute bottom-20 left-20 text-purple-500 dark:text-purple-400 opacity-5 animate-float-delay">
                 <GiNoseSide className="w-16 h-16" />
               </div>
-              <div className="hidden md:block absolute top-1/2 left-1/3 text-pink-600 opacity-5 animate-float-slow">
+              <div className="hidden md:block absolute top-1/2 left-1/3 text-pink-600 dark:text-pink-400 opacity-5 animate-float-slow">
                 <IoIosBody className="w-24 h-24" />
               </div>
             </>
           ),
-          heading: "text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 mb-2 animate-fade-in",
-          subheading: "text-sm text-pink-700 max-w-3xl mx-auto animate-slide-up",
-          searchBorder: "border-pink-300 group-hover:border-pink-500 focus:border-pink-500",
-          searchButton: "hover:bg-gradient-to-r from-pink-500 to-purple-500 hover:text-white",
-          progressLine: "bg-pink-200",
-          progressFill: "bg-gradient-to-r from-pink-500 to-purple-500",
-          stepActive: "bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-xl shadow-pink-200/50 scale-110",
-          stepInactive: "bg-gradient-to-r from-pink-50 to-purple-50 text-pink-700 hover:from-pink-100 hover:to-purple-100 shadow-md shadow-pink-100/30",
-          textActive: "text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 font-semibold",
-          uploadButton: "bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white shadow-lg shadow-pink-200/50",
-          resultItem: "hover:bg-pink-50",
-          resultText: "text-pink-800",
-          resultSubtext: "text-pink-600",
+          heading: "text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 dark:from-pink-400 dark:to-purple-400 mb-2 animate-fade-in",
+          subheading: "text-sm text-pink-700 dark:text-pink-300 max-w-3xl mx-auto animate-slide-up",
+          searchBorder: "border-pink-300 group-hover:border-pink-500 focus:border-pink-500 dark:border-pink-700 dark:group-hover:border-pink-400 dark:focus:border-pink-400",
+          searchButton: "hover:bg-gradient-to-r from-pink-500 to-purple-500 hover:text-white dark:from-pink-600 dark:to-purple-600",
+          progressLine: "bg-pink-200 dark:bg-pink-800/50",
+          progressFill: "bg-gradient-to-r from-pink-500 to-purple-500 dark:from-pink-600 dark:to-purple-600",
+          stepActive: "bg-gradient-to-r from-pink-500 to-purple-500 dark:from-pink-600 dark:to-purple-600 text-white shadow-xl shadow-pink-200/50 dark:shadow-pink-900/30 scale-110",
+          stepInactive: "bg-gradient-to-r from-pink-50 to-purple-50 dark:from-pink-900/40 dark:to-purple-900/40 text-pink-700 dark:text-pink-300 hover:from-pink-100 hover:to-purple-100 dark:hover:from-pink-800/50 dark:hover:to-purple-800/50 shadow-md shadow-pink-100/30 dark:shadow-pink-900/20",
+          textActive: "text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 dark:from-pink-400 dark:to-purple-400 font-semibold",
+          uploadButton: "bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 dark:from-pink-600 dark:to-purple-600 dark:hover:from-pink-500 dark:hover:to-purple-500 text-white shadow-lg shadow-pink-200/50 dark:shadow-pink-900/30",
+          resultItem: "hover:bg-pink-50 dark:hover:bg-pink-900/30",
+          resultText: "text-pink-800 dark:text-pink-300",
+          resultSubtext: "text-pink-600 dark:text-pink-400",
           stepContainer: "relative z-10"
         };
       default:
         return {
-          container: "py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20",
+          container: "py-7 sm:py-10 px-4 max-w-6xl mx-auto md:mt-20 dark:bg-card-bg dark:border dark:border-border rounded-3xl",
           containerBg: null,
-          heading: "text-2xl sm:text-4xl font-bold text-gray-900 mb-2 animate-fade-in",
-          subheading: "text-sm text-gray-600 max-w-3xl mx-auto animate-slide-up",
-          searchBorder: "border-[#c0bada] group-hover:border-primary focus:border-primary",
+          heading: "text-2xl sm:text-4xl font-bold text-gray-900 dark:text-text mb-2 animate-fade-in",
+          subheading: "text-sm text-gray-600 dark:text-text-light max-w-3xl mx-auto animate-slide-up",
+          searchBorder: "border-[#c0bada] group-hover:border-primary focus:border-primary dark:border-gray-700 dark:group-hover:border-primary dark:focus:border-primary",
           searchButton: "hover:bg-primary hover:text-white",
-          progressLine: "bg-gray-300",
+          progressLine: "bg-gray-300 dark:bg-gray-700",
           progressFill: "bg-primary",
           stepActive: "bg-primary text-white shadow-lg scale-110",
-          stepInactive: "bg-[#e5e2f1] text-primary hover:bg-primary/20",
-          textActive: "text-primary",
+          stepInactive: "bg-[#e5e2f1] dark:bg-gray-700 text-primary dark:text-primary-mild hover:bg-primary/20 dark:hover:bg-primary/30",
+          textActive: "text-primary dark:text-primary-mild",
           uploadButton: "bg-primary hover:bg-primary-deep text-white",
-          resultItem: "hover:bg-gray-100",
-          resultText: "text-gray-800",
-          resultSubtext: "text-gray-500",
-          stepContainer: ""
+          resultItem: "hover:bg-gray-100 dark:hover:bg-gray-800",
+          resultText: "text-gray-800 dark:text-text",
+          resultSubtext: "text-gray-500 dark:text-text-light",
+          stepContainer: "relative z-10"
         };
     }
   };
@@ -282,7 +282,7 @@ const StartYourJourney = () => {
               }}
               placeholder="Search Your Treatment"
               className={`w-full px-6 py-3 pr-12 rounded-full border-2 ${styles.searchBorder} focus:outline-none 
-              text-gray-700 placeholder-gray-400 transition-all duration-300 backdrop-blur-sm bg-white/90`}
+              text-gray-700 dark:text-text placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-300 backdrop-blur-sm bg-white/90 dark:bg-card-bg/90`}
             />
             <button
               type="submit"
@@ -294,7 +294,7 @@ const StartYourJourney = () => {
           </form>
 
           {isInputFocused && (
-            <div className="absolute z-20 mt-2 w-full bg-white shadow-lg rounded-md border border-gray-200 max-h-60 overflow-y-auto">
+            <div className="absolute z-20 mt-2 w-full bg-white dark:bg-card-bg shadow-lg rounded-md border border-gray-200 dark:border-border max-h-60 overflow-y-auto">
               {searchResults.length > 0 ? (
                 <ul className="py-1">
                   {searchResults.map((result, index) => (
@@ -313,7 +313,7 @@ const StartYourJourney = () => {
                   ))}
                 </ul>
               ) : (
-                <div className="px-4 py-3 text-sm text-gray-500">
+                <div className="px-4 py-3 text-sm text-gray-500 dark:text-text-light">
                   No treatments found
                 </div>
               )}

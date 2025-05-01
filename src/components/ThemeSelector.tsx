@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useThemeStore } from '@/store/themeStore';
+import DarkModeToggle from '@/components/shared/DarkModeToggle';
 
 /**
  * ThemeSelector Component
@@ -100,22 +101,27 @@ const ThemeSelector: React.FC = () => {
       </div>
       
       <div className="border-t border-border pt-4 mb-4">
-        <label className="flex items-center justify-between cursor-pointer p-2 rounded-md hover:bg-background">
-          <span className="text-text">Dark Mode</span>
-          <div className={`relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full ${
-            mode === 'dark' ? 'bg-primary' : 'bg-gray-300'
-          }`}>
-            <input
-              type="checkbox"
-              className="opacity-0 absolute w-full h-full cursor-pointer z-10"
-              checked={mode === 'dark'}
-              onChange={(e) => setMode(e.target.checked ? 'dark' : 'light')}
-            />
-            <span className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out ${
-              mode === 'dark' ? 'transform translate-x-6' : ''
-            }`}></span>
+        <div className="flex items-center justify-between p-2 rounded-md">
+          <span className="text-text dark:text-text-light">Dark Mode</span>
+          <div className="flex items-center space-x-3">
+            <label className="flex items-center cursor-pointer">
+              <div className={`relative inline-block w-12 h-6 transition duration-200 ease-in-out rounded-full ${
+                mode === 'dark' ? 'bg-primary' : 'bg-gray-300'
+              }`}>
+                <input
+                  type="checkbox"
+                  className="opacity-0 absolute w-full h-full cursor-pointer z-10"
+                  checked={mode === 'dark'}
+                  onChange={(e) => setMode(e.target.checked ? 'dark' : 'light')}
+                />
+                <span className={`absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition-transform duration-200 ease-in-out ${
+                  mode === 'dark' ? 'transform translate-x-6' : ''
+                }`}></span>
+              </div>
+            </label>
+            <DarkModeToggle />
           </div>
-        </label>
+        </div>
       </div>
       
       <div className="space-y-3">

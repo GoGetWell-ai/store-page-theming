@@ -127,13 +127,13 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
 
     // Default styles if themeStyles is not provided
     const defaultStyles = {
-        card: "border-purple-100 hover:border-purple-300",
-        iconBgActive: "bg-[#63559a2b] text-primary",
-        iconBgHover: "group-hover:bg-[#63559a2b] group-hover:text-primary",
-        titleText: "text-primary",
-        chevron: "text-primary",
-        expandedBg: "border-purple-100",
-        listItem: "hover:bg-purple-50 text-primary hover:text-primary"
+        card: "border-purple-100 dark:border-border hover:border-purple-300 dark:hover:border-primary/30",
+        iconBgActive: "bg-[#63559a2b] dark:bg-primary/20 text-primary dark:text-primary-mild",
+        iconBgHover: "group-hover:bg-[#63559a2b] group-hover:text-primary dark:group-hover:bg-primary/20 dark:group-hover:text-primary-mild",
+        titleText: "text-primary dark:text-primary-mild",
+        chevron: "text-primary dark:text-primary-mild",
+        expandedBg: "border-purple-100 dark:border-border",
+        listItem: "hover:bg-purple-50 dark:hover:bg-primary/10 text-primary dark:text-text hover:text-primary dark:hover:text-primary-mild"
     };
 
     // Use provided theme styles or default
@@ -143,7 +143,7 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
         const handleResize = () => {
             if (window.innerWidth > 639) {
                 const classNames =
-                    'absolute bg-white w-full px-3 rounded-lg pb-3 left-0 z-50'
+                    'absolute bg-white dark:bg-card-bg w-full px-3 rounded-lg pb-3 left-0 z-50'
                 setClassNames(classNames)
             } else {
                 setClassNames('')
@@ -169,11 +169,11 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
     const getCardBackground = () => {
         switch (specialty) {
             case 'organ-transplant':
-                return 'bg-white hover:bg-green-50';
+                return 'bg-white dark:bg-card-bg hover:bg-green-50 dark:hover:bg-green-900/20';
             case 'cosmetic-surgery':
-                return 'bg-white hover:bg-pink-50';
+                return 'bg-white dark:bg-card-bg hover:bg-pink-50 dark:hover:bg-pink-900/20';
             default:
-                return 'bg-white';
+                return 'bg-white dark:bg-card-bg hover:bg-gray-50 dark:hover:bg-gray-800/50';
         }
     };
 
@@ -199,7 +199,7 @@ const TreatmentRow: React.FC<TreatmentRowProps> = ({
                                     className={`p-2 rounded-lg transition-colors duration-300 
                                     ${expandedId === `${rowIndex}-${index}` 
                                         ? styles.iconBgActive 
-                                        : `bg-gray-100 ${styles.titleText} ${styles.iconBgHover}`}`}
+                                        : `bg-gray-100 dark:bg-gray-800/50 ${styles.titleText} ${styles.iconBgHover}`}`}
                                 >
                                     {getSpecialtyIcon(treatment.majorTitle)}
                                 </div>
@@ -252,39 +252,39 @@ const Treatments: React.FC = () => {
         switch (specialty) {
             case 'organ-transplant':
                 return {
-                    container: "max-w-[1538px] mx-auto px-4 sm:px-12 mt-5 md:mt-10 py-12 bg-gradient-to-b from-white to-green-50",
-                    heading: "text-2xl sm:text-4xl font-bold text-green-800 text-center mb-8",
-                    card: "border-green-200 hover:border-green-400 shadow-sm hover:shadow-md hover:shadow-green-100 ",
-                    iconBgActive: "bg-green-100 text-green-700",
-                    iconBgHover: "group-hover:bg-green-100 group-hover:text-green-700",
-                    titleText: "text-green-700",
-                    chevron: "text-green-600",
-                    expandedBg: " border-[2px] border-green-500",
-                    listItem: "hover:bg-green-100 text-green-800 hover:text-green-900"
+                    container: "max-w-[1538px] mx-auto px-4 sm:px-12 mt-5 md:mt-10 py-12 bg-gradient-to-b from-white to-green-50 dark:from-background dark:to-green-900/20",
+                    heading: "text-2xl sm:text-4xl font-bold text-green-800 dark:text-green-400 text-center mb-8",
+                    card: "border-green-200 dark:border-green-800/30 hover:border-green-400 dark:hover:border-green-700 shadow-sm hover:shadow-md hover:shadow-green-100 dark:hover:shadow-green-900/20",
+                    iconBgActive: "bg-green-100 dark:bg-green-800/40 text-green-700 dark:text-green-300",
+                    iconBgHover: "group-hover:bg-green-100 group-hover:text-green-700 dark:group-hover:bg-green-800/40 dark:group-hover:text-green-300",
+                    titleText: "text-green-700 dark:text-green-400",
+                    chevron: "text-green-600 dark:text-green-500",
+                    expandedBg: "border-[2px] border-green-500 dark:border-green-700",
+                    listItem: "hover:bg-green-100 dark:hover:bg-green-800/30 text-green-800 dark:text-green-300 hover:text-green-900 dark:hover:text-green-200"
                 };
             case 'cosmetic-surgery':
                 return {
-                    container: "max-w-[1538px] mx-auto px-4 sm:px-12 mt-5 md:mt-10 py-12 bg-gradient-to-b from-white to-pink-50",
-                    heading: "text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 text-center mb-8",
-                    card: "border-pink-200 hover:border-pink-400 shadow-sm hover:shadow-md hover:shadow-pink-100",
-                    iconBgActive: "bg-pink-100 text-pink-700",
-                    iconBgHover: "group-hover:bg-pink-100 group-hover:text-pink-700",
-                    titleText: "text-pink-700",
-                    chevron: "text-pink-600",
-                    expandedBg: " border-[2px] border-pink-500",
-                    listItem: "hover:bg-pink-50 text-pink-700 hover:text-pink-800"
+                    container: "max-w-[1538px] mx-auto px-4 sm:px-12 mt-5 md:mt-10 py-12 bg-gradient-to-b from-white to-pink-50 dark:from-background dark:to-pink-900/20",
+                    heading: "text-2xl sm:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-purple-600 dark:from-pink-400 dark:to-purple-400 text-center mb-8",
+                    card: "border-pink-200 dark:border-pink-800/30 hover:border-pink-400 dark:hover:border-pink-700 shadow-sm hover:shadow-md hover:shadow-pink-100 dark:hover:shadow-pink-900/20",
+                    iconBgActive: "bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300",
+                    iconBgHover: "group-hover:bg-pink-100 group-hover:text-pink-700 dark:group-hover:bg-pink-900/40 dark:group-hover:text-pink-300",
+                    titleText: "text-pink-700 dark:text-pink-400",
+                    chevron: "text-pink-600 dark:text-pink-500",
+                    expandedBg: "border-[2px] border-pink-500 dark:border-pink-700",
+                    listItem: "hover:bg-pink-50 dark:hover:bg-pink-900/30 text-pink-700 dark:text-pink-300 hover:text-pink-800 dark:hover:text-pink-200"
                 };
             default:
                 return {
-                    container: "max-w-[1538px] mx-auto px-4 sm:px-12 mt-5 md:mt-10",
-                    heading: "text-2xl sm:text-4xl font-bold text-center mb-8",
-                    card: "border-purple-100 hover:border-purple-300",
-                    iconBgActive: "bg-[#63559a2b] text-primary",
-                    iconBgHover: "group-hover:bg-[#63559a2b] group-hover:text-primary",
-                    titleText: "text-primary",
-                    chevron: "text-primary",
-                    expandedBg: " border-[2px] border-purple-400",
-                    listItem: "hover:bg-purple-50 text-primary hover:text-primary"
+                    container: "max-w-[1538px] mx-auto px-4 sm:px-12 mt-5 md:mt-10 dark:bg-background",
+                    heading: "text-2xl sm:text-4xl font-bold text-center mb-8 dark:text-text",
+                    card: "border-purple-100 dark:border-border hover:border-purple-300 dark:hover:border-primary/30",
+                    iconBgActive: "bg-[#63559a2b] dark:bg-primary/20 text-primary dark:text-primary-mild",
+                    iconBgHover: "group-hover:bg-[#63559a2b] group-hover:text-primary dark:group-hover:bg-primary/20 dark:group-hover:text-primary-mild",
+                    titleText: "text-primary dark:text-primary-mild",
+                    chevron: "text-primary dark:text-primary-mild",
+                    expandedBg: "border-[2px] border-purple-400 dark:border-primary/50",
+                    listItem: "hover:bg-purple-50 dark:hover:bg-primary/10 text-primary dark:text-text hover:text-primary dark:hover:text-primary-mild"
                 };
         }
     };

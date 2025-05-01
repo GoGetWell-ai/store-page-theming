@@ -22,7 +22,7 @@ const Header = (props: HeaderProps) => {
     } = props
 
     return (
-        <header className={classNames('header', className)}>
+        <header className={classNames('header dark:bg-card-bg dark:border-b dark:border-border', className)}>
             <div
                 className={classNames(
                     'header-wrapper',
