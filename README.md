@@ -1,326 +1,324 @@
-# GoGetWell.ai Theme System Implementation Assignment#2
+# Medical Specialty Theme System
 
-## Project Overview
+A comprehensive theming system for medical specialty interfaces, supporting Default Medical, Organ Transplant, and Cosmetic Surgery themes.
 
-You'll be implementing a comprehensive multi-theme system for our platform that adapts the entire interface based on different medical specialties. This goes beyond simple color changes - each theme should provide a distinct and cohesive user experience tailored to different medical contexts.
+## Overview
 
-The primary objective of this assignment is to evaluate your ability to perform complex frontend tasks.
+This theme system provides a robust, fully-featured solution for medical applications requiring different visual experiences based on medical specialties. The system implements a seamless theme switching mechanism with persistent theme preferences.
 
-## Requirements
+## Features
 
-### Features to Implement
+-   **Three Medical Specialty Themes**:
+    -   **Default Medical**: Professional blue-based theme for general healthcare
+    -   **Organ Transplant**: Teal/green theme representing life and renewal
+    -   **Cosmetic Surgery**: Elegant pink/rose theme for aesthetic medicine
+-   **Comprehensive Theming System**:
+    -   Color schemes specific to each medical specialty
+    -   Typography systems tailored for different content needs
+    -   Consistent spacing and border-radius scales
+    -   Smooth theme transitions without page reload
+-   **State Management**:
+    -   Theme preferences stored in localStorage
+    -   Integrated with Zustand for state management
+    -   Persists user theme preferences between sessions
+-   **Easy Integration**:
+    -   CSS variable-based approach
+    -   Compatible with Tailwind CSS
+    -   Theme-specific component styling
 
-1. **Menu Bar Navigation**
-   - Create a navigation menu bar with two options:
-     - Home (already implemented)
-     - Themes (to be created)
+## Implementation Details
 
-2. **Themes Page**
-   - Create a new "Themes" page at `src/views/Home/themes/`
-   - This page should display all available themes
-   - Allow users to preview and select different themes
+### Architecture
 
-3. **Multiple Theme Implementation**
-   - Implement 3 themes in total:
-     - Default theme (already exists)
-     - 2 new themes focusing on different medical specialties (e.g., Organ Transplant, Cosmetic Surgery)
+The theme system follows a well-structured architecture:
 
-4. **Theme Configuration**
-   - Use Zustand for state management
-   - Configure Zustand to persist theme selection in localStorage
-   - Apply the selected theme globally throughout the application
+1. **Type Definitions** (`src/@types/theme.ts`):
 
-5. **Theme Components**
-   - Each theme should include:
-     - Color scheme variations
-     - Typography changes
-     - UI element styling (buttons, cards, forms)
-     - Custom hero sections
-     - Custom menu bar styling
-    
-**Important Notes:**
-   
-Each theme must implement comprehensive changes across:
-- **Layout Structure:** Different component arrangements and spacing for each theme
-- **Marketing Copy:** Theme-specific text content and messaging tailored to each specialty
-- **Color Schemes:** Complete color palettes appropriate for each medical context
-- **Typography:** Font families, sizes, weights, and line heights that reflect each specialty
-- **UI Elements:** Custom-styled buttons, cards, forms, inputs, and interactive elements
-- **Component Variations:** Specialty-specific designs for hero sections, testimonials, and CTAs
+    - Defines theme interfaces and types
+    - Includes `ThemeSpecialty`, `ThemeColors`, `ThemeTypography`, etc.
 
-6. **Theme Color Configuration**
-   - Implement Tailwind configuration for theme colors
-   - Allow dynamic color switching between themes
+2. **Theme Store** (`src/store/themeStore.ts`):
 
-## Technical Setup
+    - Zustand-based state management
+    - Handles theme switching and persistence
+    - Stores current theme specialty and configuration
 
-### Prerequisites
+3. **Theme Configurations** (`src/configs/specialty-themes.config.ts`):
 
-- Docker
-- Node.js (v14+)
-- npm (v6+)
+    - Contains theme definitions for each specialty
+    - Defines colors, typography, spacing, and border-radius
 
-### Project Setup
+4. **CSS Variables** (`src/assets/styles/themes.css`):
 
-1. Clone the repository
-   ```bash
-   git clone [repository-url]
-   cd [repository-name]
-   ```
+    - Root variables for default theme
+    - Theme-specific class selectors for specialty themes
+    - Comprehensive set of design tokens
 
-2. Install dependencies
-   ```bash
-   npm install
-   ```
+5. **Theme Provider** (`src/components/template/ThemeProvider.tsx`):
 
-3. Set up Docker with Caddy for subdomain handling
-   - Create a `Caddyfile` in the project root with the following content:
-   ```
-   {
-     acme_ca https://acme-v02.api.letsencrypt.org/directory
-   }
+    - Applies theme classes to document root
+    - Dynamically updates theme on change
+    - Handles class management for theme switching
 
-   # Wildcard subdomain handling
-   *.localhost {
-     # Add headers to identify the subdomain
-     header {
-       +X-Subdomain {labels.1}
-     }
-     reverse_proxy host.docker.internal:5173
-   }
+6. **Theme Selector UI** (`src/components/shared/ThemeSelector.tsx`):
+    - User interface for theme switching
+    - Dropdown menu with theme options
+    - Visual indicators for active theme
 
-   # Handle base domain
-   localhost {
-     reverse_proxy host.docker.internal:5173
-   }
-   ```
+### Implementation Flow
 
-4. Create a `docker-compose.yml` file with:
-   ```yaml
-   version: '3.8'
-   services:
-     caddy:
-       image: caddy:2.7-alpine
-       restart: unless-stopped
-       ports:
-         - "80:80"
-         - "443:443"
-       volumes:
-         - ./Caddyfile:/etc/caddy/Caddyfile:ro
-         - caddy_data:/data
-         - caddy_config:/config
-       extra_hosts:
-         - "host.docker.internal:host-gateway" # This is important for Docker to resolve host machine
-   volumes:
-     caddy_data:
-     caddy_config:
-   ```
+1. ThemeSelector component provides UI for theme selection
+2. User selection triggers the `setSpecialty` action in the theme store
+3. Theme store updates state with new specialty and associated config
+4. ThemeProvider detects the change and applies appropriate CSS classes
+5. CSS variables change throughout the application without reload
+6. Components using theme variables automatically update their appearance
 
-5. Start the Docker Caddy server:
-   ```bash
-   docker-compose up -d
-   ```
+## Theme Customization Guide
 
-6. Start the development server:
-   ```bash
-   npm run dev
-   ```
+### Adding a New Theme
 
-7. Access the application via subdomains:
-   - https://demo.localhost
-   - https://demo5.localhost
-   - https://seostore.localhost
+To add a new medical specialty theme:
 
-## Implementation Guidelines
-
-### Directory Structure
-
-```
-src/
-├── @types/
-│   └── theme.ts              # Add specialty theme types
-├── assets/
-│   └── styles/
-│       ├── app.css           # Main CSS file
-│       └── themes.css        # Theme CSS variables
-├── components/
-│   ├── shared/
-│   │   └── ThemeSelector.tsx # Theme switching component
-│   └── template/
-│       └── ThemeProvider.tsx # Theme provider component
-├── configs/
-│   └── theme.config.ts       # Update theme configuration
-├── store/
-│   └── themeStore.ts         # Extend Zustand theme store
-└── views/
-    └── Home/
-        ├── components/       # Update existing components
-        │   ├── GetInTouch.tsx
-        │   ├── Home.tsx
-        │   └── ...
-        ├── themes/           # Create theme specific components
-        │   ├── base/         # Default theme
-        │   │   ├── colors.ts
-        │   │   └── typography.ts
-        │   ├── theme1/       # First new theme
-        │   │   ├── colors.ts
-        │   │   └── typography.ts
-        │   └── theme2/       # Second new theme
-        │       ├── colors.ts
-        │       └── typography.ts
-        └── index.tsx
-```
-
-### Zustand Store Implementation
-
-Extend the existing theme store in `src/store/themeStore.ts` to include specialty themes:
+1. **Update Type Definitions**:
 
 ```typescript
-// Example extension for themeStore.ts
-type ThemeState = Theme & {
-  specialty: 'default' | 'theme1' | 'theme2';
-}
-
-type ThemeAction = {
-  // ... existing actions
-  setSpecialty: (payload: ThemeState['specialty']) => void;
-}
-
-export const useThemeStore = create<ThemeState & ThemeAction>()(
-  persist(
-    (set) => ({
-      // ... existing state
-      specialty: 'default',
-      setSpecialty: (payload) => set(() => ({ specialty: payload })),
-    }),
-    {
-      name: 'theme',
-    },
-  ),
-)
+// src/@types/theme.ts
+export type ThemeSpecialty =
+    | 'default'
+    | 'organTransplant'
+    | 'cosmeticSurgery'
+    | 'yourNewTheme'
 ```
 
-### Theme Provider Implementation
-
-Create a ThemeProvider component to apply theme CSS variables:
+2. **Create Theme Configuration**:
 
 ```typescript
-import React, { useEffect } from 'react'
-import { useThemeStore } from '@/store/themeStore'
-
-const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const { specialty } = useThemeStore()
-  
-  useEffect(() => {
-    // Apply CSS class based on selected theme
-    document.documentElement.className = `theme-${specialty}`
-  }, [specialty])
-  
-  return <>{children}</>
-}
-
-export default ThemeProvider
-```
-
-### Tailwind Configuration
-
-Update the Tailwind configuration to use CSS variables for theme colors:
-
-```javascript
-// tailwind.config.cjs
-module.exports = {
-  // ...existing config
-  theme: {
-    extend: {
-      colors: {
-        'primary': 'var(--primary)',
-        'primary-deep': 'var(--primary-deep)',
-        'primary-mild': 'var(--primary-mild)',
-        // ...additional theme colors
-      },
+// src/configs/specialty-themes.config.ts
+export const yourNewTheme: ThemeConfig = {
+    colors: {
+        primary: '#YOUR_PRIMARY_COLOR',
+        secondary: '#YOUR_SECONDARY_COLOR',
+        accent: '#YOUR_ACCENT_COLOR',
+        background: '#YOUR_BACKGROUND_COLOR',
+        text: '#YOUR_TEXT_COLOR',
+        success: '#YOUR_SUCCESS_COLOR',
+        warning: '#YOUR_WARNING_COLOR',
+        danger: '#YOUR_DANGER_COLOR',
+        info: '#YOUR_INFO_COLOR',
+        muted: '#YOUR_MUTED_COLOR',
     },
-  },
+    typography: {
+        fontFamily: 'YOUR_FONT_FAMILY',
+        headings: {
+            fontWeight: 'YOUR_HEADING_WEIGHT',
+            lineHeight: 'YOUR_HEADING_LINE_HEIGHT',
+        },
+        body: {
+            fontSize: 'YOUR_BODY_FONT_SIZE',
+            lineHeight: 'YOUR_BODY_LINE_HEIGHT',
+        },
+    },
+    spacing: {
+        base: '1rem',
+        xs: '0.25rem',
+        sm: '0.5rem',
+        md: '1rem',
+        lg: '1.5rem',
+        xl: '2rem',
+        '2xl': '3rem',
+    },
+    borderRadius: {
+        none: '0',
+        sm: '0.25rem',
+        md: '0.375rem',
+        lg: '0.5rem',
+        full: '9999px',
+    },
 }
 ```
 
-### Menu Bar Implementation
+3. **Update Theme Store**:
 
-Create a navigation menu component:
+```typescript
+// src/store/themeStore.ts
+import { yourNewTheme } from '@/configs/specialty-themes.config'
+
+// Update specialtyThemes map
+const specialtyThemes: Record<ThemeSpecialty, ThemeConfig> = {
+    default: defaultTheme,
+    organTransplant: organTransplantTheme,
+    cosmeticSurgery: cosmeticSurgeryTheme,
+    yourNewTheme: yourNewTheme,
+}
+```
+
+4. **Add CSS Variables**:
+
+```css
+/* src/assets/styles/themes.css */
+.theme-yourNewTheme {
+    /* Colors */
+    --primary: #YOUR_PRIMARY_COLOR;
+    --primary-deep: #YOUR_PRIMARY_DEEP;
+    --primary-mild: #YOUR_PRIMARY_MILD;
+    --primary-subtle: #YOUR_PRIMARY_SUBTLEa;
+    --secondary: #YOUR_SECONDARY_COLOR;
+    --accent: #YOUR_ACCENT_COLOR;
+    --background: #YOUR_BACKGROUND_COLOR;
+    --text: #YOUR_TEXT_COLOR;
+    --success: #YOUR_SUCCESS_COLOR;
+    --success-subtle: #YOUR_SUCCESS_SUBTLEa;
+    --warning: #YOUR_WARNING_COLOR;
+    --warning-subtle: #YOUR_WARNING_SUBTLEa;
+    --danger: #YOUR_DANGER_COLOR;
+    --error: #YOUR_ERROR_COLOR;
+    --error-subtle: #YOUR_ERROR_SUBTLEa;
+    --info: #YOUR_INFO_COLOR;
+    --info-subtle: #YOUR_INFO_SUBTLEa;
+    --muted: #YOUR_MUTED_COLOR;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(
+        135deg,
+        #YOUR_GRADIENT_COLOR1,
+        #YOUR_GRADIENT_COLOR2
+    );
+}
+```
+
+5. **Update ThemeProvider**:
 
 ```tsx
-// src/components/shared/MenuBar.tsx
-import React from 'react'
-import { Link, useLocation } from 'react-router-dom'
-import { useThemeStore } from '@/store/themeStore'
-import ThemeSelector from './ThemeSelector'
+// src/components/template/ThemeProvider.tsx
+useEffect(() => {
+    document.documentElement.classList.remove(
+        'theme-organTransplant',
+        'theme-cosmeticSurgery',
+        'theme-yourNewTheme',
+    )
 
-const MenuBar: React.FC = () => {
-  const location = useLocation()
-  const { specialty } = useThemeStore()
-  
-  return (
-    <nav className={`bg-primary text-white p-4 ${specialty === 'theme1' ? 'theme1-nav' : specialty === 'theme2' ? 'theme2-nav' : ''}`}>
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-        <div className="flex space-x-4">
-          <Link to="/" className={`px-3 py-2 rounded-md ${location.pathname === '/' ? 'bg-primary-deep' : ''}`}>
-            Home
-          </Link>
-          <Link to="/themes" className={`px-3 py-2 rounded-md ${location.pathname === '/themes' ? 'bg-primary-deep' : ''}`}>
-            Themes
-          </Link>
-        </div>
-        <ThemeSelector />
-      </div>
-    </nav>
-  )
-}
+    if (specialty !== 'default') {
+        document.documentElement.classList.add(`theme-${specialty}`)
+    }
 
-export default MenuBar
+    // Update meta theme color if needed
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+    if (metaThemeColor) {
+        if (specialty === 'yourNewTheme') {
+            metaThemeColor.setAttribute('content', '#YOUR_PRIMARY_COLOR')
+        }
+        // Other cases...
+    }
+}, [specialty])
 ```
 
-## Testing and Deployment
+6. **Update Theme Selector**:
 
-1. **Local Testing**
-   - Test all themes on different screen sizes
-   - Verify theme persistence on page refresh
-   - Check subdomain access via Caddy
+```tsx
+// src/components/shared/ThemeSelector.tsx
+const themeOptions = [
+    { label: 'Default', value: 'default' },
+    { label: 'Organ Transplant', value: 'organTransplant' },
+    { label: 'Cosmetic Surgery', value: 'cosmeticSurgery' },
+    { label: 'Your New Theme', value: 'yourNewTheme' },
+]
 
-2. **Code Standards**
-   - Follow existing project code standards
-   - Use proper TypeScript types
-   - Use functional components with hooks
-   - Follow the established design system patterns
-   - Maintain proper component composition
+// Update gradient styles function
+const getThemeGradientStyles = () => {
+    switch (specialty) {
+        case 'yourNewTheme':
+            return 'bg-gradient-to-r from-your-color-700 to-your-color-500 hover:shadow-lg hover:from-your-color-600 hover:to-your-color-400'
+        // Other cases...
+    }
+}
+```
 
-## Submission Requirements
+### Customizing an Existing Theme
 
-1. Complete code implementation
-2. Documentation of theme system including:
-   - Implementation details
-   - Theme customization guide
-   - Screenshots of different themes
-3. Pull request with your changes following the project's contribution guidelines
+To customize an existing theme:
+
+1. Locate the theme configuration in `src/configs/specialty-themes.config.ts`
+2. Modify the color values, typography settings, or other properties
+3. Update the corresponding CSS variables in `src/assets/styles/themes.css`
+4. If needed, adjust component-specific theme styles in your components
+
+Example of customizing the Organ Transplant theme:
+
+```typescript
+// src/configs/specialty-themes.config.ts
+export const organTransplantTheme: ThemeConfig = {
+    colors: {
+        primary: '#00796B', // Changed from #006064
+        secondary: '#B2DFDB', // Changed from #4dd0e1
+        // Other color changes...
+    },
+    typography: {
+        fontFamily: 'Source Serif Pro, Georgia, serif', // Changed font
+        // Other typography changes...
+    },
+    // Other changes...
+}
+```
+
+### Using Theme Variables in Components
+
+Components can access theme variables through CSS or adapt based on the current theme specialty:
+
+#### CSS Approach
+
+```css
+.my-component {
+    background-color: var(--primary);
+    color: var(--text);
+    border: 1px solid var(--primary-mild);
+    border-radius: var(--border-radius-md);
+}
+```
+
+#### React Component Approach
+
+```tsx
+import { useThemeStore } from '@/store/themeStore'
+
+const MyComponent = () => {
+    const specialty = useThemeStore((state) => state.specialty)
+
+    // Get theme-specific classes
+    const getThemeClasses = () => {
+        switch (specialty) {
+            case 'organTransplant':
+                return 'bg-teal-50 text-teal-700 border-teal-200'
+            case 'cosmeticSurgery':
+                return 'bg-pink-50 text-pink-700 border-pink-200'
+            default:
+                return 'bg-blue-50 text-blue-700 border-blue-200'
+        }
+    }
+
+    return (
+        <div className={`p-4 rounded-lg ${getThemeClasses()}`}>
+            Theme-adaptive component
+        </div>
+    )
+}
+```
+
+## Best Practices
+
+1. **Consistency**: Maintain consistent naming conventions across themes
+2. **Accessibility**: Ensure sufficient color contrast for readability
+3. **Gradual Testing**: Test theme changes across different components
+4. **Semantic Variables**: Use semantic color names that reflect purpose rather than appearance
+5. **Component Adaptation**: Design components to adapt gracefully between themes
 
 ## Resources
 
-- Current theme implementation in `src/store/themeStore.ts`
-- Existing styling in `src/assets/styles/app.css`
-- Tailwind configuration in `tailwind.config.cjs`
-- Component structure in `src/views/Home/components/`
+-   [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+-   [CSS Variables Guide](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties)
+-   [Zustand Documentation](https://github.com/pmndrs/zustand)
+-   [Color Contrast Checker](https://webaim.org/resources/contrastchecker/)
 
-## Key Features
+## License
 
-- **Responsive Layout**: Optimized for all screen sizes and devices.
-- **Dark/Light Mode**: Easily switch between light and dark themes.
-- **Configurable Themes**: Personalize colors, layouts, and more to fit your needs.
-- **Built with React + TypeScript**: Ensures robust type-checking and fast development.
-- **Multi-Locale Support**: Easily add and manage multiple languages.
-- **RTL Support**: Full Right-to-Left support for languages like Arabic or Hebrew.
-- **Tailwind Component-Based Architecture**: Reusable components to streamline your development process.
-- **API Ready**: Simple integration with any RESTful API.
-
-## Guide
-
-Please visit our [Online documentation](https://ecme-react.themenate.net/guide/documentation/introduction) for detailed guides, setup instructions, and customization options.
-
-Good luck with your assignment!
+This theme system is licensed under the MIT License. See the LICENSE file for details.

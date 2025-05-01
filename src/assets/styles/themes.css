@@ -1,0 +1,225 @@
+/**
+ * Theme Variables
+ * 
+ * This file defines CSS variables for all themes in the application.
+ * - :root contains variables for the default medical theme
+ * - .theme-organTransplant class contains Organ Transplant theme variables
+ * - .theme-cosmeticSurgery class contains Cosmetic Surgery theme variables
+ */
+
+/* Default Medical Theme (General Practice) */
+:root {
+  /* Colors */
+  --primary: #1976d2;
+  --primary-deep: #0d47a1;
+  --primary-mild: #42a5f5;
+  --primary-subtle: #1976d21a;
+  --secondary: #90caf9;
+  --accent: #4dabf5;
+  --background: #ffffff;
+  --text: #212121;
+  --success: #4caf50;
+  --success-subtle: #4caf501a;
+  --warning: #ff9800;
+  --warning-subtle: #ff98001a;
+  --danger: #f44336;
+  --error: #f44336; /* Alias for danger for compatibility */
+  --error-subtle: #f443361a;
+  --info: #2196f3;
+  --info-subtle: #2196f31a;
+  --muted: #9e9e9e;
+
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #1976d2, #42a5f5);
+  --gradient-secondary: linear-gradient(135deg, #64b5f6, #bbdefb);
+  --gradient-accent: linear-gradient(135deg, #2196f3, #90caf9);
+  --gradient-success: linear-gradient(135deg, #2e7d32, #66bb6a);
+  --gradient-error: linear-gradient(135deg, #c62828, #ef5350);
+  --gradient-warning: linear-gradient(135deg, #ef6c00, #ffa726);
+  
+  /* Animation Speeds */
+  --transition-slow: 0.5s;
+  --transition-normal: 0.3s;
+  --transition-fast: 0.15s;
+  
+  /* Standard Gray Scale */
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --gray-900: #171717;
+  --gray-950: #0a0a0a;
+  
+  /* Neutral for contrast */
+  --neutral: #ffffff;
+
+  /* Typography */
+  --font-family: 'Roboto, Arial, sans-serif';
+  --heading-font-family: 'Roboto, Arial, sans-serif';
+  --mono-font-family: 'Roboto Mono, monospace';
+  
+  /* Font Sizes */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-size-6xl: 4rem;
+  
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.4;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.7;
+  --line-height-loose: 2;
+  
+  /* Border Radius */
+  --border-radius-none: 0;
+  --border-radius-sm: 0.125rem;
+  --border-radius-md: 0.25rem;
+  --border-radius-lg: 0.5rem;
+  --border-radius-full: 9999px;
+}
+
+/* Organ Transplant Theme */
+.theme-organTransplant {
+  /* Colors */
+  --primary: #006064;
+  --primary-deep: #004d40;
+  --primary-mild: #00897b;
+  --primary-subtle: #0060641a;
+  --secondary: #4dd0e1;
+  --accent: #00acc1;
+  --background: #f5f5f5;
+  --text: #263238;
+  --success: #00897b;
+  --success-subtle: #00897b1a;
+  --warning: #ffa000;
+  --warning-subtle: #ffa0001a;
+  --danger: #d32f2f;
+  --error: #d32f2f;
+  --error-subtle: #d32f2f1a;
+  --info: #0288d1;
+  --info-subtle: #0288d11a;
+  --muted: #78909c;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #004d40, #00897b);
+  --gradient-secondary: linear-gradient(135deg, #006064, #26c6da);
+  --gradient-accent: linear-gradient(135deg, #00838f, #4dd0e1);
+  --gradient-success: linear-gradient(135deg, #2e7d32, #66bb6a);
+  --gradient-error: linear-gradient(135deg, #b71c1c, #e57373);
+  --gradient-warning: linear-gradient(135deg, #e65100, #ffa726);
+  
+  /* Animation Speeds */
+  --transition-slow: 0.5s;
+  --transition-normal: 0.3s;
+  --transition-fast: 0.15s;
+  
+  /* Typography */
+  --font-family: 'Roboto, Arial, sans-serif';
+  --heading-font-family: 'Merriweather, Georgia, serif';
+  --mono-font-family: 'Roboto Mono, monospace';
+  
+  /* Font Sizes - slightly more conservative */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.75rem;
+  --font-size-4xl: 2rem;
+  --font-size-5xl: 2.5rem;
+  --font-size-6xl: 3rem;
+  
+  /* Line Heights - optimized for medical text */
+  --line-height-tight: 1.3;
+  --line-height-snug: 1.4;
+  --line-height-normal: 1.6;
+  --line-height-relaxed: 1.75;
+  --line-height-loose: 2;
+  
+  /* Border Radius - more squared approach */
+  --border-radius-none: 0;
+  --border-radius-sm: 0.125rem;
+  --border-radius-md: 0.25rem;
+  --border-radius-lg: 0.375rem;
+  --border-radius-full: 9999px;
+}
+
+/* Cosmetic Surgery Theme */
+.theme-cosmeticSurgery {
+  /* Colors */
+  --primary: #ad1457;
+  --primary-deep: #880e4f;
+  --primary-mild: #d81b60;
+  --primary-subtle: #ad14571a;
+  --secondary: #f48fb1;
+  --accent: #ec407a;
+  --background: #fafafa;
+  --text: #424242;
+  --success: #66bb6a;
+  --success-subtle: #66bb6a1a;
+  --warning: #ffb74d;
+  --warning-subtle: #ffb74d1a;
+  --danger: #e57373;
+  --error: #e57373;
+  --error-subtle: #e573731a;
+  --info: #64b5f6;
+  --info-subtle: #64b5f61a;
+  --muted: #bdbdbd;
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #880e4f, #e91e63);
+  --gradient-secondary: linear-gradient(135deg, #c2185b, #f48fb1);
+  --gradient-accent: linear-gradient(135deg, #ad1457, #f06292);
+  --gradient-success: linear-gradient(135deg, #2e7d32, #81c784);
+  --gradient-error: linear-gradient(135deg, #c62828, #ef9a9a);
+  --gradient-warning: linear-gradient(135deg, #ef6c00, #ffb74d);
+  
+  /* Animation Speeds */
+  --transition-slow: 0.5s;
+  --transition-normal: 0.3s;
+  --transition-fast: 0.15s;
+  
+  /* Typography */
+  --font-family: 'Montserrat, Arial, sans-serif';
+  --heading-font-family: 'Playfair Display, Georgia, serif';
+  --mono-font-family: 'Roboto Mono, monospace';
+  
+  /* Font Sizes - follows golden ratio */
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.618rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.618rem;
+  --font-size-5xl: 3.236rem;
+  --font-size-6xl: 4.236rem;
+  
+  /* Line Heights - more generous for elegance */
+  --line-height-tight: 1.3;
+  --line-height-snug: 1.5;
+  --line-height-normal: 1.7;
+  --line-height-relaxed: 1.9;
+  --line-height-loose: 2.2;
+  
+  /* Border Radius - more rounded for aesthetic appeal */
+  --border-radius-none: 0;
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.375rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-full: 9999px;
+}

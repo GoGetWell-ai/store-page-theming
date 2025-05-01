@@ -1,7 +1,207 @@
-.button {
-	@apply font-bold outline-none whitespace-nowrap content-center;
+/* Button base styles */
+.btn {
+  @apply font-semibold rounded-md whitespace-nowrap inline-flex items-center justify-center transition-colors transition-shadow duration-300 ease-in-out;
 }
 
-.button-press-feedback {
-	@apply transition-transform active:scale-[0.98];
+.btn-xs {
+  @apply text-xs h-7 px-2;
+}
+
+.btn-sm {
+  @apply text-sm h-9 px-3;
+}
+
+.btn-md {
+  @apply text-base h-10 px-4;
+}
+
+.btn-lg {
+  @apply text-base h-12 px-6;
+}
+
+/* Button Shapes */
+.btn-rounded-none {
+  @apply rounded-none;
+}
+
+.btn-rounded-md {
+  @apply rounded-md;
+}
+
+.btn-rounded-lg {
+  @apply rounded-lg;
+}
+
+.btn-rounded-full {
+  @apply rounded-full;
+}
+
+/* Button variants */
+/* Default - Solid */
+.btn-default {
+  @apply bg-primary text-white hover:bg-primary-deep active:bg-primary-deep;
+}
+
+/* Solid */
+.btn-solid {
+  @apply text-white;
+}
+
+.btn-solid-default {
+  @apply bg-primary hover:bg-primary-deep active:bg-primary-deep;
+}
+
+.btn-solid-active {
+  @apply bg-primary-deep active:bg-primary;
+}
+
+/* Gradient Button Styles */
+.btn-gradient {
+  @apply text-white transition-all duration-300;
+  background-image: var(--gradient-primary);
+  background-size: 200% auto;
+  background-position: 0% 0%;
+}
+
+.btn-gradient:hover {
+  background-position: 100% 0%;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.btn-gradient-default {
+  background-image: var(--gradient-primary);
+}
+
+.btn-gradient-success {
+  background-image: var(--gradient-success);
+}
+
+.btn-gradient-warning {
+  background-image: var(--gradient-warning);
+}
+
+.btn-gradient-danger {
+  background-image: var(--gradient-error);
+}
+
+/* Tow tone */
+.btn-two-tone {
+  @apply text-primary bg-primary-subtle hover:text-primary-deep hover:bg-primary-subtle active:text-primary-deep active:bg-primary-subtle;
+}
+
+.btn-two-tone-default {
+  @apply bg-primary-subtle text-primary hover:text-primary-deep active:text-primary-deep;
+}
+
+/* Outline */
+.btn-outline {
+  @apply border border-gray-300 dark:border-gray-600 hover:border-primary active:border-primary-deep;
+}
+
+.btn-outline-default {
+  @apply text-gray-600 dark:text-gray-100 hover:text-primary active:text-primary-deep;
+}
+
+/* Button disable */
+.btn-disabled {
+  @apply disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+/* Button loading */
+.btn-loading {
+  @apply relative text-transparent transition-none hover:text-transparent;
+}
+
+.btn-loading:hover,
+.btn-loading:focus,
+.btn-loading:active {
+  @apply cursor-default;
+}
+
+.btn-loading:before {
+  content: '';
+  @apply animate-spin h-4 w-4 absolute border-2 rounded-full;
+}
+
+.btn-loading:before {
+  @apply border-r-primary-mild;
+}
+
+.btn-loading-white:before {
+  @apply !border-r-white;
+}
+
+/* Button icon */
+.btn-icon {
+  @apply leading-none flex-shrink-0;
+}
+
+.btn-icon-sm {
+  @apply text-base;
+}
+
+.btn-icon-md {
+  @apply text-xl;
+}
+
+.btn-icon-lg {
+  @apply text-2xl;
+}
+
+.btn-icon-only {
+  @apply !px-0;
+}
+
+.btn-icon-only-xs {
+  @apply w-7;
+}
+
+.btn-icon-only-sm {
+  @apply w-9;
+}
+
+.btn-icon-only-md {
+  @apply w-10;
+}
+
+.btn-icon-only-lg {
+  @apply w-12;
+}
+
+/* Button with animations */
+.btn-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.3) 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.5s;
+}
+
+.btn-ripple:active:after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
+}
+
+/* Button groups */
+.btn-group {
+  @apply inline-flex;
+}
+
+.btn-group .btn {
+  @apply rounded-none border-r border-gray-200 dark:border-gray-600 first:rounded-l last:rounded-r last:border-r-0;
 }

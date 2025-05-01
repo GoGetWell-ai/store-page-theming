@@ -27,27 +27,8 @@ const HCFHeader: React.FC<HCFHeaderProps> = ({ leftSide }) => {
 
                 <div className='w-full z-[1] relative max-w-[700px] mx-auto'>
                     {leftSide}
-                    <div className="flex gap-4 items-center mt-4 sm:mt-8 justify-center">
-                        <Button
-                            type="button"
-                            className="min-w-[150px] rounded-[5px] bg-primary border-0 text-white hover:text-white"
-                        >
-                            Upload now
-                        </Button>
-
-                        <Button
-                            type="button"
-                            className="min-w-[150px] bg-transparent border-[2px] border-white rounded-[5px] hover:bg-primary hover:border-primary transition-all duration-300"
-                            onClick={() => navigate('/chat-bot')}
-                            variant='solid'
-                        >
-                            Get Started
-                        </Button>
-
-                        {
-                            uploadReport && <UploadMedicalReports setPopupStatus={setUploadReport} />
-                        }
-                    </div>
+                    
+                    {uploadReport && <UploadMedicalReports setPopupStatus={setUploadReport} />}
                 </div>
             </div>
         </section>
