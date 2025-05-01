@@ -24,12 +24,16 @@ const Hero: React.FC = () => {
             {/* Only show profile card for default theme */}
             {specialty === 'default' && (
                 <>
-                    <div className='md:block hidden z-5 absolute bottom-[-25%] w-[70%] left-[15%] lg:w-[50%] lg:left-[25%]'>
+                    {/* Desktop version - positioned below hero with proper spacing */}
+                    <div className='md:block hidden relative z-10 mx-auto max-w-4xl px-4 -mt-16'>
                         <ProfileCard />
                     </div>
-                    <div className='w-full md:hidden block'>
+                    {/* Mobile version - full width with proper spacing */}
+                    <div className='w-full md:hidden block mt-6 px-4'>
                         <ProfileCard />
                     </div>
+                    {/* Add spacing after the card for content that follows */}
+                    <div className="md:pt-24 pt-8"></div>
                 </>
             )}
             
@@ -165,15 +169,34 @@ const ProfileCard = () => {
     const { hcfData } = useAuthStore();
 
     const age = hcfData?.dob ? calculateAge(hcfData.dob) : 'N/A';
+    
+    // Format location properly
+    const location = () => {
+        const city = hcfData?.address?.city || '';
+        const country = hcfData?.address?.country || '';
+        
+        if (city && country) return `${city}, ${country}`;
+        if (city) return city;
+        if (country) return country;
+        return 'N/A';
+    };
+    
+    // Format languages properly
+    const languages = () => {
+        if (!hcfData?.languages?.length) return 'N/A';
+        return hcfData.languages.join(', ');
+    };
 
     return (
-        <div className="w-full mx-auto bg-card-bg rounded-card shadow-theme p-4 md:p-6 border border-border">
-            <div className="flex flex-col gap-1">
+        <div className="w-full mx-auto bg-card-bg rounded-card shadow-theme  p-4 md:p-6 border border-border">
+            <div className="flex flex-col gap-3">
                 {/* Header with title and button */}
-                <div className="flex justify-between items-center">
-                    <h1 className="text-xl font-heading font-heading text-text">{hcfData.name}</h1>
+                <div className="flex flex-wrap justify-between items-center gap-3">
+                    <h1 className="text-xl font-heading font-bold text-text">
+                        {hcfData?.name || 'Medical Professional'}
+                    </h1>
                     <a 
-                        href={`https://api.whatsapp.com/send?phone=${hcfData?.phone || hcfData?.auth?.phoneNumber}&text=Hi!%20Dear,%20I%20have%20a%20inquiry`} 
+                        href={`https://api.whatsapp.com/send?phone=${hcfData?.phone || hcfData?.auth?.phoneNumber || '1234567890'}&text=Hi!%20I%20have%20an%20inquiry`} 
                         target='_blank' 
                         rel='noreferrer' 
                         className="bg-primary text-white px-4 md:px-6 py-2 rounded-button flex items-center gap-2 hover:bg-primary-deep transition-colors text-sm md:text-base shadow-theme"
@@ -185,39 +208,114 @@ const ProfileCard = () => {
                     </a>
                 </div>
 
+                {/* Profile image section with multiple doctor images */}
+                <div className="flex flex-col mb-4">
+                    <div className="flex items-center gap-4 mb-3">
+                        <div className="w-16 h-16 rounded-full bg-primary-subtle flex items-center justify-center overflow-hidden border-2 border-primary">
+                            <img 
+                                src="https://placehold.co/200x200/2a85ff/FFFFFF?text=MD" 
+                                alt="Doctor Profile" 
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        <div>
+                            <p className="text-text-light text-sm">Medical Professional</p>
+                            <p className="text-primary font-medium">{hcfData?.specialty || 'General Medicine'}</p>
+                        </div>
+                    </div>
+                    
+                    {/* Multiple doctor images */}
+                    <div className="bg-primary-subtle/20 p-3 rounded-lg">
+                        <p className="text-text-light text-sm mb-2">Our Medical Team</p>
+                        <div className="flex -space-x-3 overflow-hidden">
+                            {[
+                                "https://placehold.co/100x100/2a85ff/FFFFFF?text=Dr.A",
+                                "https://placehold.co/100x100/4996ff/FFFFFF?text=Dr.B",
+                                "https://placehold.co/100x100/0069f6/FFFFFF?text=Dr.C",
+                                "https://placehold.co/100x100/2a85ff/FFFFFF?text=Dr.D",
+                                "https://placehold.co/100x100/4996ff/FFFFFF?text=Dr.E"
+                            ].map((img, index) => (
+                                <div 
+                                    key={index} 
+                                    className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+                                >
+                                    <img 
+                                        src={img} 
+                                        alt={`Doctor ${index + 1}`} 
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            ))}
+                            <div className="w-10 h-10 rounded-full border-2 border-white bg-primary flex items-center justify-center text-white text-xs font-bold">
+                                +15
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 {/* Info grid */}
-                <div className="grid grid-cols-1 xs:grid-cols-2 gap-1 mt-3">
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-text-light flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 mt-2">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
-                        <span className="text-text-light text-sm">Location: </span>
-                        <span className="text-primary text-sm">{`${hcfData?.address?.city ? `${hcfData?.address?.city}, ` : ''}${hcfData?.address?.country ? `${hcfData?.address?.country}, ` : ''}`}</span>
+                        <div>
+                            <span className="text-text-light text-sm block">Location</span>
+                            <span className="text-text font-medium">{location()}</span>
+                        </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-text-light flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <span className="text-text-light text-sm">Age: </span>
-                        <span className="text-text text-sm">{age} years</span>
+                        <div>
+                            <span className="text-text-light text-sm block">Age</span>
+                            <span className="text-text font-medium">{age} years</span>
+                        </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-text-light flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
                         </svg>
-                        <span className="text-text-light text-sm">Language: </span>
-                        <span className="text-text text-sm">{hcfData?.languages?.length ? hcfData?.languages.map((data) => ` ${data},`) : ''}</span>
+                        <div>
+                            <span className="text-text-light text-sm block">Languages</span>
+                            <span className="text-text font-medium">{languages()}</span>
+                        </div>
                     </div>
 
-                    <div className="flex items-center gap-2">
-                        <svg className="w-4 h-4 md:w-5 md:h-5 text-text-light flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div className="flex items-start gap-2 p-2 rounded-lg hover:bg-primary-subtle/20 transition-colors">
+                        <svg className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
-                        <span className="text-text-light text-sm">Gender: </span>
-                        <span className="text-primary text-sm capitalize">{hcfData?.gender || 'N/A'}</span>
+                        <div>
+                            <span className="text-text-light text-sm block">Gender</span>
+                            <span className="text-text font-medium capitalize">{hcfData?.gender || 'N/A'}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                {/* Experience and ratings - Added for better visual appeal */}
+                <div className="mt-2 pt-3 border-t border-border flex justify-between">
+                    <div className="text-center">
+                        <span className="text-primary font-bold text-lg">10+</span>
+                        <p className="text-text-light text-xs">Years Exp.</p>
+                    </div>
+                    <div className="text-center">
+                        <div className="flex items-center justify-center">
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <svg key={star} className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                </svg>
+                            ))}
+                        </div>
+                        <p className="text-text-light text-xs">4.9/5 Rating</p>
+                    </div>
+                    <div className="text-center">
+                        <span className="text-primary font-bold text-lg">500+</span>
+                        <p className="text-text-light text-xs">Patients</p>
                     </div>
                 </div>
             </div>

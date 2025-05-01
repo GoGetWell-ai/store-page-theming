@@ -154,6 +154,36 @@ module.exports = {
         'heading': 'var(--heading-weight)',
         'body': 'var(--body-weight)',
       },
+      animation: {
+        'float': 'float 4s ease-in-out infinite',
+        'float-slow': 'float 6s ease-in-out infinite',
+        'float-delay': 'float 5s ease-in-out 1s infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'fade-in': 'fadeIn 1s ease-in-out',
+        'gradient': 'gradient 8s ease infinite',
+        'sparkle': 'sparkle 2s ease-in-out infinite',
+        'sparkle-delay': 'sparkle 2s ease-in-out 0.5s infinite',
+        'sparkle-slow': 'sparkle 3s ease-in-out 1s infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        gradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        sparkle: {
+          '0%, 100%': { opacity: '0.7', transform: 'scale(1)' },
+          '50%': { opacity: '1', transform: 'scale(1.2)' },
+        },
+      },
     },
   },
   plugins: [

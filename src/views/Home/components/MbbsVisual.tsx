@@ -3,7 +3,6 @@ import visualBg from '@/assets/images/mbbsImg.webp'
 import { BsArrowRight } from 'react-icons/bs'
 import { Button } from '@/components/ui'
 import { useThemeStore } from '@/store/themeStore'
-
 const HeroSection = () => {
     const { specialty } = useThemeStore();
 
@@ -37,7 +36,6 @@ const HeroSection = () => {
                                     <BsArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                                 </Button>
                                 <Button
-                                    variant="outline"
                                     className="border-green-600 text-green-600 hover:bg-green-50 rounded-button !text-[15px] group inline-flex items-center px-6 py-4 text-lg transition-all duration-300 ease-in-out"
                                 >
                                     Learn More
@@ -51,12 +49,9 @@ const HeroSection = () => {
                                 <div className="absolute inset-0 bg-green-500/10 rounded-full filter blur-3xl animate-blob"></div>
                                 <div className="relative z-10 animate-float">
                                     <img
-                                        src="/img/specialties/organ-transplant-doctors.png"
+                                        src={organthemeplant}
                                         alt="Organ Transplant Specialists"
-                                        className="w-full max-w-lg mx-auto"
-                                        onError={(e) => {
-                                            e.currentTarget.src = "https://placehold.co/600x400/16a34a/FFFFFF?text=Transplant+Specialists";
-                                        }}
+                                        className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
                                     />
                                     <div className="absolute -top-4 -right-4 w-8 h-8 bg-green-500 rounded-full animate-bounce delay-100"></div>
                                     <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-green-600 rounded-full animate-bounce delay-300"></div>
@@ -141,7 +136,7 @@ const HeroSection = () => {
                                     <BsArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                                 </Button>
                                 <Button
-                                    variant="outline"
+                                    variant="solid"
                                     className="border-pink-600 text-pink-600 hover:bg-pink-50 rounded-button !text-[15px] group inline-flex items-center px-6 py-4 text-lg transition-all duration-300 ease-in-out"
                                 >
                                     View Procedures
@@ -155,12 +150,9 @@ const HeroSection = () => {
                                 <div className="absolute inset-0 bg-pink-500/10 rounded-full filter blur-3xl animate-blob"></div>
                                 <div className="relative z-10 animate-float">
                                     <img
-                                        src="/img/specialties/cosmetic-surgery-doctors.png"
+                                        src="https://placehold.co/600x400/db2777/FFFFFF?text=Cosmetic+Surgeons"
                                         alt="Cosmetic Surgery Specialists"
-                                        className="w-full max-w-lg mx-auto"
-                                        onError={(e) => {
-                                            e.currentTarget.src = "https://placehold.co/600x400/db2777/FFFFFF?text=Cosmetic+Surgeons";
-                                        }}
+                                        className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
                                     />
                                     <div className="absolute -top-4 -right-4 w-8 h-8 bg-pink-500 rounded-full animate-bounce delay-100"></div>
                                     <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-purple-500 rounded-full animate-bounce delay-300"></div>
@@ -247,17 +239,47 @@ const HeroSection = () => {
                         </Button>
                     </div>
 
-                    {/* Right Image */}
+                    {/* Right Image with multiple doctor images */}
                     <div className="relative flex justify-center items-center max-w-[500px] sm:w-full w-[80%] mx-auto lg:order-last order-first">
+                        {/* Enhanced glow effects */}
                         <div className="absolute w-[120%] h-[120%] bg-primary-subtle rounded-full opacity-10 animate-pulse-slow"></div>
+                        <div className="absolute w-[100%] h-[100%] bg-primary/20 rounded-full opacity-20 animate-pulse"></div>
+                        
                         <div className="relative">
                             <div className="absolute inset-0 bg-primary/10 rounded-full filter blur-3xl animate-blob"></div>
                             <div className="relative z-10 animate-float">
                                 <img
-                                    src={visualBg}
+                                    src="https://placehold.co/600x400/2a85ff/FFFFFF?text=Medical+Care"
                                     alt="Medical Technology Illustration"
-                                    className="w-full max-w-lg mx-auto"
+                                    className="w-full max-w-lg mx-auto rounded-lg shadow-lg"
+                                    onError={(e) => {
+                                        e.currentTarget.src = "https://placehold.co/600x400/2a85ff/FFFFFF?text=Medical+Care";
+                                    }}
                                 />
+                                
+                                {/* Floating doctor images */}
+                                <div className="absolute -top-6 -right-6 w-20 h-20 bg-white rounded-full p-1 shadow-lg animate-float-slow">
+                                    <img 
+                                        src="https://placehold.co/100x100/0069f6/FFFFFF?text=Dr.1" 
+                                        alt="Doctor 1" 
+                                        className="w-full h-full rounded-full object-cover"
+                                    />
+                                </div>
+                                <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-white rounded-full p-1 shadow-lg animate-float">
+                                    <img 
+                                        src="https://placehold.co/100x100/4996ff/FFFFFF?text=Dr.2" 
+                                        alt="Doctor 2" 
+                                        className="w-full h-full rounded-full object-cover"
+                                    />
+                                </div>
+                                <div className="absolute top-1/2 -right-10 transform -translate-y-1/2 w-16 h-16 bg-white rounded-full p-1 shadow-lg animate-float-delay">
+                                    <img 
+                                        src="https://placehold.co/100x100/2a85ff/FFFFFF?text=Dr.3" 
+                                        alt="Doctor 3" 
+                                        className="w-full h-full rounded-full object-cover"
+                                    />
+                                </div>
+                                
                                 {/* Decorative Circles */}
                                 <div className="absolute -top-4 -right-4 w-8 h-8 bg-primary rounded-full animate-bounce delay-100"></div>
                                 <div className="absolute -bottom-4 -left-4 w-6 h-6 bg-primary-deep rounded-full animate-bounce delay-300"></div>
