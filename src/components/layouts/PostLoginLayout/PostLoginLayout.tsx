@@ -1,11 +1,11 @@
 import { lazy, Suspense } from 'react'
 import {
-    LAYOUT_COLLAPSIBLE_SIDE,
-    LAYOUT_STACKED_SIDE,
-    LAYOUT_TOP_BAR_CLASSIC,
-    LAYOUT_FRAMELESS_SIDE,
-    LAYOUT_CONTENT_OVERLAY,
     LAYOUT_BLANK,
+    LAYOUT_CLASSIC,
+    LAYOUT_MODERN,
+    LAYOUT_STACKED_SIDE,
+    LAYOUT_SIMPLE,
+    LAYOUT_DECKED,
 } from '@/constants/theme.constant'
 import Loading from '@/components/shared/Loading'
 import type { CommonProps } from '@/@types/common'
@@ -22,21 +22,28 @@ interface PostLoginLayoutProps extends CommonProps {
 }
 
 const layouts: Layouts = {
-    [LAYOUT_COLLAPSIBLE_SIDE]: lazy(
-        () => import('./components/CollapsibleSide'),
-    ),
-    [LAYOUT_STACKED_SIDE]: lazy(() => import('./components/StackedSide')),
-    [LAYOUT_TOP_BAR_CLASSIC]: lazy(() => import('./components/TopBarClassic')),
-    [LAYOUT_FRAMELESS_SIDE]: lazy(() => import('./components/FrameLessSide')),
-    [LAYOUT_CONTENT_OVERLAY]: lazy(() => import('./components/ContentOverlay')),
     [LAYOUT_BLANK]: lazy(() => import('./components/Blank')),
+    [LAYOUT_CLASSIC]: lazy(() => import('./components/Classic')),
+    [LAYOUT_MODERN]: lazy(() => import('./components/Modern')),
+    [LAYOUT_STACKED_SIDE]: lazy(() => import('./components/StackedSide')),
+    [LAYOUT_SIMPLE]: lazy(() => import('./components/Simple')),
+    [LAYOUT_DECKED]: lazy(() => import('./components/Decked')),
 }
 
 const PostLoginLayout = ({ layoutType, children }: PostLoginLayoutProps) => {
-
-    const AppLayout =
-        layouts[layoutType] ?? layouts[Object.keys(layouts)[0]];
-
+    console.log('PostLoginLayout rendering:', { layoutType })
+    
+    // Ensure we have a valid layout type
+    const validLayoutType = layoutType || LAYOUT_CLASSIC
+    const AppLayout = layouts[validLayoutType]
+    
+    console.log('Selected layout component:', validLayoutType)
+    
+    if (!AppLayout) {
+        console.error('Invalid layout type:', layoutType)
+        return null
+    }
+    
     return (
         <Suspense fallback={<Loading type='cover' loading={true} />}>
             <AppLayout>{children}</AppLayout>

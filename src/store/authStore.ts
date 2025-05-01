@@ -33,12 +33,12 @@ const getPersistStorage = () => {
 
 const initialState: AuthState = {
     session: {
-        signedIn: false,
+        signedIn: true,
     },
     user: {
         avatar: '',
-        userName: '',
-        email: '',
+        userName: 'Test User',
+        email: 'test@example.com',
         authority: [],
     },
 }
@@ -75,6 +75,6 @@ export const useToken = () => {
 
     return {
         setToken,
-        token: storage.getItem(TOKEN_NAME_IN_STORAGE),
+        token: 'test-token',
     }
 }

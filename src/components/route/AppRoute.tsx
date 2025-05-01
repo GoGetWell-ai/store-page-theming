@@ -2,27 +2,30 @@ import { useEffect, useCallback } from 'react'
 import { useRouteKeyStore } from '@/store/routeKeyStore'
 import { useLocation } from 'react-router-dom'
 import { useThemeStore } from '@/store/themeStore'
+import PageContainer from '@/components/template/PageContainer'
 import type { LayoutType } from '@/@types/theme'
 import type { ComponentType } from 'react'
+import { useAuth } from '@/auth'
+import { LAYOUT_CLASSIC } from '@/constants/theme.constant'
 
 export type AppRouteProps<T> = {
     component: ComponentType<T>
     routeKey: string
     layout?: LayoutType
+    pageContainerType?: 'default' | 'contained' | 'fluid'
 }
 
 const AppRoute = <T extends Record<string, unknown>>({
     component: Component,
     routeKey,
-    ...props
+    layout,
+    pageContainerType = 'contained',
 }: AppRouteProps<T>) => {
     const location = useLocation()
-
-    const { layout, setPreviousLayout, setLayout } = useThemeStore(
+    const { layoutType, setLayout } = useThemeStore(
         (state) => state,
     )
-
-    const { type: layoutType, previousType: previousLayout } = layout
+    const { authenticated } = useAuth()
 
     const setCurrentRouteKey = useRouteKeyStore(
         (state) => state.setCurrentRouteKey,
@@ -31,23 +34,33 @@ const AppRoute = <T extends Record<string, unknown>>({
     const handleLayoutChange = useCallback(() => {
         setCurrentRouteKey(routeKey)
 
-        if (props.layout && props.layout !== layoutType) {
-            setPreviousLayout(layoutType)
-            setLayout(props.layout)
+        if (layout && layout !== layoutType) {
+            setLayout(layout)
+        } else if (!layoutType) {
+            setLayout(LAYOUT_CLASSIC)
         }
+    }, [layout, routeKey, layoutType, setLayout, setCurrentRouteKey])
 
-        if (!props.layout && previousLayout && layoutType !== previousLayout) {
-            setLayout(previousLayout)
-            setPreviousLayout('')
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.layout, routeKey])
+    useEffect(() => {
+        console.log('AppRoute mounted:', {
+            location: location.pathname,
+            routeKey,
+            layoutType,
+            layout,
+            authenticated,
+            pageContainerType
+        })
+    }, [location.pathname, routeKey, layoutType, layout, authenticated, pageContainerType])
 
     useEffect(() => {
         handleLayoutChange()
     }, [location, handleLayoutChange])
 
-    return <Component {...(props as T)} />
+    return (
+        <PageContainer type={pageContainerType}>
+            <Component />
+        </PageContainer>
+    )
 }
 
 export default AppRoute

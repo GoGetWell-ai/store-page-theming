@@ -1,0 +1,14 @@
+{
+  acme_ca https://acme-v02.api.letsencrypt.org/directory
+}
+
+*.localhost {
+  header {
+    +X-Subdomain {labels.1}
+  }
+  reverse_proxy host.docker.internal:5173
+}
+
+localhost {
+  reverse_proxy host.docker.internal:5173
+}

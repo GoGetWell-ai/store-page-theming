@@ -1,0 +1,91 @@
+:root {
+    /* Base theme variables */
+    --primary: #3b82f6;
+    --primary-light: #60a5fa;
+    --primary-dark: #2563eb;
+    --primary-contrast: #ffffff;
+    --secondary: #10b981;
+    --secondary-light: #34d399;
+    --secondary-dark: #059669;
+    --secondary-contrast: #ffffff;
+    --background-default: #ffffff;
+    --background-paper: #f3f4f6;
+    --text-primary: #111827;
+    --text-secondary: #6b7280;
+    --font-family: 'Inter', sans-serif;
+}
+
+/* Organ Transplant Theme */
+.theme-organ-transplant {
+    --primary: #1e40af;
+    --primary-light: #3b82f6;
+    --primary-dark: #1e3a8a;
+    --primary-contrast: #ffffff;
+    --secondary: #047857;
+    --secondary-light: #10b981;
+    --secondary-dark: #065f46;
+    --secondary-contrast: #ffffff;
+    --background-default: #f8fafc;
+    --background-paper: #f1f5f9;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --font-family: 'Roboto', sans-serif;
+}
+
+/* Cosmetic Surgery Theme */
+.theme-cosmetic-surgery {
+    --primary: #7c3aed;
+    --primary-light: #a78bfa;
+    --primary-dark: #5b21b6;
+    --primary-contrast: #ffffff;
+    --secondary: #ec4899;
+    --secondary-light: #f472b6;
+    --secondary-dark: #be185d;
+    --secondary-contrast: #ffffff;
+    --background-default: #fdf4ff;
+    --background-paper: #faf5ff;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --font-family: 'Poppins', sans-serif;
+}
+
+/* Theme-specific styles */
+.theme-organ-transplant .menu-bar {
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--primary-dark);
+}
+
+.theme-cosmetic-surgery .menu-bar {
+    background-color: var(--primary);
+    border-bottom: 2px solid var(--primary-dark);
+}
+
+.theme-organ-transplant .card {
+    border: 1px solid var(--primary-light);
+    background-color: var(--background-paper);
+}
+
+.theme-cosmetic-surgery .card {
+    border: 1px solid var(--primary-light);
+    background-color: var(--background-paper);
+}
+
+.theme-organ-transplant .form {
+    background-color: var(--background-paper);
+    border: 1px solid var(--primary-light);
+}
+
+.theme-cosmetic-surgery .form {
+    background-color: var(--background-paper);
+    border: 1px solid var(--primary-light);
+}
+
+.theme-organ-transplant .hero-section {
+    background: linear-gradient(to right, var(--primary), var(--primary-dark));
+    color: var(--primary-contrast);
+}
+
+.theme-cosmetic-surgery .hero-section {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    color: var(--primary-contrast);
+} 

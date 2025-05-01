@@ -3,7 +3,6 @@ import Loading from '@/components/shared/Loading'
 import type { CommonProps } from '@/@types/common'
 import { useAuth } from '@/auth'
 import { useThemeStore } from '@/store/themeStore'
-import PostLoginLayout from './PostLoginLayout'
 import PreLoginLayout from './PreLoginLayout'
 import useHCFApi from '@/utils/hooks/useHcfApi'
 import { useParams } from 'react-router-dom'
@@ -11,7 +10,6 @@ import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStor
 import { useAuthStore } from './AuthLayout/store/useAuthStore'
 
 const Layout = ({ children }: CommonProps) => {
-    const layoutType = useThemeStore((state) => state.layout.type)
     const { hcfData: hcfDataFromApi, loadingStatus } = useHCFApi()
     const { id } = useParams()
     const { setHcfData } = useAuthStore((state) => state)
@@ -39,9 +37,7 @@ const Layout = ({ children }: CommonProps) => {
         >
             <Loading loading={loadingStatus}>
                 {authenticated ? (
-                    <PostLoginLayout layoutType={layoutType}>
-                        {children}
-                    </PostLoginLayout>
+                    children
                 ) : (
                     <PreLoginLayout>{children}</PreLoginLayout>
                 )}
