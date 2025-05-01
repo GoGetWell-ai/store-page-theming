@@ -352,9 +352,11 @@ const StartYourJourney = () => {
                     ))}
                 </div>
             </div>
-            
+
             <div className="text-center mt-16 mb-8">
-                <h2 className={`text-2xl sm:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.gradient}`}>
+                <h2
+                    className={`text-2xl sm:text-3xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.gradient}`}
+                >
                     Explore more about Treatments
                 </h2>
                 <div className="w-20 h-1 mx-auto rounded-full bg-gradient-to-r from-purple-400 to-blue-500"></div>
