@@ -1,5 +1,9 @@
 # GoGetWell.ai Theme System Implementation Assignment#2
 
+## 🌈 Theme System Documentation
+[Full documentation here →](./THEME.md)
+
+
 ## Project Overview
 
 This assignment requires implementing a multi-theme system for the GoGetWell.ai platform to create contextually relevant interfaces for different medical specialties. The theme system should allow easy switching between themes and provide a consistent look and feel across all pages.
