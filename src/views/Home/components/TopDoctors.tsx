@@ -1,11 +1,11 @@
-import { apiGetDoctors } from '@/services/DoctorService';
-import React, { useEffect, useState } from 'react';
-import { FaRegCalendarAlt, FaRegStar, FaStethoscope } from 'react-icons/fa';
-import { CgLock } from 'react-icons/cg';
-import { LuBuilding2 } from 'react-icons/lu';
-import { useNavigate } from 'react-router-dom';
-import { useThemeStore } from '@/store/themeStore';
-import { Badge } from '@/components/ui';
+import { apiGetDoctors } from '@/services/DoctorService'
+import React, { useEffect, useState } from 'react'
+import { FaRegCalendarAlt, FaRegStar, FaStethoscope } from 'react-icons/fa'
+import { CgLock } from 'react-icons/cg'
+import { LuBuilding2 } from 'react-icons/lu'
+import { useNavigate } from 'react-router-dom'
+import { useThemeStore } from '@/store/themeStore'
+import { Badge } from '@/components/ui'
 
 interface TopDoctorsProps {
     hcfData: {
@@ -14,14 +14,14 @@ interface TopDoctorsProps {
 }
 
 const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
-    const navigate = useNavigate();
-    const [doctors, setDoctors] = useState<any>([]);
-    const [isVisible, setIsVisible] = useState(false);
-    const { specialty } = useThemeStore();
-    
+    const navigate = useNavigate()
+    const [doctors, setDoctors] = useState<any>([])
+    const [isVisible, setIsVisible] = useState(false)
+    const { specialty } = useThemeStore()
+
     useEffect(() => {
-        setIsVisible(true);
-    }, []);
+        setIsVisible(true)
+    }, [])
 
     // Get theme specific classes
     const getThemeClasses = () => {
@@ -35,12 +35,13 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                     iconColor: 'text-teal-500',
                     badgeBg: 'bg-teal-100',
                     badgeText: 'text-teal-700',
-                    buttonGradient: 'bg-gradient-to-r from-teal-600 to-teal-400',
+                    buttonGradient:
+                        'bg-gradient-to-r from-teal-600 to-teal-400',
                     loadMoreBorder: 'border-teal-300',
                     loadMoreText: 'text-teal-600',
                     loadMoreHover: 'hover:bg-teal-50',
-                    sectionBg: 'bg-gradient-to-b from-white to-teal-50'
-                };
+                    sectionBg: 'bg-gradient-to-b from-white to-teal-50',
+                }
             case 'cosmeticSurgery':
                 return {
                     titleGradient: 'from-pink-600 to-purple-500',
@@ -50,12 +51,13 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                     iconColor: 'text-pink-500',
                     badgeBg: 'bg-pink-100',
                     badgeText: 'text-pink-700',
-                    buttonGradient: 'bg-gradient-to-r from-pink-600 to-pink-400',
+                    buttonGradient:
+                        'bg-gradient-to-r from-pink-600 to-pink-400',
                     loadMoreBorder: 'border-pink-300',
                     loadMoreText: 'text-pink-600',
                     loadMoreHover: 'hover:bg-pink-50',
-                    sectionBg: 'bg-gradient-to-b from-white to-pink-50'
-                };
+                    sectionBg: 'bg-gradient-to-b from-white to-pink-50',
+                }
             default:
                 return {
                     titleGradient: 'from-blue-600 to-indigo-500',
@@ -65,45 +67,54 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                     iconColor: 'text-primary/60',
                     badgeBg: 'bg-blue-100',
                     badgeText: 'text-blue-700',
-                    buttonGradient: 'bg-gradient-to-r from-blue-600 to-blue-400',
+                    buttonGradient:
+                        'bg-gradient-to-r from-blue-600 to-blue-400',
                     loadMoreBorder: 'border-primary/20',
                     loadMoreText: 'text-primary',
                     loadMoreHover: 'hover:bg-primary/5',
-                    sectionBg: 'bg-gradient-to-b from-white to-blue-50'
-                };
+                    sectionBg: 'bg-gradient-to-b from-white to-blue-50',
+                }
         }
-    };
+    }
 
-    const themeClasses = getThemeClasses();
-    
+    const themeClasses = getThemeClasses()
+
     // Helper function to get random specialties
     const getRandomSpecialties = () => {
         const specialties = [
-            'Cardiology', 'Neurology', 'Oncology', 'Orthopedics', 
-            'Pediatrics', 'Dermatology', 'Ophthalmology', 'Urology',
-            'Gynecology', 'Psychiatry', 'Endocrinology'
-        ];
-        const count = Math.floor(Math.random() * 2) + 1; // 1-2 specialties
-        const randomSpecialties = [];
-        
+            'Cardiology',
+            'Neurology',
+            'Oncology',
+            'Orthopedics',
+            'Pediatrics',
+            'Dermatology',
+            'Ophthalmology',
+            'Urology',
+            'Gynecology',
+            'Psychiatry',
+            'Endocrinology',
+        ]
+        const count = Math.floor(Math.random() * 2) + 1 // 1-2 specialties
+        const randomSpecialties = []
+
         for (let i = 0; i < count; i++) {
-            const randomIndex = Math.floor(Math.random() * specialties.length);
-            randomSpecialties.push(specialties[randomIndex]);
-            specialties.splice(randomIndex, 1);
+            const randomIndex = Math.floor(Math.random() * specialties.length)
+            randomSpecialties.push(specialties[randomIndex])
+            specialties.splice(randomIndex, 1)
         }
-        
-        return randomSpecialties;
-    };
-    
+
+        return randomSpecialties
+    }
+
     // Helper function to get years of experience
     const getExperienceYears = () => {
-        return Math.floor(Math.random() * 20) + 5; // 5-25 years
-    };
-    
+        return Math.floor(Math.random() * 20) + 5 // 5-25 years
+    }
+
     // Helper function to get rating
     const getRating = () => {
-        return (Math.random() * (5 - 4.2) + 4.2).toFixed(1);
-    };
+        return (Math.random() * (5 - 4.2) + 4.2).toFixed(1)
+    }
 
     useEffect(() => {
         if (hcfData?.doctors?.length) {
@@ -114,30 +125,39 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
     useEffect(() => {
         const callApi = async () => {
             if (doctors.length < 3) {
-                const limit = 3 - doctors.length;
+                const limit = 3 - doctors.length
                 try {
-                    const data = await apiGetDoctors({ page: 1, limit, search: '' })
+                    const data = await apiGetDoctors({
+                        page: 1,
+                        limit,
+                        search: '',
+                    })
                     if (data?.data) {
                         setDoctors((prv) => [...prv, ...data.data])
                     }
                 } catch (err) {
-                    console.log('error', err);
+                    console.log('error', err)
                 }
             }
         }
 
-        callApi();
+        callApi()
     }, [doctors])
 
     return (
-        <div className={`w-full ${themeClasses.sectionBg} py-12 md:py-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+        <div
+            className={`w-full ${themeClasses.sectionBg} py-12 md:py-20 transition-all duration-1000 transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
+        >
             <div className="max-w-7xl mx-auto px-4">
                 <div className="text-center mb-12">
-                    <h1 className={`text-3xl sm:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.titleGradient}`}>
+                    <h1
+                        className={`text-3xl sm:text-4xl font-bold mb-3 text-transparent bg-clip-text bg-gradient-to-r ${themeClasses.titleGradient}`}
+                    >
                         Top Doctors
                     </h1>
                     <p className="text-gray-600 max-w-2xl mx-auto">
-                        Connect with our highly skilled medical professionals specialized in various fields
+                        Connect with our highly skilled medical professionals
+                        specialized in various fields
                     </p>
                 </div>
 
@@ -157,28 +177,38 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                                                 alt={doctor.name}
                                                 className="w-full h-full object-cover"
                                                 onError={(e) => {
-                                                    e.currentTarget.src = 'https://doctoryouneed.org/wp-content/uploads/2020/08/dummy_gn-300x300.jpg';
+                                                    e.currentTarget.src =
+                                                        'https://doctoryouneed.org/wp-content/uploads/2020/08/dummy_gn-300x300.jpg'
                                                 }}
                                             />
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2 mb-1">
-                                                <h2 className={`text-lg font-bold ${themeClasses.nameColor}`}>
-                                                    {doctor.name || `Dr. Robert Smith`}
+                                                <h2
+                                                    className={`text-lg font-bold ${themeClasses.nameColor}`}
+                                                >
+                                                    {doctor.name ||
+                                                        `Dr. Robert Smith`}
                                                 </h2>
                                                 <div className="flex items-center text-amber-500 text-sm">
                                                     <FaRegStar className="inline mr-1" />
                                                     <span>{getRating()}</span>
                                                 </div>
                                             </div>
-                                            <p className="text-sm text-gray-600">{doctor.designation || 'Specialist'}</p>
+                                            <p className="text-sm text-gray-600">
+                                                {doctor.designation ||
+                                                    'Specialist'}
+                                            </p>
                                         </div>
                                     </div>
-                                    
+
                                     <div className="flex flex-wrap gap-2 mb-4">
-                                        {(doctor.specializations || getRandomSpecialties()).map((specialty, i) => (
-                                            <Badge 
-                                                key={i} 
+                                        {(
+                                            doctor.specializations ||
+                                            getRandomSpecialties()
+                                        ).map((specialty, i) => (
+                                            <Badge
+                                                key={i}
                                                 className={`${themeClasses.badgeBg} ${themeClasses.badgeText} text-xs`}
                                             >
                                                 {specialty}
@@ -188,36 +218,55 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
 
                                     <div className="space-y-3 mt-4 border-t border-gray-100 pt-4">
                                         <InfoRow
-                                            icon={<CgLock className="w-4 h-4" />}
+                                            icon={
+                                                <CgLock className="w-4 h-4" />
+                                            }
                                             label="Experience"
-                                            value={doctor.experience?.years || `${getExperienceYears()} years`}
+                                            value={
+                                                doctor.experience?.years ||
+                                                `${getExperienceYears()} years`
+                                            }
                                             iconColor={themeClasses.iconColor}
                                         />
                                         <InfoRow
-                                            icon={<LuBuilding2 className="w-4 h-4" />}
+                                            icon={
+                                                <LuBuilding2 className="w-4 h-4" />
+                                            }
                                             label="Hospital"
-                                            value={doctor.hospitals?.[0] || 'Max Super Specialty Hospital'}
+                                            value={
+                                                doctor.hospitals?.[0] ||
+                                                'Max Super Specialty Hospital'
+                                            }
                                             className="line-clamp-1"
                                             iconColor={themeClasses.iconColor}
                                         />
                                         <InfoRow
-                                            icon={<FaStethoscope className="w-4 h-4" />}
+                                            icon={
+                                                <FaStethoscope className="w-4 h-4" />
+                                            }
                                             label="Surgeries"
-                                            value={doctor.experience?.surgeries || '500+'}
+                                            value={
+                                                doctor.experience?.surgeries ||
+                                                '500+'
+                                            }
                                             iconColor={themeClasses.iconColor}
                                         />
                                         <InfoRow
-                                            icon={<FaRegCalendarAlt className="w-4 h-4" />}
+                                            icon={
+                                                <FaRegCalendarAlt className="w-4 h-4" />
+                                            }
                                             label="Availability"
                                             value="Mon to Fri"
                                             iconColor={themeClasses.iconColor}
                                         />
                                     </div>
                                 </div>
-                                
+
                                 <div className="mt-auto p-4 pt-0">
                                     <button
-                                        onClick={() => navigate(`/doctors/${doctor._id}`)}
+                                        onClick={() =>
+                                            navigate(`/doctors/${doctor._id}`)
+                                        }
                                         className={`w-full ${themeClasses.buttonGradient} text-white py-3 px-6 rounded-lg transition-all duration-300 font-medium shadow-md hover:shadow-lg btn-ripple`}
                                     >
                                         More details
@@ -238,15 +287,19 @@ const TopDoctors: React.FC<TopDoctorsProps> = ({ hcfData }) => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
 const InfoRow = ({ icon, label, value, className = '', iconColor }) => (
     <div className="flex items-center text-sm">
         <div className={`${iconColor}`}>{icon}</div>
         <span className="ml-2 text-gray-500">{label}:</span>
-        <span className={`ml-2 text-gray-700 font-medium truncate ${className}`}>{value}</span>
+        <span
+            className={`ml-2 text-gray-700 font-medium truncate ${className}`}
+        >
+            {value}
+        </span>
     </div>
-);
+)
 
-export default TopDoctors;
+export default TopDoctors

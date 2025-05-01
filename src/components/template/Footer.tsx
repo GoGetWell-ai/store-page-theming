@@ -12,44 +12,47 @@ type FooterProps = {
 }
 
 const FooterContent = () => {
-    const { specialty } = useThemeStore();
-    
+    const { specialty } = useThemeStore()
+
     // Get theme specific classes
     const getThemeClasses = () => {
         switch (specialty) {
             case 'organTransplant':
                 return {
                     footerBg: 'bg-gradient-to-r from-teal-50 to-cyan-50',
-                    buttonGradient: 'bg-gradient-to-r from-teal-600 to-teal-400',
+                    buttonGradient:
+                        'bg-gradient-to-r from-teal-600 to-teal-400',
                     linkColor: 'text-teal-600 hover:text-teal-700',
-                    borderColor: 'border-teal-100'
-                };
+                    borderColor: 'border-teal-100',
+                }
             case 'cosmeticSurgery':
                 return {
                     footerBg: 'bg-gradient-to-r from-pink-50 to-purple-50',
-                    buttonGradient: 'bg-gradient-to-r from-pink-600 to-pink-400',
+                    buttonGradient:
+                        'bg-gradient-to-r from-pink-600 to-pink-400',
                     linkColor: 'text-pink-600 hover:text-pink-700',
-                    borderColor: 'border-pink-100'
-                };
+                    borderColor: 'border-pink-100',
+                }
             default:
                 return {
                     footerBg: 'bg-gradient-to-r from-blue-50 to-indigo-50',
-                    buttonGradient: 'bg-gradient-to-r from-blue-600 to-blue-400',
+                    buttonGradient:
+                        'bg-gradient-to-r from-blue-600 to-blue-400',
                     linkColor: 'text-primary hover:text-primary-deep',
-                    borderColor: 'border-blue-100'
-                };
+                    borderColor: 'border-blue-100',
+                }
         }
-    };
+    }
 
-    const themeClasses = getThemeClasses();
+    const themeClasses = getThemeClasses()
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-between flex-auto w-full gap-4">
             <div className="flex flex-col md:flex-row gap-4 items-center">
                 <span className="font-semibold text-gray-700">{`${APP_NAME}`}</span>
                 <span className="text-gray-500 text-sm">
-                    Copyright &copy; {`${new Date().getFullYear()}`}{' '}
-                    All rights reserved.
+                    Copyright &copy; {`${new Date().getFullYear()}`} All rights
+                    reserved.
                 </span>
             </div>
             <div className="flex items-center gap-6">
@@ -67,9 +70,11 @@ const FooterContent = () => {
                 >
                     Privacy Policy
                 </a>
-                <button 
+                <button
                     className={`${themeClasses.buttonGradient} text-white px-4 py-2 rounded-lg transition-all duration-300 shadow-sm hover:shadow-md btn-ripple text-sm font-medium`}
-                    onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                    onClick={() =>
+                        window.scrollTo({ top: 0, behavior: 'smooth' })
+                    }
                 >
                     Back to Top
                 </button>
@@ -82,21 +87,21 @@ export default function Footer({
     pageContainerType = 'contained',
     className,
 }: FooterProps) {
-    const { specialty } = useThemeStore();
-    
+    const { specialty } = useThemeStore()
+
     // Get theme specific classes for footer background
     const getFooterBg = () => {
         switch (specialty) {
             case 'organTransplant':
-                return 'bg-gradient-to-b from-white to-teal-50/30';
+                return 'bg-gradient-to-b from-white to-teal-50/30'
             case 'cosmeticSurgery':
-                return 'bg-gradient-to-b from-white to-pink-50/30';
+                return 'bg-gradient-to-b from-white to-pink-50/30'
             default:
-                return 'bg-gradient-to-b from-white to-blue-50/30';
+                return 'bg-gradient-to-b from-white to-blue-50/30'
         }
-    };
+    }
 
-    const footerBg = getFooterBg();
+    const footerBg = getFooterBg()
 
     return (
         <footer
