@@ -9,12 +9,10 @@ export type PageHeaderProps = {
 }
 
 export interface Meta {
-    pageContainerType?: 'default' | 'gutterless' | 'contained'
-    pageBackgroundType?: 'default' | 'plain'
-    header?: PageHeaderProps
-    footer?: boolean
-    layout?: LayoutType
-}
+    layout?: string
+    requiresAuth?: boolean
+    [key: string]: any
+  }
 
 export type Route = {
     key: string

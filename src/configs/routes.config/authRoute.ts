@@ -1,6 +1,9 @@
 import { lazy } from 'react'
 import type { Routes } from '@/@types/routes'
 
+
+
+
 const authRoute: Routes = [
     {
         key: 'signIn',
@@ -35,6 +38,7 @@ const authRoute: Routes = [
             layout: 'blank',
         }
     },
+  
     {
         key: `chatBotId`,
         path: '/chat-bot',

@@ -9,6 +9,7 @@ import useHCFApi from '@/utils/hooks/useHcfApi'
 import { useParams } from 'react-router-dom'
 import { usGenerativeChatStore } from '@/views/chat-bot/store/generativeChatStore'
 import { useAuthStore } from './AuthLayout/store/useAuthStore'
+import MenuBar from '../shared/MenuBar'
 
 const Layout = ({ children }: CommonProps) => {
     const layoutType = useThemeStore((state) => state.layout.type)
@@ -39,11 +40,20 @@ const Layout = ({ children }: CommonProps) => {
         >
             <Loading loading={loadingStatus}>
                 {authenticated ? (
+                          // User is authenticated: show MenuBar and main app layout
+                          <>
+                          <MenuBar/>
                     <PostLoginLayout layoutType={layoutType}>
+
                         {children}
                     </PostLoginLayout>
+                    </>
                 ) : (
-                    <PreLoginLayout>{children}</PreLoginLayout>
+                     // User is not authenticated: show MenuBar and pre-login layout
+                     <>
+                     <MenuBar/>
+                     <PreLoginLayout>{children}</PreLoginLayout>
+                     </>
                 )}
             </Loading>
         </Suspense>

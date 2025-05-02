@@ -1,1 +1,8 @@
 @import "./assets/styles/app.css";
+
+/* app.css */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  
