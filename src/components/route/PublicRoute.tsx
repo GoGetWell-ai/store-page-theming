@@ -1,13 +1,15 @@
-import { Navigate, Outlet } from 'react-router-dom'
-import appConfig from '@/configs/app.config'
-import { useAuth } from '@/auth'
-
-const { authenticatedEntryPath } = appConfig
+// src/components/route/PublicRoute.tsx
+import { Outlet } from 'react-router-dom'
+import { useThemeStore } from '@/store/themeStore'
 
 const PublicRoute = () => {
-    const { authenticated } = useAuth()
+    const { layout } = useThemeStore()
 
-    return authenticated ? <Navigate to={authenticatedEntryPath} /> : <Outlet />
+    return (
+        <div className={layout.current === 'dashboard' ? 'dashboard-layout' : 'default-layout'}>
+            <Outlet />
+        </div>
+    )
 }
 
 export default PublicRoute

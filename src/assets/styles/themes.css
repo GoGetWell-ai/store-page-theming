@@ -1,0 +1,30 @@
+:root.theme-default {
+    --primary: #4f46e5;
+    --primary-deep: #3730a3;
+    --primary-mild: #a5b4fc;
+  }
+  
+  :root.theme-theme1 {
+    --primary: #16a34a;
+    --primary-deep: #166534;
+    --primary-mild: #bbf7d0;
+  }
+  
+  :root.theme-theme2 {
+    --primary: #d946ef;
+    --primary-deep: #a21caf;
+    --primary-mild: #f5d0fe;
+  }
+  
+  /* theme.css */
+:root.theme-default,
+:root.theme-theme1,
+:root.theme-theme2 {
+    --border-primary: var(--primary);
+}
+
+.card-border {
+    border-style: solid;
+    border-width: 2px;
+}
+
