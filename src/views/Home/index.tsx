@@ -12,6 +12,9 @@ import HeaderLogo from '@/components/template/HeaderLogo'
 import { useAuth } from '@/auth'
 import { useAuthStore } from '@/components/layouts/AuthLayout/store/useAuthStore'
 
+import '../../assets/styles/themes.css'
+
+
 const Home = () => {
     const { hcfData } = useAuthStore((state) => state)
     const { smaller } = useResponsive()

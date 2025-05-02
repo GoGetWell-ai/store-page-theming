@@ -1,0 +1,27 @@
+
+/*  Default Theme (applies when no specific theme is selected) */
+:root {
+  --color-primary: #007bff;
+  /* Blue (default) */
+  --text-heading:#000;
+}
+
+/*Theme 1 – Green Color Theme */
+.theme1 {
+  --color-primary: #4caf50;
+  /* Green */
+  --text-heading:#000;
+}
+
+/*  Dark Theme – Black */
+.dark {
+  --color-primary: #000000;
+  /* Black */
+  --text-heading:#ccc;
+}
+
+
+/* Global heading styles */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading) !important;
+}
