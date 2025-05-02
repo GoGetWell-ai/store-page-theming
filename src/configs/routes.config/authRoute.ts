@@ -35,6 +35,15 @@ const authRoute: Routes = [
             layout: 'blank',
         }
     },
+		{
+				key: 'Themes',
+				path: '/themes',
+				component: lazy(() => import('@/views/Home/themes')),
+				authority: [],
+				meta: {
+					layout: 'blank',
+				}
+		},
     {
         key: `chatBotId`,
         path: '/chat-bot',

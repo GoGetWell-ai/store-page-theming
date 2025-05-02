@@ -2,6 +2,7 @@ import authRoute from '@/configs/routes.config/authRoute'
 import { Routes } from '@/@types/routes'
 import { publicRoutes, protectedRoutes } from '@/configs/routes.config'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 const useSubdomainNavigation = () => {
     // Get hostname and determine if it's a subdomain
@@ -35,9 +36,11 @@ const useSubdomainNavigation = () => {
 
     const subdomainRoute = authRoute.find((route) => route.path === pathname)
 
-    if (subdomainRoute) {
-        navigate('/')
-    }
+		useEffect(() => {
+        if (subdomainRoute && pathname !== '/themes') {
+            navigate('/'); 
+        }
+    }, [subdomainRoute, navigate])
 
     // Initialize routes
     let newPublicRoutes: Routes = publicRoutes
