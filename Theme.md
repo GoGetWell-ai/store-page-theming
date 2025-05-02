@@ -38,9 +38,9 @@ This repository contains a completed implementation of a comprehensive multi-the
 ## 🖼️ Screenshots
 
 ### 🌿 Organ Transplant Theme
-![Organ Transplant Theme](src/assets/theme/organ.png)
+![Organ Transplant Theme](./src/assets/themes/organ-transplant.png)
 
 ### 💄 Cosmetic Surgery Theme
-![Cosmetic Surgery Theme](/assets/themes/cosmetic.png)
+![Cosmetic Surgery Theme](./src/assets/themes/cosmetic.png)
 
 ---
